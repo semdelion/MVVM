@@ -6,6 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import com.semdelion.mvvm.App
+import com.semdelion.mvvm.MainActivity
 import com.semdelion.mvvm.R
 import com.semdelion.mvvm.presentation.navigations.Navigator
 import com.semdelion.mvvm.presentation.navigations.UiActions
@@ -14,13 +15,12 @@ import com.semdelion.mvvm.presentation.utils.ResourceActions
 import com.semdelion.mvvm.presentation.viewmodels.base.LiveEvent
 import com.semdelion.mvvm.presentation.viewmodels.base.MutableLiveEvent
 import com.semdelion.mvvm.presentation.views.base.BaseScreen
-import com.semdelion.mvvm.MainActivity
 
 const val ARG_SCREEN = "ARG_SCREEN"
 
 class MainViewModel(
     application: Application
-) : AndroidViewModel(application), Navigator, UiActions  {
+) : AndroidViewModel(application), Navigator, UiActions {
 
     val whenActivityActive = ResourceActions<MainActivity>()
 

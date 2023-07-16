@@ -9,8 +9,5 @@ typealias LiveEvent<T> = LiveData<Event<T>>
 typealias MutableLiveEvent<T> = MutableLiveData<Event<T>>
 
 open class BaseViewModel : ViewModel() {
-
-    open fun onResult(result: Any) {
-
-    }
+    open fun onResult(result: Any) { }
 }

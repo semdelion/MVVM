@@ -1,22 +1,19 @@
 package com.semdelion.mvvm.presentation.views
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import com.semdelion.mvvm.R
 import com.semdelion.mvvm.presentation.viewmodels.FirstViewModel
-import com.semdelion.mvvm.presentation.viewmodels.SecondViewModel
 import com.semdelion.mvvm.presentation.views.base.BaseFragment
 import com.semdelion.mvvm.presentation.views.base.BaseScreen
 import com.semdelion.mvvm.presentation.views.factories.screenViewModel
 
 class FirstFragment : BaseFragment() {
-
-    class Screen: BaseScreen
+    class Screen : BaseScreen
 
     override val viewModel by screenViewModel<FirstViewModel>()
 
@@ -29,6 +26,12 @@ class FirstFragment : BaseFragment() {
         val button = view.findViewById<Button>(R.id.sendTextButton)
 
         button.setOnClickListener { viewModel.sendText() }
+
+
+        val textResult = view.findViewById<TextView>(R.id.second_result_text)
+        viewModel.resultLive.observe(viewLifecycleOwner) {
+            textResult.text = it
+        }
 
         return view
     }

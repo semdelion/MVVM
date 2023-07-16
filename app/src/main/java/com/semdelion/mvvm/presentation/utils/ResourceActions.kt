@@ -7,9 +7,9 @@ class ResourceActions<T> {
     private val _actions = mutableListOf<ResourceAction<T>>()
 
     var resource: T? = null
-        set (newValue) {
+        set(newValue) {
             field = newValue
-            if(newValue != null) {
+            if (newValue != null) {
                 _actions.forEach { it(newValue) }
                 _actions.clear()
             }

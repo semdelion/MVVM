@@ -13,10 +13,11 @@ import com.semdelion.mvvm.presentation.views.base.BaseFragment
 import com.semdelion.mvvm.presentation.views.base.BaseScreen
 import java.lang.reflect.Constructor
 
-inline fun <reified VM: ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {
+inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {
     val application = requireActivity().application as App
-    val screen = requireArguments().getSerializable (ARG_SCREEN) as BaseScreen
-    val provider = ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory(application))
+    val screen = requireArguments().getSerializable(ARG_SCREEN) as BaseScreen
+    val provider =
+        ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory(application))
     val mainViewModel = provider[MainViewModel::class.java]
     val dependencies = listOf(screen, mainViewModel) + application.models
     ViewModelFactory(dependencies, this)
@@ -25,7 +26,7 @@ inline fun <reified VM: ViewModel> BaseFragment.screenViewModel() = viewModels<V
 class ViewModelFactory(
     private val dependencies: List<Any>,
     owner: SavedStateRegistryOwner
-):AbstractSavedStateViewModelFactory(owner, null) {
+) : AbstractSavedStateViewModelFactory(owner, null) {
 
     override fun <T : ViewModel> create(
         key: String,
@@ -42,7 +43,7 @@ class ViewModelFactory(
     private fun findDependencies(constructor: Constructor<*>, dependencies: List<Any>): List<Any> {
         val args = mutableListOf<Any>()
         constructor.parameterTypes.forEach { parameterClass ->
-            val dependency = dependencies.first {parameterClass.isAssignableFrom(it.javaClass)}
+            val dependency = dependencies.first { parameterClass.isAssignableFrom(it.javaClass) }
             args.add(dependency)
         }
         return args
