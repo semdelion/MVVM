@@ -2,7 +2,7 @@ package com.semdelion.mvvm.presentation.views.base
 
 import androidx.fragment.app.Fragment
 import com.semdelion.mvvm.presentation.viewmodels.base.BaseViewModel
-import com.semdelion.mvvm.presentation.views.MainActivity
+import com.semdelion.mvvm.MainActivity
 
 abstract class BaseFragment: Fragment() {
 

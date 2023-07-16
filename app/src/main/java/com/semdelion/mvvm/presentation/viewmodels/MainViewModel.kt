@@ -9,9 +9,12 @@ import com.semdelion.mvvm.App
 import com.semdelion.mvvm.R
 import com.semdelion.mvvm.presentation.navigations.Navigator
 import com.semdelion.mvvm.presentation.navigations.UiActions
+import com.semdelion.mvvm.presentation.utils.Event
 import com.semdelion.mvvm.presentation.utils.ResourceActions
+import com.semdelion.mvvm.presentation.viewmodels.base.LiveEvent
+import com.semdelion.mvvm.presentation.viewmodels.base.MutableLiveEvent
 import com.semdelion.mvvm.presentation.views.base.BaseScreen
-import com.semdelion.mvvm.presentation.views.MainActivity
+import com.semdelion.mvvm.MainActivity
 
 const val ARG_SCREEN = "ARG_SCREEN"
 

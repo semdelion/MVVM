@@ -1,4 +1,4 @@
-package com.semdelion.mvvm.presentation.views
+package com.semdelion.mvvm
 
 import android.os.Bundle
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import com.semdelion.mvvm.R
 import com.semdelion.mvvm.presentation.viewmodels.MainViewModel
+import com.semdelion.mvvm.presentation.views.FirstFragment
 import com.semdelion.mvvm.presentation.views.base.BaseFragment
 import com.semdelion.mvvm.presentation.views.base.HasScreenTitle
 
@@ -34,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             activityViewModel.launchFragment(
                 activity = this,
-                screen = Fragmentff,
-                appToBackStack = false
+                screen = FirstFragment.Screen(),
+                addToBackStack = false
             )
         }
 
