@@ -1,11 +1,11 @@
-package com.semdelion.mvvm.presentation.viewmodels
+package com.semdelion.presentaion.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.semdelion.mvvm.presentation.navigations.Navigator
-import com.semdelion.mvvm.presentation.navigations.UiActions
-import com.semdelion.mvvm.presentation.viewmodels.base.BaseViewModel
-import com.semdelion.mvvm.presentation.views.SecondFragment
+import com.semdelion.presentaion.navigation.Navigator
+import com.semdelion.presentaion.navigation.UiActions
+import com.semdelion.presentaion.viewmodels.base.BaseViewModel
+import com.semdelion.presentaion.views.SecondFragment
 
 class SecondViewModel(
     screen: SecondFragment.Screen,

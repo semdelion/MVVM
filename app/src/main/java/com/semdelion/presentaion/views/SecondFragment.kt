@@ -1,19 +1,17 @@
-package com.semdelion.mvvm.presentation.views
+package com.semdelion.presentaion.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
-import com.semdelion.mvvm.R
-import com.semdelion.mvvm.databinding.FragmentFirstBinding
-import com.semdelion.mvvm.databinding.FragmentSecondBinding
-import com.semdelion.mvvm.presentation.viewmodels.SecondViewModel
-import com.semdelion.mvvm.presentation.views.base.BaseFragment
-import com.semdelion.mvvm.presentation.views.base.BaseScreen
-import com.semdelion.mvvm.presentation.views.base.HasScreenTitle
-import com.semdelion.mvvm.presentation.views.factories.screenViewModel
+import com.semdelion.presentaion.R
+import com.semdelion.presentaion.databinding.FragmentSecondBinding
+import com.semdelion.presentaion.viewmodels.SecondViewModel
+import com.semdelion.presentaion.views.base.BaseFragment
+import com.semdelion.presentaion.views.base.BaseScreen
+import com.semdelion.presentaion.views.base.HasScreenTitle
+import com.semdelion.presentaion.views.base.factories.screenViewModel
 
 class SecondFragment : BaseFragment(), HasScreenTitle {
     class Screen(

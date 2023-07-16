@@ -1,4 +1,4 @@
-package com.semdelion.mvvm.presentation.views.factories
+package com.semdelion.presentaion.views.base.factories
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
@@ -6,11 +6,11 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
-import com.semdelion.mvvm.App
-import com.semdelion.mvvm.presentation.viewmodels.ARG_SCREEN
-import com.semdelion.mvvm.presentation.viewmodels.MainViewModel
-import com.semdelion.mvvm.presentation.views.base.BaseFragment
-import com.semdelion.mvvm.presentation.views.base.BaseScreen
+import com.semdelion.presentaion.App
+import com.semdelion.presentaion.viewmodels.ARG_SCREEN
+import com.semdelion.presentaion.viewmodels.MainViewModel
+import com.semdelion.presentaion.views.base.BaseFragment
+import com.semdelion.presentaion.views.base.BaseScreen
 import java.lang.reflect.Constructor
 
 inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {

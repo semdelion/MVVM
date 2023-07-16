@@ -1,6 +1,6 @@
-package com.semdelion.mvvm.presentation.navigations
+package com.semdelion.presentaion.navigation
 
-import com.semdelion.mvvm.presentation.views.base.BaseScreen
+import com.semdelion.presentaion.views.base.BaseScreen
 
 /**
  * Navigation for your application

@@ -1,4 +1,4 @@
-package com.semdelion.mvvm
+package com.semdelion.presentaion
 
 import org.junit.Test
 

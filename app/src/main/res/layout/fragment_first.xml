@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.semdelion.mvvm.presentation.viewmodels.FirstViewModel" />
+            type="com.semdelion.presentaion.viewmodels.FirstViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

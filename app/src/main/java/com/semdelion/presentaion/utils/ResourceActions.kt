@@ -1,4 +1,4 @@
-package com.semdelion.mvvm.presentation.utils
+package com.semdelion.presentaion.utils
 
 typealias ResourceAction<T> = (T) -> Unit
 

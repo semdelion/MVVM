@@ -1,4 +1,4 @@
-package com.semdelion.mvvm
+package com.semdelion.presentaion
 
 import android.os.Bundle
 import android.view.View
@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.semdelion.mvvm.R
-import com.semdelion.mvvm.presentation.viewmodels.MainViewModel
-import com.semdelion.mvvm.presentation.views.FirstFragment
-import com.semdelion.mvvm.presentation.views.base.BaseFragment
-import com.semdelion.mvvm.presentation.views.base.HasScreenTitle
+import com.semdelion.presentaion.R
+import com.semdelion.presentaion.viewmodels.MainViewModel
+import com.semdelion.presentaion.views.FirstFragment
+import com.semdelion.presentaion.views.base.BaseFragment
+import com.semdelion.presentaion.views.base.HasScreenTitle
 
 class MainActivity : AppCompatActivity() {
 

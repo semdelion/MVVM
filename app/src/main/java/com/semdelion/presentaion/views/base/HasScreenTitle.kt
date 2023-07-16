@@ -1,4 +1,4 @@
-package com.semdelion.mvvm.presentation.views.base
+package com.semdelion.presentaion.views.base
 
 interface HasScreenTitle {
     fun getScreenTitle(): String?

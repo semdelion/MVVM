@@ -1,20 +1,20 @@
-package com.semdelion.mvvm.presentation.viewmodels
+package com.semdelion.presentaion.viewmodels
 
 import android.app.Application
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
-import com.semdelion.mvvm.App
-import com.semdelion.mvvm.MainActivity
-import com.semdelion.mvvm.R
-import com.semdelion.mvvm.presentation.navigations.Navigator
-import com.semdelion.mvvm.presentation.navigations.UiActions
-import com.semdelion.mvvm.presentation.utils.Event
-import com.semdelion.mvvm.presentation.utils.ResourceActions
-import com.semdelion.mvvm.presentation.viewmodels.base.LiveEvent
-import com.semdelion.mvvm.presentation.viewmodels.base.MutableLiveEvent
-import com.semdelion.mvvm.presentation.views.base.BaseScreen
+import com.semdelion.presentaion.App
+import com.semdelion.presentaion.MainActivity
+import com.semdelion.presentaion.R
+import com.semdelion.presentaion.navigation.Navigator
+import com.semdelion.presentaion.navigation.UiActions
+import com.semdelion.presentaion.utils.Event
+import com.semdelion.presentaion.utils.ResourceActions
+import com.semdelion.presentaion.viewmodels.base.LiveEvent
+import com.semdelion.presentaion.viewmodels.base.MutableLiveEvent
+import com.semdelion.presentaion.views.base.BaseScreen
 
 const val ARG_SCREEN = "ARG_SCREEN"
 
