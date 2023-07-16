@@ -16,7 +16,9 @@ class SecondViewModel(
     private val _messageLive = MutableLiveData<String>(screen.message)
     val messageLive: LiveData<String> = _messageLive
 
+    val resultLive = MutableLiveData<String>("")
+
     fun onBackPressed() {
-        navigationService.goBack("Result from secondVM")
+        navigationService.goBack(resultLive.value)
     }
 }

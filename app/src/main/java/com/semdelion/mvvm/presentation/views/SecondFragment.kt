@@ -5,34 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import com.semdelion.mvvm.R
+import com.semdelion.mvvm.databinding.FragmentFirstBinding
+import com.semdelion.mvvm.databinding.FragmentSecondBinding
 import com.semdelion.mvvm.presentation.viewmodels.SecondViewModel
 import com.semdelion.mvvm.presentation.views.base.BaseFragment
 import com.semdelion.mvvm.presentation.views.base.BaseScreen
+import com.semdelion.mvvm.presentation.views.base.HasScreenTitle
 import com.semdelion.mvvm.presentation.views.factories.screenViewModel
 
-class SecondFragment : BaseFragment() {
+class SecondFragment : BaseFragment(), HasScreenTitle {
     class Screen(
         val message: String
     ) : BaseScreen
 
     override val viewModel by screenViewModel<SecondViewModel>()
+    private lateinit var binding: FragmentSecondBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_second, container, false)
-        val messageText = view.findViewById<TextView>(R.id.message_text)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_second, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
         viewModel.messageLive.observe(viewLifecycleOwner) {
-            messageText.text = it
+            binding.messageText.text = it
         }
 
-        val button = view.findViewById<TextView>(R.id.send_back_button)
+        binding.sendBackButton.setOnClickListener { viewModel.onBackPressed() }
 
-        button.setOnClickListener { viewModel.onBackPressed() }
+        return binding.root
+    }
 
-        return view
+    override fun getScreenTitle(): String {
+        return "SecondFragment"
     }
 }

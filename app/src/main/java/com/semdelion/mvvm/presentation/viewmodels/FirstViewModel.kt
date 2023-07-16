@@ -19,8 +19,10 @@ class FirstViewModel(
     private val _resultLive = MutableLiveData("...")
     val resultLive: LiveData<String> = _resultLive
 
+    val messageLive = MutableLiveData<String>("")
+
     fun sendText() {
-        val screen = SecondFragment.Screen("message from firstVM")
+        val screen = SecondFragment.Screen(messageLive.value?:"")
         navigationService.launch(screen)
     }
 

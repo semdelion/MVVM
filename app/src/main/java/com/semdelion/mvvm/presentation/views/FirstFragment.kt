@@ -10,29 +10,35 @@ import com.semdelion.mvvm.R
 import com.semdelion.mvvm.presentation.viewmodels.FirstViewModel
 import com.semdelion.mvvm.presentation.views.base.BaseFragment
 import com.semdelion.mvvm.presentation.views.base.BaseScreen
+import com.semdelion.mvvm.presentation.views.base.HasScreenTitle
 import com.semdelion.mvvm.presentation.views.factories.screenViewModel
+import androidx.databinding.DataBindingUtil
+import com.semdelion.mvvm.databinding.FragmentFirstBinding
 
-class FirstFragment : BaseFragment() {
+class FirstFragment : BaseFragment(), HasScreenTitle {
     class Screen : BaseScreen
 
     override val viewModel by screenViewModel<FirstViewModel>()
+    private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_first, container, false)
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-        val button = view.findViewById<Button>(R.id.sendTextButton)
+        binding.sendTextButton.setOnClickListener { viewModel.sendText() }
 
-        button.setOnClickListener { viewModel.sendText() }
-
-
-        val textResult = view.findViewById<TextView>(R.id.second_result_text)
         viewModel.resultLive.observe(viewLifecycleOwner) {
-            textResult.text = it
+            binding.secondResultText.text = it
         }
 
-        return view
+        return binding.root
+    }
+
+    override fun getScreenTitle(): String {
+        return "FirstFragment"
     }
 }
