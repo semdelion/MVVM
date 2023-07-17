@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.semdelion.presentaion.R
+import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.databinding.FragmentSecondBinding
 import com.semdelion.presentaion.viewmodels.SecondViewModel
-import com.semdelion.presentaion.views.base.BaseFragment
-import com.semdelion.presentaion.views.base.BaseScreen
-import com.semdelion.presentaion.views.base.HasScreenTitle
-import com.semdelion.presentaion.views.base.factories.screenViewModel
+import com.semdelion.presentaion.core.views.utils.BaseScreen
+import com.semdelion.presentaion.core.views.utils.HasScreenTitle
+import com.semdelion.presentaion.core.views.factories.screenViewModel
 
 class SecondFragment : BaseFragment(), HasScreenTitle {
     class Screen(

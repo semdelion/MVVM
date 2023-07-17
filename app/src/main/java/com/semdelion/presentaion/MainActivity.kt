@@ -7,11 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
-import com.semdelion.presentaion.R
-import com.semdelion.presentaion.viewmodels.MainViewModel
+import com.semdelion.presentaion.core.viewmodels.MainViewModel
+import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.views.FirstFragment
-import com.semdelion.presentaion.views.base.BaseFragment
-import com.semdelion.presentaion.views.base.HasScreenTitle
+import com.semdelion.presentaion.core.views.utils.HasScreenTitle
 
 class MainActivity : AppCompatActivity() {
 

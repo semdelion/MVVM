@@ -1,4 +1,4 @@
-package com.semdelion.presentaion.views.base
+package com.semdelion.presentaion.core.views.utils
 
 import java.io.Serializable
 

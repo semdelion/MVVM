@@ -1,4 +1,4 @@
-package com.semdelion.presentaion.viewmodels
+package com.semdelion.presentaion.core.viewmodels
 
 import android.app.Application
 import android.widget.Toast
@@ -8,13 +8,11 @@ import androidx.lifecycle.AndroidViewModel
 import com.semdelion.presentaion.App
 import com.semdelion.presentaion.MainActivity
 import com.semdelion.presentaion.R
-import com.semdelion.presentaion.navigation.Navigator
-import com.semdelion.presentaion.navigation.UiActions
-import com.semdelion.presentaion.utils.Event
-import com.semdelion.presentaion.utils.ResourceActions
-import com.semdelion.presentaion.viewmodels.base.LiveEvent
-import com.semdelion.presentaion.viewmodels.base.MutableLiveEvent
-import com.semdelion.presentaion.views.base.BaseScreen
+import com.semdelion.presentaion.core.navigator.Navigator
+import com.semdelion.presentaion.core.uiactions.UiActions
+import com.semdelion.presentaion.core.utils.Event
+import com.semdelion.presentaion.core.utils.ResourceActions
+import com.semdelion.presentaion.core.views.utils.BaseScreen
 
 const val ARG_SCREEN = "ARG_SCREEN"
 

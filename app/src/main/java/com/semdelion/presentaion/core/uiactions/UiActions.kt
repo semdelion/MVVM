@@ -1,4 +1,4 @@
-package com.semdelion.presentaion.navigation
+package com.semdelion.presentaion.core.uiactions
 
 interface UiActions {
 

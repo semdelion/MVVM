@@ -1,4 +1,4 @@
-package com.semdelion.presentaion.utils
+package com.semdelion.presentaion.core.utils
 
 class Event<T>(
     private val value: T

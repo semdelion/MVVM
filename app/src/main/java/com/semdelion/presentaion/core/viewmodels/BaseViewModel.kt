@@ -1,9 +1,9 @@
-package com.semdelion.presentaion.viewmodels.base
+package com.semdelion.presentaion.core.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.semdelion.presentaion.utils.Event
+import com.semdelion.presentaion.core.utils.Event
 
 typealias LiveEvent<T> = LiveData<Event<T>>
 typealias MutableLiveEvent<T> = MutableLiveData<Event<T>>
