@@ -3,7 +3,6 @@ package com.semdelion.presentaion.core.utils
 typealias ResourceAction<T> = (T) -> Unit
 
 class ResourceActions<T> {
-
     private val _actions = mutableListOf<ResourceAction<T>>()
 
     var resource: T? = null

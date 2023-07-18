@@ -4,22 +4,20 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
-import com.semdelion.presentaion.App
-import com.semdelion.presentaion.core.viewmodels.ARG_SCREEN
-import com.semdelion.presentaion.core.viewmodels.MainViewModel
+import com.semdelion.presentaion.core.ARG_SCREEN
+import com.semdelion.presentaion.core.BaseApplication
 import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.core.views.utils.BaseScreen
+import com.semdelion.presentaion.core.views.utils.FragmentsHolder
 import java.lang.reflect.Constructor
 
 inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {
-    val application = requireActivity().application as App
+    val application = requireActivity().application as BaseApplication
     val screen = requireArguments().getSerializable(ARG_SCREEN) as BaseScreen
-    val provider =
-        ViewModelProvider(requireActivity(), ViewModelProvider.AndroidViewModelFactory(application))
-    val mainViewModel = provider[MainViewModel::class.java]
-    val dependencies = listOf(screen, mainViewModel) + application.models
+
+    val baseActivityViewModel = (requireActivity() as FragmentsHolder).getBaseActivityViewModel()
+    val dependencies = listOf(screen, baseActivityViewModel) + application.repositories
     ViewModelFactory(dependencies, this)
 }
 

@@ -1,49 +1,44 @@
 package com.semdelion.presentaion
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProvider
-import com.semdelion.presentaion.core.viewmodels.MainViewModel
-import com.semdelion.presentaion.core.views.BaseFragment
+import com.semdelion.presentaion.core.navigator.FragmentNavigator
+import com.semdelion.presentaion.core.navigator.IntermediateNavigator
+import com.semdelion.presentaion.core.uiactions.UiActionsImpl
+import com.semdelion.presentaion.core.utils.viewModelCreator
+import com.semdelion.presentaion.core.BaseActivityViewModel
+import com.semdelion.presentaion.core.views.utils.FragmentsHolder
 import com.semdelion.presentaion.views.FirstFragment
-import com.semdelion.presentaion.core.views.utils.HasScreenTitle
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentsHolder {
 
-    private val activityViewModel by viewModels<MainViewModel> {
-        ViewModelProvider.AndroidViewModelFactory(
-            application
+    private lateinit var navigator: FragmentNavigator
+
+    private val activityViewModel by viewModelCreator<BaseActivityViewModel> {
+        BaseActivityViewModel(
+            uiActions = UiActionsImpl(application),
+            navigator = IntermediateNavigator()
         )
-    }
-
-    private val fragmentCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
-        override fun onFragmentViewCreated(
-            fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?
-        ) {
-            notifyScreenUpdate()
-        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (savedInstanceState == null) {
-            activityViewModel.launchFragment(
-                activity = this,
-                screen = FirstFragment.Screen(),
-                addToBackStack = false
-            )
-        }
-
-        supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallbacks, false)
+        navigator = FragmentNavigator(
+            activity = this,
+            containerId = R.id.fragmentContent,
+            animations = FragmentNavigator.Animations(
+                enterAnim = R.anim.enter,
+                exitAnim = R.anim.exit,
+                popEnter = R.anim.pop_enter,
+                popExit = R.anim.pop_exit),
+            initialScreenCreator = { FirstFragment.Screen()}
+        )
+        navigator.onCreate(savedInstanceState)
     }
 
     override fun onDestroy() {
-        supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentCallbacks)
+        navigator.onDestroy()
         super.onDestroy()
     }
 
@@ -54,28 +49,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        activityViewModel.whenActivityActive.resource = this
+        activityViewModel.navigator.setTarget(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        activityViewModel.whenActivityActive.resource = null
+        activityViewModel.navigator.setTarget(null)
     }
 
-    fun notifyScreenUpdate() {
-        val container = supportFragmentManager.findFragmentById(R.id.fragmentContent)
-        val hasStack = supportFragmentManager.backStackEntryCount > 0
-        supportActionBar?.setDisplayHomeAsUpEnabled(hasStack)
+    override fun notifyScreenUpdate() {
+        navigator.notifyScreenUpdate()
+    }
 
-        if((container is HasScreenTitle) && (container.getScreenTitle() != null)) {
-            supportActionBar?.title = container.getScreenTitle()
-        } else {
-            supportActionBar?.title = ""
-        }
-
-        val result = activityViewModel.result.value?.getValue() ?: return
-        if(container is BaseFragment) {
-            container.viewModel.onResult(result)
-        }
+    override fun getBaseActivityViewModel(): BaseActivityViewModel {
+        return activityViewModel
     }
 }
