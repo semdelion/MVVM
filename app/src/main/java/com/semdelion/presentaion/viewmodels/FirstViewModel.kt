@@ -3,6 +3,8 @@ package com.semdelion.presentaion.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import com.semdelion.domain.models.takeSuccess
+import com.semdelion.domain.repositories.IMessageRepository
 import com.semdelion.presentaion.core.navigator.Navigator
 import com.semdelion.presentaion.core.uiactions.UiActions
 import com.semdelion.presentaion.core.viewmodels.BaseViewModel
@@ -13,6 +15,7 @@ class FirstViewModel(
     screen: FirstFragment.Screen,
     private val navigationService: Navigator,
     private val uiActions: UiActions,
+    private val messageRepository: IMessageRepository,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -21,8 +24,14 @@ class FirstViewModel(
 
     val messageLive = MutableLiveData<String>("")
 
+    init {
+        messageRepository.getMessage().safeEnqueue {
+            _resultLive.postValue(it.takeSuccess()?.text)
+        }
+    }
+
     fun sendText() {
-        val screen = SecondFragment.Screen(messageLive.value?:"")
+        val screen = SecondFragment.Screen(messageLive.value ?: "")
         navigationService.launch(screen)
     }
 
