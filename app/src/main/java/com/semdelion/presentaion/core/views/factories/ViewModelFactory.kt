@@ -17,7 +17,7 @@ inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<
     val screen = requireArguments().getSerializable(ARG_SCREEN) as BaseScreen
 
     val baseActivityViewModel = (requireActivity() as FragmentsHolder).getBaseActivityViewModel()
-    val dependencies = listOf(screen, baseActivityViewModel) + application.repositories
+    val dependencies = listOf(screen, baseActivityViewModel) + application.singletonScopeDependencies
     ViewModelFactory(dependencies, this)
 }
 

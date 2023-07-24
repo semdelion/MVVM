@@ -2,15 +2,14 @@ package com.semdelion.presentaion.core.tasks
 
 import android.os.Handler
 import android.os.Looper
-import com.semdelion.domain.core.Task
-import com.semdelion.domain.core.TaskBody
-import com.semdelion.domain.core.TaskListener
-import com.semdelion.domain.core.TasksFactory
+import com.semdelion.domain.core.tasks.Task
+import com.semdelion.domain.core.tasks.TaskBody
+import com.semdelion.domain.core.tasks.TaskListener
+import com.semdelion.domain.core.tasks.TasksFactory
+import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
 import com.semdelion.domain.models.ErrorResult
 import com.semdelion.domain.models.FinalResult
 import com.semdelion.domain.models.SuccessResult
-import kotlinx.coroutines.NonCancellable.start
-import kotlinx.coroutines.withContext
 
 private val handler = Handler(Looper.getMainLooper())
 
@@ -37,7 +36,7 @@ class SimpleTaskFactory : TasksFactory {
             thread = null
         }
 
-        override fun enqueue(listener: TaskListener<T>) {
+        override fun enqueue(dispatcher: Dispatcher, listener: TaskListener<T>) {
             thread = Thread {
                 try {
                     val data = body()

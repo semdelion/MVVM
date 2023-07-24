@@ -3,19 +3,23 @@ package com.semdelion.presentaion
 import android.app.Application
 import com.semdelion.data.repositories.MessageRepositoryImpl
 import com.semdelion.data.storages.SharedPrefMessageStorage
-import com.semdelion.domain.repositories.IMessageRepository
-import com.semdelion.domain.repositories.IRepository
+import com.semdelion.domain.core.tasks.ThreadUtils
 import com.semdelion.presentaion.core.BaseApplication
 import com.semdelion.presentaion.core.tasks.SimpleTaskFactory
+import com.semdelion.presentaion.core.tasks.dispatchers.MainThreadDispatcher
 
 class App : Application(), BaseApplication {
 
-    override lateinit var repositories: List<IRepository>
+    override lateinit var singletonScopeDependencies: List<Any>
+
+    private val threadUtils = ThreadUtils.Default()
+    private val dispatcher = MainThreadDispatcher()
 
     override fun onCreate() {
         super.onCreate()
-        repositories = listOf<IRepository>(
-            MessageRepositoryImpl(SharedPrefMessageStorage(applicationContext), SimpleTaskFactory()),
+        singletonScopeDependencies = listOf(
+            dispatcher,
+            MessageRepositoryImpl(SharedPrefMessageStorage(applicationContext), SimpleTaskFactory(), threadUtils),
             SimpleTaskFactory())
     }
 }

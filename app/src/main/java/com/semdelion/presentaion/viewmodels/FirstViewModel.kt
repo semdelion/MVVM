@@ -3,6 +3,7 @@ package com.semdelion.presentaion.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
 import com.semdelion.domain.models.takeSuccess
 import com.semdelion.domain.repositories.IMessageRepository
 import com.semdelion.presentaion.core.navigator.Navigator
@@ -16,8 +17,9 @@ class FirstViewModel(
     private val navigationService: Navigator,
     private val uiActions: UiActions,
     private val messageRepository: IMessageRepository,
-    savedStateHandle: SavedStateHandle
-) : BaseViewModel() {
+    savedStateHandle: SavedStateHandle,
+    dispatcher: Dispatcher
+) : BaseViewModel(dispatcher) {
 
     private val _resultLive = MutableLiveData("...")
     val resultLive: LiveData<String> = _resultLive
