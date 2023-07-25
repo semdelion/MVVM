@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.semdelion.presentaion.core.utils.Event
 import com.semdelion.presentaion.core.ARG_SCREEN
+import com.semdelion.presentaion.core.utils.Event
 import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.core.views.utils.BaseScreen
 import com.semdelion.presentaion.core.views.utils.HasScreenTitle
@@ -32,6 +32,13 @@ class FragmentNavigator(
             _result = Event(result)
         }
         activity.onBackPressed()
+    }
+
+    fun onBackPressed() {
+        val container = activity.supportFragmentManager.findFragmentById(containerId)
+        if (container is BaseFragment) {
+            container.viewModel.onBackPressed()
+        }
     }
 
     fun onCreate(savedInstanceState: Bundle?) {
@@ -75,7 +82,7 @@ class FragmentNavigator(
 
     private fun publishResults(fragment: Fragment) {
         val result = _result?.getValue() ?: return
-        if(fragment is BaseFragment) {
+        if (fragment is BaseFragment) {
             fragment.viewModel.onResult(result)
         }
     }
@@ -85,7 +92,7 @@ class FragmentNavigator(
         val hasStack = activity.supportFragmentManager.backStackEntryCount > 0
         activity.supportActionBar?.setDisplayHomeAsUpEnabled(hasStack)
 
-        if((container is HasScreenTitle) && (container.getScreenTitle() != null)) {
+        if ((container is HasScreenTitle) && (container.getScreenTitle() != null)) {
             activity.supportActionBar?.title = container.getScreenTitle()
         } else {
             activity.supportActionBar?.title = ""
@@ -93,9 +100,9 @@ class FragmentNavigator(
     }
 
     data class Animations(
-        @AnimRes val enterAnim:Int,
-        @AnimRes val exitAnim:Int,
-        @AnimRes val popEnter:Int,
-        @AnimRes val popExit:Int
+        @AnimRes val enterAnim: Int,
+        @AnimRes val exitAnim: Int,
+        @AnimRes val popEnter: Int,
+        @AnimRes val popExit: Int
     )
 }

@@ -14,10 +14,13 @@ open class BaseViewModel(private val dispatcher: Dispatcher) : ViewModel() {
 
     open fun onResult(result: Any) {}
 
+    open fun onBackPressed() {
+        clearTasks()
+    }
+
     override fun onCleared() {
         super.onCleared()
-        tasks.forEach { it.cancel() }
-        tasks.clear()
+        clearTasks()
     }
 
     fun <T> Task<T>.safeEnqueue(listener: TaskListener<T>? = null) {
@@ -33,5 +36,10 @@ open class BaseViewModel(private val dispatcher: Dispatcher) : ViewModel() {
         this.safeEnqueue {
             liveResult.value = it
         }
+    }
+
+    private fun clearTasks() {
+        tasks.forEach { it.cancel() }
+        tasks.clear()
     }
 }

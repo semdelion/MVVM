@@ -5,6 +5,10 @@ import com.semdelion.domain.models.FinalResult
 
 typealias TaskListener<T> = (FinalResult<T>) -> Unit
 
+class CancelledException(
+    originException: java.lang.Exception? = null
+) : Exception(originException)
+
 interface Task<T> {
 
     fun await(): T

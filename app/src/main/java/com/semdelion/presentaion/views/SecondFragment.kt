@@ -33,7 +33,7 @@ class SecondFragment : BaseFragment(), HasScreenTitle {
             binding.messageText.text = it
         }
 
-        binding.sendBackButton.setOnClickListener { viewModel.onBackPressed() }
+        binding.sendBackButton.setOnClickListener { viewModel.onBack() }
 
         return binding.root
     }

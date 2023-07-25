@@ -27,7 +27,7 @@ class SecondViewModel(
 
     val resultLive = MutableLiveData<String>("")
 
-    fun onBackPressed() {
+    fun onBack() {
         saveMessage()
     }
 
