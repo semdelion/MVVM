@@ -8,14 +8,17 @@ import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
 import com.semdelion.domain.models.LoadingResult
 import com.semdelion.domain.models.Result
 
-open class BaseViewModel(private val dispatcher: Dispatcher) : ViewModel() {
+open class BaseViewModel(
+    private val dispatcher: Dispatcher
+    ) : ViewModel() {
 
     private val tasks = mutableSetOf<Task<*>>()
 
     open fun onResult(result: Any) {}
 
-    open fun onBackPressed() {
+    open fun onBackPressed(): Boolean {
         clearTasks()
+        return false
     }
 
     override fun onCleared() {

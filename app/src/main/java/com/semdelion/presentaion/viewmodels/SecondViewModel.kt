@@ -8,15 +8,15 @@ import com.semdelion.domain.models.ErrorResult
 import com.semdelion.domain.models.Message
 import com.semdelion.domain.models.SuccessResult
 import com.semdelion.domain.repositories.IMessageRepository
-import com.semdelion.presentaion.core.navigator.Navigator
-import com.semdelion.presentaion.core.uiactions.UiActions
+import com.semdelion.presentaion.core.sideeffects.navigator.Navigator
+import com.semdelion.presentaion.core.sideeffects.toasts.Toasts
 import com.semdelion.presentaion.core.viewmodels.BaseViewModel
 import com.semdelion.presentaion.views.SecondFragment
 
 class SecondViewModel(
     screen: SecondFragment.Screen,
     private val navigationService: Navigator,
-    private val uiActions: UiActions,
+    private val toasts: Toasts,
     private val messageRepository: IMessageRepository,
     savedStateHandle: SavedStateHandle,
     dispatcher: Dispatcher
@@ -42,9 +42,9 @@ class SecondViewModel(
                         if(result.data)
                             navigationService.goBack(resultLive.value)
                         else
-                            uiActions.toast("Oops something wrong!")
+                            toasts.toast("Oops something wrong!")
                     }
-                    is ErrorResult -> uiActions.toast(result.exception.message ?: "Error")
+                    is ErrorResult -> toasts.toast(result.exception.message ?: "Error")
                 }
             }
         }
