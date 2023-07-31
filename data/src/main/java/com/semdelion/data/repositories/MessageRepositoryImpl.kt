@@ -14,15 +14,14 @@ class MessageRepositoryImpl(
     private val tasksFactory: TasksFactory,
     private val threadUtils: ThreadUtils,
 ) : IMessageRepository {
-    override fun saveMessage(message: Message): Task<Boolean> = tasksFactory.async {
+    override suspend fun saveMessage(message: Message): Boolean = tasksFactory.async {
         threadUtils.sleep(2000)
         return@async messageStorage.save(MessageDataModel(message.text))
-    }
+    }.suspend()
 
-    override fun getMessage(): Task<Message> = tasksFactory.async  {
+    override suspend fun getMessage(): Message = tasksFactory.async  {
         threadUtils.sleep(2000)
         val dataModel = messageStorage.get()
-
         return@async dataModel.toMessageModel()
-    }
+    }.suspend()
 }

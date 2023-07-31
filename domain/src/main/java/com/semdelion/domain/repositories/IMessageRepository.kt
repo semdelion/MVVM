@@ -4,6 +4,6 @@ import com.semdelion.domain.core.tasks.Task
 import com.semdelion.domain.models.Message
 
 interface IMessageRepository : IRepository {
-    fun saveMessage(message: Message): Task<Boolean>
-    fun getMessage(): Task<Message>
+    suspend fun saveMessage(message: Message): Boolean
+    suspend fun getMessage(): Message
 }
