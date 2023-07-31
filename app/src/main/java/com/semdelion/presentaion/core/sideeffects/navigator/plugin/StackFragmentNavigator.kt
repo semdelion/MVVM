@@ -7,9 +7,7 @@ import androidx.annotation.IdRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.LifecycleOwner
 import com.semdelion.presentaion.core.sideeffects.SideEffectImplementation
 import com.semdelion.presentaion.core.sideeffects.navigator.Navigator
 import com.semdelion.presentaion.core.utils.Event
@@ -23,7 +21,7 @@ class StackFragmentNavigator(
     private val defaultTitle: String,
     private val animations: Animations,
     private val initialScreenCreator: () -> BaseScreen
-) : SideEffectImplementation(), Navigator, LifecycleObserver {
+) : SideEffectImplementation(), Navigator {
 
     private var result: Event<Any>? = null
 
@@ -50,8 +48,7 @@ class StackFragmentNavigator(
         requireActivity().supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallbacks, false)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
+    override fun onDestroy(owner: LifecycleOwner) {
         requireActivity().supportFragmentManager.unregisterFragmentLifecycleCallbacks(fragmentCallbacks)
     }
 

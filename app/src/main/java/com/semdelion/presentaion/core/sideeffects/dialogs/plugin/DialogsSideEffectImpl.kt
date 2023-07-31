@@ -3,15 +3,13 @@ package com.semdelion.presentaion.core.sideeffects.dialogs.plugin
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.LifecycleOwner
 import com.semdelion.domain.models.SuccessResult
 import com.semdelion.presentaion.core.sideeffects.SideEffectImplementation
 
 class DialogsSideEffectImpl(
     private val retainedState: DialogsSideEffectMediator.RetainedState
-) : SideEffectImplementation(), LifecycleObserver {
+) : SideEffectImplementation() {
 
     private var dialog: Dialog? = null
 
@@ -20,14 +18,12 @@ class DialogsSideEffectImpl(
         requireActivity().lifecycle.addObserver(this)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onStart() {
+    override fun onStart(owner: LifecycleOwner) {
         val record = retainedState.record ?: return
         showDialog(record)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onStop() {
+    override fun onStop(owner: LifecycleOwner) {
         removeDialog()
     }
 
@@ -65,6 +61,4 @@ class DialogsSideEffectImpl(
         dialog?.dismiss()
         dialog = null
     }
-
-
 }

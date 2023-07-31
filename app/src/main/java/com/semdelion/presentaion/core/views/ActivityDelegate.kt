@@ -3,9 +3,8 @@ package com.semdelion.presentaion.core.views
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import com.semdelion.presentaion.core.sideeffects.SideEffectImplementationsHolder
 import com.semdelion.presentaion.core.sideeffects.SideEffectPlugin
 import com.semdelion.presentaion.core.sideeffects.SideEffectPluginsManager
@@ -24,7 +23,7 @@ import com.semdelion.presentaion.core.viewmodels.BaseActivityViewModel
  */
 class ActivityDelegate(
     private val activity: AppCompatActivity
-) : LifecycleObserver {
+) : DefaultLifecycleObserver {
 
     internal val sideEffectPluginsManager = SideEffectPluginsManager()
 
@@ -109,20 +108,20 @@ class ActivityDelegate(
         return activityViewModel
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    private fun onResume() {
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
         sideEffectPluginsManager.plugins.forEach {
             activityViewModel.sideEffectMediatorsHolder.setTargetWithPlugin(it, implementersHolder)
         }
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    private fun onPause() {
+    override fun onPause(owner: LifecycleOwner) {
+        super.onPause(owner)
         activityViewModel.sideEffectMediatorsHolder.removeTargets()
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    private fun onDestroy() {
+    override fun onDestroy(owner: LifecycleOwner) {
+        super.onDestroy(owner)
         implementersHolder.clear()
     }
 
@@ -137,5 +136,4 @@ class ActivityDelegate(
     private fun setupSideEffectImplementer(plugin: SideEffectPlugin<*, *>) {
         implementersHolder.putWithPlugin(plugin, activityViewModel.sideEffectMediatorsHolder, activity)
     }
-
 }

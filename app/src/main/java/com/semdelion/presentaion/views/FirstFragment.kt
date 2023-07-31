@@ -29,6 +29,8 @@ class FirstFragment : BaseFragment(), HasScreenTitle {
 
         binding.sendTextButton.setOnClickListener { viewModel.sendText() }
 
+        binding.requestPermission.setOnClickListener { viewModel.requestPermission() }
+
         viewModel.resultLive.observe(viewLifecycleOwner) {
             binding.secondResultText.text = it
         }

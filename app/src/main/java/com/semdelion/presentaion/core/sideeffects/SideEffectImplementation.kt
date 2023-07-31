@@ -3,6 +3,7 @@ package com.semdelion.presentaion.core.sideeffects
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.DefaultLifecycleObserver
 
 /**
  * Base class for side-effect implementations.
@@ -10,12 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
  * account activity lifecycle. You may safely launch dialogs, perform navigation, change UI here.
  * Implementations are tied to activity.
  */
-abstract class SideEffectImplementation {
+abstract class SideEffectImplementation: DefaultLifecycleObserver {
 
     private lateinit var activity: AppCompatActivity
 
     fun requireActivity(): AppCompatActivity = activity
-
     open fun onCreate(savedInstanceState: Bundle?) {}
     open fun onBackPressed(): Boolean { return false }
     open fun onRequestUpdates() {}
