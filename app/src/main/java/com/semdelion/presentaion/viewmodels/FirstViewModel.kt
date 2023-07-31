@@ -4,6 +4,7 @@ import android.Manifest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.semdelion.domain.core.tasks.TasksFactory
 import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
 import com.semdelion.domain.models.takeSuccess
@@ -19,6 +20,9 @@ import com.semdelion.presentaion.core.sideeffects.toasts.Toasts
 import com.semdelion.presentaion.core.viewmodels.BaseViewModel
 import com.semdelion.presentaion.views.FirstFragment
 import com.semdelion.presentaion.views.SecondFragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class FirstViewModel(
     screen: FirstFragment.Screen,
@@ -28,11 +32,9 @@ class FirstViewModel(
     private val permissions: Permissions,
     private val intents: Intents,
     private val dialogs: Dialogs,
-    private val tasksFactory: TasksFactory,
     private val messageRepository: IMessageRepository,
-    savedStateHandle: SavedStateHandle,
-    dispatcher: Dispatcher
-) : BaseViewModel(dispatcher) {
+    savedStateHandle: SavedStateHandle
+) : BaseViewModel() {
 
     private val _resultLive = MutableLiveData("...")
     val resultLive: LiveData<String> = _resultLive
@@ -40,8 +42,9 @@ class FirstViewModel(
     val messageLive = MutableLiveData<String>("")
 
     init {
-        messageRepository.getMessage().safeEnqueue {
-            _resultLive.postValue(it.takeSuccess()?.text)
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = messageRepository.getMessage()
+            _resultLive.postValue(result.text)
         }
     }
 
@@ -50,13 +53,13 @@ class FirstViewModel(
         navigationService.launch(screen)
     }
 
-    fun requestPermission() = tasksFactory.async<Unit> {
+    fun requestPermission() = viewModelScope.launch {
         val permission = Manifest.permission.ACCESS_FINE_LOCATION
         val hasPermission = permissions.hasPermissions(permission)
         if (hasPermission) {
-            dialogs.show(createPermissionAlreadyGrantedDialog()).await()
+            dialogs.show(createPermissionAlreadyGrantedDialog())
         } else {
-            when (permissions.requestPermission(permission).await()) {
+            when (permissions.requestPermission(permission)) {
                 PermissionStatus.GRANTED -> {
                     toasts.toast("GRANTED")
                 }
@@ -64,13 +67,13 @@ class FirstViewModel(
                     toasts.toast("DENIED")
                 }
                 PermissionStatus.DENIED_FOREVER -> {
-                    if (dialogs.show(createAskForLaunchingAppSettingsDialog()).await()) {
+                    if (dialogs.show(createAskForLaunchingAppSettingsDialog())) {
                         intents.openAppSettings()
                     }
                 }
             }
         }
-    }.safeEnqueue()
+    }
 
     private fun createPermissionAlreadyGrantedDialog() = DialogConfig(
         title = "title",

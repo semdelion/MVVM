@@ -2,15 +2,18 @@ package com.semdelion.presentaion.core.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.semdelion.domain.core.tasks.Task
 import com.semdelion.domain.core.tasks.TaskListener
 import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
+import com.semdelion.domain.models.ErrorResult
 import com.semdelion.domain.models.LoadingResult
 import com.semdelion.domain.models.Result
+import com.semdelion.domain.models.SuccessResult
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
-open class BaseViewModel(
-    private val dispatcher: Dispatcher
-    ) : ViewModel() {
+open class BaseViewModel: ViewModel() {
 
     private val tasks = mutableSetOf<Task<*>>()
 
@@ -26,18 +29,13 @@ open class BaseViewModel(
         clearTasks()
     }
 
-    fun <T> Task<T>.safeEnqueue(listener: TaskListener<T>? = null) {
-        tasks.add(this)
-        this.enqueue(dispatcher) {
-            tasks.remove(this)
-            listener?.invoke(it)
-        }
-    }
-
-    fun <T> Task<T>.into(liveResult: MutableLiveData<Result<T>>) {
-        liveResult.value = LoadingResult()
-        this.safeEnqueue {
-            liveResult.value = it
+    fun <T> into(liveResult: MutableLiveData<Result<T>>, block: suspend () -> T) {
+        viewModelScope.launch {
+            try {
+                liveResult.postValue(SuccessResult(block()))
+            } catch (ex: Exception) {
+                liveResult.postValue(ErrorResult(ex))
+            }
         }
     }
 
