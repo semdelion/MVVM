@@ -4,8 +4,6 @@ import com.semdelion.domain.models.FinalResult
 
 typealias CancelListener = () -> Unit
 
-typealias ExecutionListener<T> = (Emitter<T>) -> Unit
-
 /**
  * Emitter instance is passed to [CallbackTask.create] as an argument so you can use it
  * for converting callbacks into [Task].

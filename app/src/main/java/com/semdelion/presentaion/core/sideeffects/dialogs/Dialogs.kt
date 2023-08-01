@@ -1,6 +1,5 @@
 package com.semdelion.presentaion.core.sideeffects.dialogs
 
-import com.semdelion.domain.core.tasks.Task
 import com.semdelion.presentaion.core.sideeffects.dialogs.plugin.DialogConfig
 
 /**

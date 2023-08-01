@@ -3,25 +3,21 @@ package com.semdelion.data.repositories
 import com.semdelion.data.storages.interfaces.IMessageStorage
 import com.semdelion.data.storages.models.MessageDataModel
 import com.semdelion.data.storages.models.toMessageModel
-import com.semdelion.domain.core.tasks.Task
-import com.semdelion.domain.core.tasks.TasksFactory
-import com.semdelion.domain.core.tasks.ThreadUtils
 import com.semdelion.domain.models.Message
 import com.semdelion.domain.repositories.IMessageRepository
+import kotlinx.coroutines.delay
 
 class MessageRepositoryImpl(
     private val messageStorage: IMessageStorage,
-    private val tasksFactory: TasksFactory,
-    private val threadUtils: ThreadUtils,
 ) : IMessageRepository {
-    override suspend fun saveMessage(message: Message): Boolean = tasksFactory.async {
-        threadUtils.sleep(2000)
-        return@async messageStorage.save(MessageDataModel(message.text))
-    }.suspend()
+    override suspend fun saveMessage(message: Message): Boolean {
+        delay(2000)
+        return messageStorage.save(MessageDataModel(message.text))
+    }
 
-    override suspend fun getMessage(): Message = tasksFactory.async  {
-        threadUtils.sleep(2000)
+    override suspend fun getMessage(): Message {
+        delay(2000)
         val dataModel = messageStorage.get()
-        return@async dataModel.toMessageModel()
-    }.suspend()
+        return dataModel.toMessageModel()
+    }
 }

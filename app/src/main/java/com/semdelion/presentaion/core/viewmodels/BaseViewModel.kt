@@ -3,8 +3,6 @@ package com.semdelion.presentaion.core.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.semdelion.domain.core.tasks.Task
-import com.semdelion.domain.core.tasks.TaskListener
 import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
 import com.semdelion.domain.models.ErrorResult
 import com.semdelion.domain.models.LoadingResult
@@ -14,8 +12,6 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 
 open class BaseViewModel: ViewModel() {
-
-    private val tasks = mutableSetOf<Task<*>>()
 
     open fun onResult(result: Any) {}
 
@@ -40,7 +36,5 @@ open class BaseViewModel: ViewModel() {
     }
 
     private fun clearTasks() {
-        tasks.forEach { it.cancel() }
-        tasks.clear()
     }
 }
