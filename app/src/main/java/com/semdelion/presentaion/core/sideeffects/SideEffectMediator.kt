@@ -1,7 +1,7 @@
 package com.semdelion.presentaion.core.sideeffects
 
 import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
-import com.semdelion.presentaion.core.tasks.dispatchers.MainThreadDispatcher
+import com.semdelion.presentaion.core.utils.dispatchers.MainThreadDispatcher
 import com.semdelion.presentaion.core.utils.ResourceActions
 
 /**

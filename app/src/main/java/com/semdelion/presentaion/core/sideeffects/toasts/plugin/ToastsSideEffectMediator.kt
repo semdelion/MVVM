@@ -4,7 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import com.semdelion.presentaion.core.sideeffects.SideEffectMediator
 import com.semdelion.presentaion.core.sideeffects.toasts.Toasts
-import com.semdelion.presentaion.core.tasks.dispatchers.MainThreadDispatcher
+import com.semdelion.presentaion.core.utils.dispatchers.MainThreadDispatcher
 
 /**
  * Android implementation of [Toasts]. Displaying simple toast message and getting string from resources.

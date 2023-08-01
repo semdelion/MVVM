@@ -1,4 +1,4 @@
-package com.semdelion.presentaion.core.tasks.dispatchers
+package com.semdelion.presentaion.core.utils.dispatchers
 
 import android.os.Handler
 import android.os.Looper

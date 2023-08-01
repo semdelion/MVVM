@@ -3,8 +3,8 @@ package com.semdelion.presentaion.core.utils
 import com.semdelion.domain.models.ErrorResult
 import com.semdelion.domain.models.FinalResult
 import com.semdelion.domain.models.SuccessResult
-import com.semdelion.presentaion.core.tasks.callback.CancelListener
-import com.semdelion.presentaion.core.tasks.callback.Emitter
+import com.semdelion.presentaion.core.utils.callback.CancelListener
+import com.semdelion.presentaion.core.utils.callback.Emitter
 import kotlinx.coroutines.CancellableContinuation
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.resumeWithException

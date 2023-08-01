@@ -1,4 +1,4 @@
-package com.semdelion.presentaion.core.tasks.callback
+package com.semdelion.presentaion.core.utils.callback
 
 import com.semdelion.domain.models.FinalResult
 

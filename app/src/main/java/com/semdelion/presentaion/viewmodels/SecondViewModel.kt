@@ -3,8 +3,6 @@ package com.semdelion.presentaion.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
-import com.semdelion.domain.core.tasks.dispatchers.Dispatcher
 import com.semdelion.domain.models.Message
 import com.semdelion.domain.repositories.IMessageRepository
 import com.semdelion.presentaion.core.sideeffects.navigator.Navigator

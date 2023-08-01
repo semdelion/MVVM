@@ -3,7 +3,7 @@ package com.semdelion.presentaion.core.sideeffects.dialogs.plugin
 import com.semdelion.domain.models.ErrorResult
 import com.semdelion.presentaion.core.sideeffects.SideEffectMediator
 import com.semdelion.presentaion.core.sideeffects.dialogs.Dialogs
-import com.semdelion.presentaion.core.tasks.callback.Emitter
+import com.semdelion.presentaion.core.utils.callback.Emitter
 import com.semdelion.presentaion.core.utils.toEmitter
 import kotlinx.coroutines.suspendCancellableCoroutine
 

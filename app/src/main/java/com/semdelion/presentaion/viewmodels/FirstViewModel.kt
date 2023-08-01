@@ -4,7 +4,6 @@ import android.Manifest
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.semdelion.domain.repositories.IMessageRepository
 import com.semdelion.presentaion.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentaion.core.sideeffects.dialogs.plugin.DialogConfig
