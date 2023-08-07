@@ -1,8 +1,6 @@
 package com.semdelion.presentaion.viewmodels
 
 import android.Manifest
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.IMessageRepository
 import com.semdelion.presentaion.core.sideeffects.dialogs.Dialogs
@@ -17,6 +15,8 @@ import com.semdelion.presentaion.core.viewmodels.BaseViewModel
 import com.semdelion.presentaion.views.FirstFragment
 import com.semdelion.presentaion.views.SecondFragment
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class FirstViewModel(
@@ -31,15 +31,15 @@ class FirstViewModel(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _resultLive = MutableLiveData("...")
-    val resultLive: LiveData<String> = _resultLive
+    private val _resultLive = MutableStateFlow("...")
+    val resultLive: StateFlow<String> = _resultLive
 
-    val messageLive = MutableLiveData<String>("")
+    val messageLive = MutableStateFlow("")
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val result = messageRepository.getMessage()
-            _resultLive.postValue(result.text)
+            _resultLive.value = result.text
         }
     }
 

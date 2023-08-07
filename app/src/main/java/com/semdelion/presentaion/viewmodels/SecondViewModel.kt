@@ -1,6 +1,5 @@
 package com.semdelion.presentaion.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.models.Message
@@ -9,6 +8,8 @@ import com.semdelion.presentaion.core.sideeffects.navigator.Navigator
 import com.semdelion.presentaion.core.sideeffects.toasts.Toasts
 import com.semdelion.presentaion.core.viewmodels.BaseViewModel
 import com.semdelion.presentaion.views.SecondFragment
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SecondViewModel(
@@ -19,10 +20,10 @@ class SecondViewModel(
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _messageLive = MutableLiveData<String>(screen.message)
-    val messageLive: LiveData<String> = _messageLive
+    private val _messageLive = MutableStateFlow(screen.message)
+    val messageLive: StateFlow<String> = _messageLive
 
-    val resultLive = MutableLiveData<String>("")
+    val resultLive = MutableLiveData("")
 
     fun onBack() {
         saveMessage()
