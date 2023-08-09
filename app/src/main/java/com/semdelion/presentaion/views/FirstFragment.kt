@@ -10,8 +10,12 @@ import com.semdelion.presentaion.core.views.utils.BaseScreen
 import com.semdelion.presentaion.core.views.utils.HasScreenTitle
 import com.semdelion.presentaion.core.views.factories.screenViewModel
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.databinding.FragmentFirstBinding
+import kotlinx.coroutines.launch
 
 class FirstFragment : BaseFragment(), HasScreenTitle {
     class Screen : BaseScreen
@@ -29,8 +33,14 @@ class FirstFragment : BaseFragment(), HasScreenTitle {
 
         binding.sendTextButton.setOnClickListener { viewModel.sendText() }
 
-        viewModel.resultLive.observe(viewLifecycleOwner) {
-            binding.secondResultText.text = it
+        binding.requestPermission.setOnClickListener { viewModel.requestPermission() }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.resultLive.collect {
+                    result -> binding.secondResultText.text = result
+                }
+            }
         }
 
         return binding.root
