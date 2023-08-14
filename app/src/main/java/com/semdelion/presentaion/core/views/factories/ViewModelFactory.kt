@@ -5,28 +5,30 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.savedstate.SavedStateRegistryOwner
-import com.semdelion.presentaion.core.BaseApplication
+import com.semdelion.presentaion.core.SingletonScopeDependencies
 import com.semdelion.presentaion.core.views.ActivityDelegateHolder
 import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.core.views.utils.BaseScreen
 import com.semdelion.presentaion.core.views.utils.BaseScreen.Companion.ARG_SCREEN
-import com.semdelion.presentaion.core.views.utils.FragmentsHolder
 import java.lang.reflect.Constructor
 
 inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {
-    val application = requireActivity().application as BaseApplication
+    val application = requireActivity().application
     val screen = requireArguments().getSerializable(ARG_SCREEN) as BaseScreen
 
     val baseActivityViewModel = (requireActivity() as ActivityDelegateHolder).delegate.getBaseActivityViewModel()
+
     // forming the list of available dependencies:
     // - singleton scope dependencies (repositories) -> from App class
     // - activity VM scope dependencies -> from ActivityScopeViewModel
     // - screen VM scope dependencies -> screen args
-    val dependencies = listOf(screen) + baseActivityViewModel.sideEffectMediators + application.singletonScopeDependencies
+    val dependencies = listOf(screen) + baseActivityViewModel.sideEffectMediators +
+            SingletonScopeDependencies.getSingletonScopeDependencies(application)
 
     ViewModelFactory(dependencies, this)
 }
 
+@Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
     private val dependencies: List<Any>,
     owner: SavedStateRegistryOwner
