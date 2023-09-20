@@ -4,29 +4,30 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.AnimRes
 import androidx.annotation.IdRes
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import com.semdelion.presentaion.core.sideeffects.SideEffectImplementation
 import com.semdelion.presentaion.core.sideeffects.navigator.Navigator
 import com.semdelion.presentaion.core.utils.Event
 import com.semdelion.presentaion.core.views.BaseFragment
-import com.semdelion.presentaion.core.views.utils.BaseScreen
-import com.semdelion.presentaion.core.views.utils.BaseScreen.Companion.ARG_SCREEN
 import com.semdelion.presentaion.core.views.utils.HasScreenTitle
 
 class StackFragmentNavigator(
     @IdRes private val containerId: Int,
-    private val defaultTitle: String,
-    private val animations: Animations,
-    private val initialScreenCreator: () -> BaseScreen
+    private val animations: Animations
 ) : SideEffectImplementation(), Navigator {
 
     private var result: Event<Any>? = null
 
-    override fun launch(screen: BaseScreen) {
-        launchFragment(screen)
+    private var currentFragment: Fragment ?= null
+
+    override fun launch(direction: NavDirections) {
+        launchDirections(direction)
     }
 
     override fun goBack(result: Any?) {
@@ -38,14 +39,7 @@ class StackFragmentNavigator(
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requireActivity().lifecycle.addObserver(this)
-        if (savedInstanceState == null) {
-            // define the initial screen that should be launched when app starts.
-            launchFragment(
-                screen = initialScreenCreator(),
-                addToBackStack = false
-            )
-        }
-        requireActivity().supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallbacks, false)
+        requireActivity().supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentCallbacks, true)
     }
 
     override fun onDestroy(owner: LifecycleOwner) {
@@ -53,7 +47,7 @@ class StackFragmentNavigator(
     }
 
     override fun onBackPressed(): Boolean {
-        val f = getCurrentFragment()
+        val f = currentFragment
         return if (f is BaseFragment) {
             f.viewModel.onBackPressed()
         } else {
@@ -67,56 +61,53 @@ class StackFragmentNavigator(
     }
 
     override fun onRequestUpdates() {
-        val f = getCurrentFragment()
-
-        if (requireActivity().supportFragmentManager.backStackEntryCount > 0) {
-            // more than 1 screen -> show back button in the toolbar
-            requireActivity().supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        } else {
-            requireActivity().supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        }
-
+        val f = currentFragment
         if (f is HasScreenTitle && f.getScreenTitle() != null) {
-            // fragment has custom screen title -> display it
             requireActivity().supportActionBar?.title = f.getScreenTitle()
-        } else {
-            requireActivity().supportActionBar?.title = defaultTitle
-        }
+        } 
     }
 
-    private fun launchFragment(screen: BaseScreen, addToBackStack: Boolean = true) {
-        // as screen classes are inside fragments -> we can create fragment directly from screen
-        val fragment = screen.javaClass.enclosingClass.newInstance() as Fragment
-        // set screen object as fragment's argument
-        fragment.arguments = bundleOf(ARG_SCREEN to screen)
+    private fun launchDirections(direction: NavDirections) {
+        requireActivity().findNavController(containerId).navigate(
+            directions = direction,
+            navOptions =  navOptions {
+                anim {
+                    enter = animations.enterAnim
+                    exit = animations.exitAnim
+                    popEnter = animations.popEnterAnim
+                    popExit = animations.popExitAnim
+                }
+            }
+        )
+    }
 
-        val transaction = requireActivity().supportFragmentManager.beginTransaction()
-        if (addToBackStack) transaction.addToBackStack(null)
-        transaction
-            .setCustomAnimations(
-                animations.enterAnim,
-                animations.exitAnim,
-                animations.popEnterAnim,
-                animations.popExitAnim,
-            )
-            .replace(containerId, fragment)
-            .commit()
+    private fun launchDestination(destination: Int, args: Bundle?) {
+        requireActivity().findNavController(containerId).navigate(
+            destination,
+            args = args,
+            navOptions =  navOptions {
+                anim {
+                    enter = animations.enterAnim
+                    exit = animations.exitAnim
+                    popEnter = animations.popEnterAnim
+                    popExit = animations.popExitAnim
+                }
+            }
+        )
     }
 
     private fun publishResults(fragment: Fragment) {
         val result = result?.getValue() ?: return
         if (fragment is BaseFragment) {
-            // has result that can be delivered to the screen's view-model
+            // has result that can be delivered to the view-model
             fragment.viewModel.onResult(result)
         }
     }
 
-    private fun getCurrentFragment(): Fragment? {
-        return requireActivity().supportFragmentManager.findFragmentById(containerId)
-    }
-
     private val fragmentCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
         override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View, savedInstanceState: Bundle?) {
+            if (f is NavHostFragment) return
+            currentFragment = f
             onRequestUpdates()
             publishResults(f)
         }

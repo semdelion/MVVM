@@ -22,5 +22,13 @@
         <argument
             android:name="message"
             app:argType="string" />
+        <action
+            android:id="@+id/action_secondFragment_to_thirdFragment"
+            app:destination="@id/thirdFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.semdelion.presentaion.views.ThirdFragment"
+        tools:layout="@layout/fragment_third"
+        android:label="Third" />
 </navigation>

@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.semdelion.presentaion.R
 import com.semdelion.presentaion.viewmodels.FirstViewModel
-import com.semdelion.presentaion.core.views.utils.BaseScreen
 import com.semdelion.presentaion.core.views.utils.HasScreenTitle
-import com.semdelion.presentaion.core.views.factories.screenViewModel
+import com.semdelion.presentaion.core.views.factories.viewModel
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -18,9 +17,8 @@ import com.semdelion.presentaion.databinding.FragmentFirstBinding
 import kotlinx.coroutines.launch
 
 class FirstFragment : BaseFragment(), HasScreenTitle {
-    class Screen : BaseScreen
 
-    override val viewModel by screenViewModel<FirstViewModel>()
+    override val viewModel by viewModel<FirstViewModel>()
     private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(

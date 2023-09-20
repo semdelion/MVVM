@@ -12,15 +12,13 @@ import com.semdelion.presentaion.core.sideeffects.permissions.plugin.PermissionS
 import com.semdelion.presentaion.core.sideeffects.resources.Resources
 import com.semdelion.presentaion.core.sideeffects.toasts.Toasts
 import com.semdelion.presentaion.core.viewmodels.BaseViewModel
-import com.semdelion.presentaion.views.FirstFragment
-import com.semdelion.presentaion.views.SecondFragment
+import com.semdelion.presentaion.views.FirstFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class FirstViewModel(
-    screen: FirstFragment.Screen,
     private val navigationService: Navigator,
     private val toasts: Toasts,
     private val resources: Resources,
@@ -44,8 +42,7 @@ class FirstViewModel(
     }
 
     fun sendText() {
-        val screen = SecondFragment.Screen(messageLive.value ?: "")
-        navigationService.launch(screen)
+        navigationService.launch(FirstFragmentDirections.actionFirstFragmentToSecondFragment(messageLive.value ?: ""))
     }
 
     fun requestPermission() = viewModelScope.launch {

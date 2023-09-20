@@ -1,5 +1,6 @@
 package com.semdelion.presentaion.core.views.factories
 
+import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
@@ -8,31 +9,28 @@ import androidx.savedstate.SavedStateRegistryOwner
 import com.semdelion.presentaion.core.SingletonScopeDependencies
 import com.semdelion.presentaion.core.views.ActivityDelegateHolder
 import com.semdelion.presentaion.core.views.BaseFragment
-import com.semdelion.presentaion.core.views.utils.BaseScreen
-import com.semdelion.presentaion.core.views.utils.BaseScreen.Companion.ARG_SCREEN
 import java.lang.reflect.Constructor
 
-inline fun <reified VM : ViewModel> BaseFragment.screenViewModel() = viewModels<VM> {
+inline fun <reified VM : ViewModel> BaseFragment.viewModel() = viewModels<VM> {
     val application = requireActivity().application
-    val screen = requireArguments().getSerializable(ARG_SCREEN) as BaseScreen
 
     val baseActivityViewModel = (requireActivity() as ActivityDelegateHolder).delegate.getBaseActivityViewModel()
 
     // forming the list of available dependencies:
     // - singleton scope dependencies (repositories) -> from App class
     // - activity VM scope dependencies -> from ActivityScopeViewModel
-    // - screen VM scope dependencies -> screen args
-    val dependencies = listOf(screen) + baseActivityViewModel.sideEffectMediators +
+    val dependencies = baseActivityViewModel.sideEffectMediators +
             SingletonScopeDependencies.getSingletonScopeDependencies(application)
 
-    ViewModelFactory(dependencies, this)
+    ViewModelFactory(dependencies, this, arguments)
 }
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory(
     private val dependencies: List<Any>,
-    owner: SavedStateRegistryOwner
-) : AbstractSavedStateViewModelFactory(owner, null) {
+    owner: SavedStateRegistryOwner,
+    args: Bundle?
+) : AbstractSavedStateViewModelFactory(owner, args) {
 
     override fun <T : ViewModel> create(
         key: String,

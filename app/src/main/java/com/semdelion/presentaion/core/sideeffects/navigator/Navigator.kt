@@ -1,17 +1,17 @@
 package com.semdelion.presentaion.core.sideeffects.navigator
 
-import com.semdelion.presentaion.core.views.utils.BaseScreen
+import androidx.navigation.NavDirections
 
 interface Navigator {
 
     /**
-     * Launch a new screen at the top of back stack.
+     * Launch a new view at the top of back stack.
      */
-    fun launch(screen: BaseScreen)
+
+    fun launch(direction: NavDirections)
 
     /**
      * Go back to the previous screen and optionally send some results.
      */
     fun goBack(result: Any? = null)
-
 }

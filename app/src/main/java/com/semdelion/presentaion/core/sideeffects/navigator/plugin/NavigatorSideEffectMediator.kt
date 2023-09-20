@@ -1,13 +1,13 @@
 package com.semdelion.presentaion.core.sideeffects.navigator.plugin
 
+import androidx.navigation.NavDirections
 import com.semdelion.presentaion.core.sideeffects.SideEffectMediator
 import com.semdelion.presentaion.core.sideeffects.navigator.Navigator
-import com.semdelion.presentaion.core.views.utils.BaseScreen
 
 class NavigatorSideEffectMediator : SideEffectMediator<Navigator>(), Navigator {
 
-    override fun launch(screen: BaseScreen) = target {
-        it.launch(screen)
+    override fun launch(direction: NavDirections) = target {
+        it.launch(direction)
     }
 
     override fun goBack(result: Any?) = target {

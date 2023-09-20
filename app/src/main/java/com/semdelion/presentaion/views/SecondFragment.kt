@@ -8,22 +8,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import com.semdelion.presentaion.R
 import com.semdelion.presentaion.core.views.BaseFragment
 import com.semdelion.presentaion.databinding.FragmentSecondBinding
 import com.semdelion.presentaion.viewmodels.SecondViewModel
-import com.semdelion.presentaion.core.views.utils.BaseScreen
 import com.semdelion.presentaion.core.views.utils.HasScreenTitle
-import com.semdelion.presentaion.core.views.factories.screenViewModel
+import com.semdelion.presentaion.core.views.factories.viewModel
 import kotlinx.coroutines.launch
 
 class SecondFragment : BaseFragment(), HasScreenTitle {
-    class Screen(
-        val message: String
-    ) : BaseScreen
 
-    override val viewModel by screenViewModel<SecondViewModel>()
+    override val viewModel by viewModel<SecondViewModel>()
+
     private lateinit var binding: FragmentSecondBinding
+
+    private val args: SecondFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,13 @@ class SecondFragment : BaseFragment(), HasScreenTitle {
             }
         }
 
-        binding.sendBackButton.setOnClickListener { viewModel.onBack() }
+        binding.goNextButton.setOnClickListener {
+            viewModel.goNext()
+        }
+
+        binding.sendBackButton.setOnClickListener {
+            viewModel.onBack()
+        }
 
         return binding.root
     }

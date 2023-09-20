@@ -7,26 +7,27 @@ import com.semdelion.domain.repositories.IMessageRepository
 import com.semdelion.presentaion.core.sideeffects.navigator.Navigator
 import com.semdelion.presentaion.core.sideeffects.toasts.Toasts
 import com.semdelion.presentaion.core.viewmodels.BaseViewModel
-import com.semdelion.presentaion.views.SecondFragment
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.semdelion.presentaion.views.SecondFragmentDirections
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SecondViewModel(
-    screen: SecondFragment.Screen,
     private val navigationService: Navigator,
     private val toasts: Toasts,
     private val messageRepository: IMessageRepository,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _messageLive = MutableStateFlow(screen.message)
-    val messageLive: StateFlow<String> = _messageLive
+    val messageLive: StateFlow<String> = savedStateHandle.getStateFlow("message", "")
 
     val resultLive = MutableLiveData("")
 
     fun onBack() {
         saveMessage()
+    }
+
+    fun goNext() {
+        navigationService.launch(SecondFragmentDirections.actionSecondFragmentToThirdFragment())
     }
 
     private fun saveMessage() {
