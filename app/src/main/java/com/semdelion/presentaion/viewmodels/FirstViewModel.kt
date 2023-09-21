@@ -3,6 +3,7 @@ package com.semdelion.presentaion.viewmodels
 import android.Manifest
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.IMessageRepository
+import com.semdelion.presentaion.R
 import com.semdelion.presentaion.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentaion.core.sideeffects.dialogs.plugin.DialogConfig
 import com.semdelion.presentaion.core.sideeffects.intents.Intents
@@ -68,16 +69,16 @@ class FirstViewModel(
     }
 
     private fun createPermissionAlreadyGrantedDialog() = DialogConfig(
-        title = "title",
-        message ="already_granted",
-        positiveButton = "ok"
+        title = resources.getString(R.string.dialog_permission_title),
+        message = resources.getString(R.string.dialog_permission_granted_message),
+        positiveButton = resources.getString(R.string.dialog_permission_granted_button_ok)
     )
 
     private fun createAskForLaunchingAppSettingsDialog() = DialogConfig(
-        title = "title",
-        message = "message",
-        positiveButton = "action_open",
-        negativeButton = "cancel"
+        title = resources.getString(R.string.dialog_permission_title),
+        message = resources.getString(R.string.dialog_permission_denied_message),
+        positiveButton = resources.getString(R.string.dialog_permission_denied_button_ok),
+        negativeButton = resources.getString(R.string.dialog_permission_denied_button_cancel)
     )
 
     override fun onResult(result: Any) {

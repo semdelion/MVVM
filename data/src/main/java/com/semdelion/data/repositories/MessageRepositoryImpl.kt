@@ -14,12 +14,11 @@ class MessageRepositoryImpl(
     private val ioDispatcher: IoDispatcher
 ) : IMessageRepository {
     override suspend fun saveMessage(message: Message): Boolean = withContext(ioDispatcher.value) {
-        delay(2000)
         return@withContext messageStorage.save(MessageDataModel(message.text))
     }
 
     override suspend fun getMessage(): Message = withContext(ioDispatcher.value) {
-        delay(2000)
+        delay(1000)
         val dataModel = messageStorage.get()
         return@withContext dataModel.toMessageModel()
     }

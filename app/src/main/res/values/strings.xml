@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MVVM</string>
+
+    <string name="dialog_permission_title">Permission</string>
+    <string name="dialog_permission_granted_message">Location permission already granted, thanks!</string>
+    <string name="dialog_permission_granted_button_ok">OK</string>
+
+    <string name="dialog_permission_denied_message">Give location permission in settings</string>
+    <string name="dialog_permission_denied_button_ok">Open settings</string>
+    <string name="dialog_permission_denied_button_cancel">Cancel</string>
 </resources>
