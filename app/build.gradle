@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.semdelion.presentaion'
+    namespace 'com.semdelion.presentation'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.semdelion.presentaion"
+        applicationId "com.semdelion.presentation"
         minSdk 23
         targetSdk 34
         versionCode 1

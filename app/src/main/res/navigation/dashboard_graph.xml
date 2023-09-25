@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/rootFragment"
+    android:id="@+id/dashboard_graph">
+    <fragment
+        android:id="@+id/rootFragment"
+        android:name="com.semdelion.presentation.ui.tabs.dashboard.RootFragment"
+        android:label="Root"
+        tools:layout="@layout/fragment_root" >
+        <action
+            android:id="@+id/action_rootFragment_to_boxFragment"
+            app:destination="@id/boxFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boxFragment"
+        android:name="com.semdelion.presentation.ui.tabs.dashboard.BoxFragment"
+        android:label="{colorName} Box"
+        tools:layout="@layout/fragment_box" >
+        <action
+            android:id="@+id/action_boxFragment_to_secretFragment"
+            app:destination="@id/secretFragment" />
+        <argument
+            android:name="color"
+            app:argType="integer"/>
+        <argument
+            android:name="colorName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/secretFragment"
+        android:name="com.semdelion.presentation.ui.tabs.dashboard.SecretFragment"
+        android:label="Secret"
+        tools:layout="@layout/fragment_secret" />
+</navigation>
