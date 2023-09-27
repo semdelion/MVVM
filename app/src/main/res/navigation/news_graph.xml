@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/news_graph"
-    app:startDestination="@id/newsFragment">
-
-    <fragment
-        android:id="@+id/newsFragment"
-        android:name="com.semdelion.presentation.ui.tabs.news.NewsFragment"
-        android:label="News"
-        tools:layout="@layout/fragment_news" />
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/news_graph"
+app:startDestination="@+id/newsFragment">
+<fragment
+    android:id="@+id/newsFragment"
+    android:name="com.semdelion.presentation.ui.tabs.news.NewsFragment"
+    android:label="@string/toolbar_title_news"
+    tools:layout="@layout/fragment_news">
+    <action
+        android:id="@+id/action_newsFragment_to_newsDetailsFragment"
+        app:destination="@id/newsDetailsFragment" />
+</fragment>
+<fragment
+    android:id="@+id/newsDetailsFragment"
+    android:name="com.semdelion.presentation.ui.tabs.news.NewsDetailsFragment"
+    android:label="@string/toolbar_title_news"
+    tools:layout="@layout/fragment_news_details">
+    <argument
+        android:name="newsItem"
+        app:argType="com.semdelion.presentation.navigation.NewsNavigationArg" />
+</fragment>
 </navigation>

@@ -15,10 +15,6 @@ import kotlin.random.Random
 
 class BoxFragment : BaseFragment() {
 
-    companion object {
-        const val EXTRA_RANDOM_NUMBER = "EXTRA_RANDOM_NUMBER"
-    }
-
     override val viewModel by viewModel<BoxViewModel>()
     private lateinit var binding: FragmentBoxBinding
 

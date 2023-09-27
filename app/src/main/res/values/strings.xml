@@ -12,6 +12,8 @@
     <string name="menu_news">News</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_favorite">Favorite</string>
+    <string name="menu_remove_news">menu_remove_news</string>
+    <string name="menu_add_favorite">menu_save_news</string>
 
     <string name="please_wait">Please wait…</string>
     <string name="edit_profile_description">Right now you can edit only username</string>
@@ -33,5 +35,9 @@
     <string name="password_mismatch">Password mismatch</string>
     <string name="account_already_exists">Account already exists</string>
     <string name="placeholder">-</string>
+
+    <string name="toolbar_title_news">News</string>
+    <string name="toolbar_title_favorite_news">Favorite news</string>
+
 
 </resources>
