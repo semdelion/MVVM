@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.AnimRes
 import androidx.annotation.IdRes
-import androidx.annotation.NavigationRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
@@ -19,8 +18,9 @@ import com.semdelion.presentation.core.utils.Event
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.utils.HasScreenTitle
 
+
 class StackFragmentNavigator(
-    @IdRes private val containerId: Int,
+    @IdRes private val containerId: List<Int>,
     private val animations: Animations
 ) : SideEffectImplementation(), Navigator {
 
@@ -72,32 +72,49 @@ class StackFragmentNavigator(
     }
 
     private fun launchDirections(direction: NavDirections) {
-        requireActivity().findNavController(containerId).navigate(
-            directions = direction,
-            navOptions =  navOptions {
-                anim {
-                    enter = animations.enterAnim
-                    exit = animations.exitAnim
-                    popEnter = animations.popEnterAnim
-                    popExit = animations.popExitAnim
-                }
+        for (container in containerId) {
+            //TODO костыль
+            try {
+                val navController = requireActivity().findNavController(container)
+                navController.navigate(
+                    directions = direction,
+                    navOptions = navOptions {
+                        anim {
+                            enter = animations.enterAnim
+                            exit = animations.exitAnim
+                            popEnter = animations.popEnterAnim
+                            popExit = animations.popExitAnim
+                        }
+                    }
+                )
+                return
+            } catch (ex: Exception) {
+                var t = ex.message
             }
-        )
+        }
     }
 
     private fun launchDestination(destination: Int, args: Bundle?) {
-        requireActivity().findNavController(containerId).navigate(
-            destination,
-            args = args,
-            navOptions =  navOptions {
-                anim {
-                    enter = animations.enterAnim
-                    exit = animations.exitAnim
-                    popEnter = animations.popEnterAnim
-                    popExit = animations.popExitAnim
-                }
+        for (container in containerId) {
+            //TODO костыль
+            try {
+                requireActivity().findNavController(container).navigate(
+                    destination,
+                    args = args,
+                    navOptions = navOptions {
+                        anim {
+                            enter = animations.enterAnim
+                            exit = animations.exitAnim
+                            popEnter = animations.popEnterAnim
+                            popExit = animations.popExitAnim
+                        }
+                    }
+                )
+                return
+            } catch (ex: Exception) {
+
             }
-        )
+        }
     }
 
     private fun publishResults(fragment: Fragment) {

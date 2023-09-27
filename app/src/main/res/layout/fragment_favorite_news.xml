@@ -6,20 +6,21 @@
     <data>
         <variable
             name="viewModel"
-            type="com.semdelion.presentation.ui.tabs.settings.SettingsViewModel" />
+            type="com.semdelion.presentation.ui.tabs.favorite.FavoriteNewsViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.tabs.settings.SettingsFragment">
+        tools:context=".ui.tabs.favorite.FavoriteNewsFragment">
+
         <TextView
             android:id="@+id/screenTitleTextView"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="Favorite News"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="30dp"
-            android:text="Settings"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

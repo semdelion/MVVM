@@ -1,7 +1,10 @@
 package com.semdelion.presentation.ui.auth
 
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.fragment.findNavController
 import com.semdelion.domain.exceptions.AccountAlreadyExistsException
 import com.semdelion.domain.exceptions.EmptyFieldException
 import com.semdelion.domain.exceptions.Field
@@ -9,7 +12,11 @@ import com.semdelion.domain.exceptions.PasswordMismatchException
 import com.semdelion.domain.models.SignUpData
 import com.semdelion.domain.repositories.IAccountsRepository
 import com.semdelion.presentation.R
+import com.semdelion.presentation.core.sideeffects.navigator.Navigator
+import com.semdelion.presentation.core.sideeffects.resources.Resources
+import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
+import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.requireValue
 import com.semdelion.presentation.core.utils.share
@@ -17,14 +24,13 @@ import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.launch
 
 class SignUpViewModel(
-    private val accountsRepository: IAccountsRepository
+    private val accountsRepository: IAccountsRepository,
+    private val navigationService: Navigator,
+    private val toasts: Toasts,
+    private val resources: Resources,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _showSuccessSignUpMessageEvent = MutableUnitLiveEvent()
-    val showSuccessSignUpMessageEvent =_showSuccessSignUpMessageEvent.share()
-
-    private val _goBackEvent = MutableUnitLiveEvent()
-    val goBackEvent = _goBackEvent.share()
 
     private val _state = MutableLiveData(State())
     val state = _state.share()
@@ -34,7 +40,7 @@ class SignUpViewModel(
             showProgress()
             try {
                 accountsRepository.signUp(signUpData)
-                showSuccessSignUpMessage()
+                toasts.toast(resources.getString(R.string.sign_up_success))
                 goBack()
             } catch (e: EmptyFieldException) {
                 processEmptyFieldException(e)
@@ -78,9 +84,7 @@ class SignUpViewModel(
         _state.value = _state.requireValue().copy(signUpInProgress = false)
     }
 
-    private fun showSuccessSignUpMessage() = _showSuccessSignUpMessageEvent.publishEvent()
-
-    private fun goBack() = _goBackEvent.publishEvent()
+    private fun goBack() = navigationService.goBack()
 
     data class State(
         @StringRes val emailErrorMessageRes: Int = NO_ERROR_MESSAGE,

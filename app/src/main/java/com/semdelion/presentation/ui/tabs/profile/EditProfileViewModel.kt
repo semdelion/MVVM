@@ -1,8 +1,11 @@
 package com.semdelion.presentation.ui.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.exceptions.EmptyFieldException
 import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.presentation.core.sideeffects.navigator.Navigator
+import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
@@ -13,7 +16,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class EditProfileViewModel(
-    private val accountsRepository: IAccountsRepository
+    private val accountsRepository: IAccountsRepository,
+    private val navigationService: Navigator,
+    private val toasts: Toasts,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _initialUsernameEvent = MutableLiveEvent<String>()

@@ -26,20 +26,12 @@ class SignInFragment : BaseFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding = FragmentSignInBinding.bind(binding.root)
         binding.signInButton.setOnClickListener { onSignInButtonPressed() }
         binding.signUpButton.setOnClickListener { onSignUpButtonPressed() }
         observeState()
         observeClearPasswordEvent()
-        observeShowAuthErrorMessageEvent()
-        observeNavigateToTabsEvent()
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     private fun onSignInButtonPressed() {
@@ -60,16 +52,9 @@ class SignInFragment : BaseFragment() {
         binding.progressBar.visibility = if (result.showProgress) View.VISIBLE else View.INVISIBLE
     }
 
-    private fun observeShowAuthErrorMessageEvent() = viewModel.showAuthToastEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.invalid_email_or_password, Toast.LENGTH_SHORT).show()
-    }
 
     private fun observeClearPasswordEvent() = viewModel.clearPasswordEvent.observeEvent(viewLifecycleOwner) {
         binding.passwordEditText.text?.clear()
-    }
-
-    private fun observeNavigateToTabsEvent() = viewModel.navigateToTabsEvent.observeEvent(viewLifecycleOwner) {
-        findNavController().navigate(R.id.action_signInFragment_to_tabsFragment)
     }
 
     private fun onSignUpButtonPressed() {

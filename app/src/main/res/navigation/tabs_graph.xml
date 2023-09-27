@@ -6,6 +6,7 @@
     app:startDestination="@id/dashboard_graph">
 
     <include app:graph="@navigation/dashboard_graph" />
+    <include app:graph="@navigation/news_graph" />
+    <include app:graph="@navigation/favorite_news_graph" />
     <include app:graph="@navigation/profile_graph" />
-    <include app:graph="@navigation/settings_graph" />
 </navigation>

@@ -32,16 +32,14 @@ class BoxFragment : BaseFragment() {
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
-        val color = args.color
-
-        binding.root.setBackgroundColor(color)
+        binding.root.setBackgroundColor(args.color)
 
         binding.backButton.setOnClickListener {
-            findNavController().popBackStack()
+            viewModel.goBack()
         }
 
         binding.openSecretButton.setOnClickListener {
-            findNavController().navigate(BoxFragmentDirections.actionBoxFragmentToSecretFragment())
+            viewModel.goSecretBox()
         }
 
         binding.generateNumberButton.setOnClickListener {

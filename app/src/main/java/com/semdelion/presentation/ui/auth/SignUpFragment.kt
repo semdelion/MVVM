@@ -42,8 +42,6 @@ class SignUpFragment : BaseFragment() {
         }
 
         observeState()
-        observeGoBackEvent()
-        observeShowSuccessSignUpMessageEvent()
 
         return binding.root
     }
@@ -73,10 +71,6 @@ class SignUpFragment : BaseFragment() {
         binding.progressBar.visibility = if (state.showProgress) View.VISIBLE else View.INVISIBLE
     }
 
-    private fun observeShowSuccessSignUpMessageEvent() = viewModel.showSuccessSignUpMessageEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.sign_up_success, Toast.LENGTH_LONG).show()
-    }
-
     private fun fillError(input: TextInputLayout, @StringRes stringRes: Int) {
         if (stringRes == SignUpViewModel.NO_ERROR_MESSAGE) {
             input.error = null
@@ -85,10 +79,6 @@ class SignUpFragment : BaseFragment() {
             input.error = getString(stringRes)
             input.isErrorEnabled = true
         }
-    }
-
-    private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
-        findNavController().popBackStack()
     }
 
     private fun getEmailArgument(): String? = args.email

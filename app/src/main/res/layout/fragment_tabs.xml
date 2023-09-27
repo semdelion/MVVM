@@ -11,7 +11,7 @@
         tools:context=".views.tabs.TabsFragment">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/tabsContainer"
+            android:id="@+id/tabs_fragment_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:name="androidx.navigation.fragment.NavHostFragment"

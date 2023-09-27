@@ -5,13 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.navOptions
 import com.semdelion.domain.models.Account
 import com.semdelion.presentation.R
+import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseFragment
 import java.text.SimpleDateFormat
 import java.util.Date
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentProfileBinding
+import com.semdelion.presentation.findTopNavController
 
 class ProfileFragment : BaseFragment() {
 
@@ -27,7 +30,7 @@ class ProfileFragment : BaseFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.editProfileButton.setOnClickListener { onEditProfileButtonPressed() }
+        binding.editProfileButton.setOnClickListener { viewModel.toEditProfile() }
         binding.logoutButton.setOnClickListener { onLogoutButtonPressed() }
 
         observeAccountDetails()
@@ -38,29 +41,25 @@ class ProfileFragment : BaseFragment() {
 
     private fun observeAccountDetails() {
         val formatter = SimpleDateFormat.getDateTimeInstance()
-        viewModel.account.observe(viewLifecycleOwner) { account: Account ->
-            if (account == null) return@observe
-            binding.emailTextView.text = account.email
-            binding.usernameTextView.text = account.username
-            binding.createdAtTextView.text = if (account.createdAt == Account.UNKNOWN_CREATED_AT)
+        viewModel.account.observe(viewLifecycleOwner) {
+            if (it == null) return@observe
+            binding.emailTextView.text = it.email
+            binding.usernameTextView.text = it.username
+            binding.createdAtTextView.text = if (it.createdAt == Account.UNKNOWN_CREATED_AT)
                 getString(R.string.placeholder)
             else
-                formatter.format(Date(account.createdAt))
+                formatter.format(Date(it.createdAt))
         }
     }
 
-    private fun onEditProfileButtonPressed() {
-        //TODO findTopNavController().navigate(R.id.editProfileFragment)
-    }
-
     private fun observeRestartAppFromLoginScreenEvent() {
-        //TODO viewModel.restartWithSignInEvent.observeEvent(viewLifecycleOwner) {
-      //      findTopNavController().navigate(R.id.signInFragment, null, navOptions {
-       //         popUpTo(R.id.tabsFragment) {
-        //            inclusive = true
-        //        }
-        //    })
-      //  }
+        viewModel.restartWithSignInEvent.observeEvent(viewLifecycleOwner) {
+            findTopNavController().navigate(R.id.signInFragment, null, navOptions {
+                popUpTo(R.id.tabsFragment) {
+                    inclusive = true
+                }
+            })
+        }
     }
 
     private fun onLogoutButtonPressed() {

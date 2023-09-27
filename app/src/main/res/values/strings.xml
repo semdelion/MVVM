@@ -9,8 +9,9 @@
     <string name="dialog_permission_denied_button_ok">Open settings</string>
     <string name="dialog_permission_denied_button_cancel">Cancel</string>
     <string name="menu_dashboard">Dashboard</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_news">News</string>
     <string name="menu_profile">Profile</string>
+    <string name="menu_favorite">Favorite</string>
 
     <string name="please_wait">Please wait…</string>
     <string name="edit_profile_description">Right now you can edit only username</string>

@@ -1,20 +1,33 @@
 package com.semdelion.presentation.ui.auth
 
+import android.text.Layout.Directions
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.exceptions.AuthException
 import com.semdelion.domain.exceptions.EmptyFieldException
 import com.semdelion.domain.exceptions.Field
 import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.presentation.R
+import com.semdelion.presentation.core.sideeffects.navigator.Navigator
+import com.semdelion.presentation.core.sideeffects.resources.Resources
+import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
+import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.requireValue
 import com.semdelion.presentation.core.utils.share
 
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import com.semdelion.presentation.ui.tabs.dashboard.FirstFragmentDirections
 import kotlinx.coroutines.launch
 
 class SignInViewModel(
-    private val accountsRepository: IAccountsRepository
+    private val accountsRepository: IAccountsRepository,
+    private val navigationService: Navigator,
+    private val resources: Resources,
+    private val toasts: Toasts,
+    savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
     private val _state = MutableLiveData(State())
@@ -23,17 +36,11 @@ class SignInViewModel(
     private val _clearPasswordEvent = MutableUnitLiveEvent()
     val clearPasswordEvent = _clearPasswordEvent.share()
 
-    private val _showAuthErrorToastEvent = MutableUnitLiveEvent()
-    val showAuthToastEvent = _showAuthErrorToastEvent.share()
-
-    private val _navigateToTabsEvent = MutableUnitLiveEvent()
-    val navigateToTabsEvent = _navigateToTabsEvent.share()
-
     fun signIn(email: String, password: String) = viewModelScope.launch {
         showProgress()
         try {
             accountsRepository.signIn(email, password)
-            launchTabsScreen()
+            navigationService.launch(SignInFragmentDirections.actionSignInFragmentToTabsFragment())
         } catch (e: EmptyFieldException) {
             processEmptyFieldException(e)
         } catch (e: AuthException) {
@@ -54,7 +61,7 @@ class SignInViewModel(
             signInInProgress = false
         )
         clearPasswordField()
-        showAuthErrorToast()
+        toasts.toast(resources.getString(R.string.invalid_email_or_password))
     }
 
     private fun showProgress() {
@@ -62,10 +69,6 @@ class SignInViewModel(
     }
 
     private fun clearPasswordField() = _clearPasswordEvent.publishEvent()
-
-    private fun showAuthErrorToast() = _showAuthErrorToastEvent.publishEvent()
-
-    private fun launchTabsScreen() = _navigateToTabsEvent.publishEvent()
 
     data class State(
         val emptyEmailError: Boolean = false,

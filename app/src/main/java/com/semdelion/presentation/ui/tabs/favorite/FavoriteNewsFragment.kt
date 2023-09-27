@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.settings
+package com.semdelion.presentation.ui.tabs.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,18 +8,18 @@ import androidx.databinding.DataBindingUtil
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.factories.viewModel
-import com.semdelion.presentation.databinding.FragmentSettingsBinding
+import com.semdelion.presentation.databinding.FragmentFavoriteNewsBinding
 
-class SettingsFragment : BaseFragment() {
+class FavoriteNewsFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentSettingsBinding
-    override val viewModel by viewModel<SettingsViewModel>()
+    private lateinit var binding: FragmentFavoriteNewsBinding
+    override val viewModel by viewModel<FavoriteNewsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_news, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
