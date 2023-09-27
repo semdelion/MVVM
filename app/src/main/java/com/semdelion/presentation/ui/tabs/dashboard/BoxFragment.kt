@@ -43,9 +43,7 @@ class BoxFragment : BaseFragment() {
         }
 
         binding.generateNumberButton.setOnClickListener {
-            val number = Random.nextInt(100)
-            findNavController().previousBackStackEntry?.savedStateHandle?.set(EXTRA_RANDOM_NUMBER, number)
-            findNavController().popBackStack()
+            viewModel.goBackWithRandom()
         }
 
         return binding.root

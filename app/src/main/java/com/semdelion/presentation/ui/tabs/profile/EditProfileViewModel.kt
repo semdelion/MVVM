@@ -1,10 +1,14 @@
 package com.semdelion.presentation.ui.tabs.profile
 
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.fragment.findNavController
 import com.semdelion.domain.exceptions.EmptyFieldException
 import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
+import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
@@ -19,6 +23,7 @@ class EditProfileViewModel(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator,
     private val toasts: Toasts,
+    private val resources: Resources,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -27,12 +32,6 @@ class EditProfileViewModel(
 
     private val _saveInProgress = MutableLiveData(false)
     val saveInProgress = _saveInProgress.share()
-
-    private val _goBackEvent = MutableUnitLiveEvent()
-    val goBackEvent = _goBackEvent.share()
-
-    private val _showEmptyFieldErrorEvent = MutableUnitLiveEvent()
-    val showEmptyFieldErrorEvent = _showEmptyFieldErrorEvent.share()
 
     init {
         viewModelScope.launch {
@@ -48,15 +47,17 @@ class EditProfileViewModel(
             showProgress()
             try {
                 accountsRepository.updateAccountUsername(newUsername)
-                goBack()
+                navigationService.goBack()
             } catch (e: EmptyFieldException) {
                 hideProgress()
-                showEmptyFieldErrorMessage()
+                toasts.toast(resources.getString(R.string.field_is_empty))
             }
         }
     }
 
-    private fun goBack() = _goBackEvent.publishEvent()
+    fun goCancel() {
+        navigationService.goBack()
+    }
 
     private fun showProgress() {
         _saveInProgress.value = true
@@ -65,8 +66,4 @@ class EditProfileViewModel(
     private fun hideProgress() {
         _saveInProgress.value = false
     }
-
-    private fun showEmptyFieldErrorMessage() = _showEmptyFieldErrorEvent.publishEvent()
-
-
 }

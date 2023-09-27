@@ -9,7 +9,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navArgs
-import androidx.navigation.ui.NavigationUI
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogsPlugin
 import com.semdelion.presentation.core.sideeffects.intents.plugin.IntentsPlugin
@@ -134,7 +133,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun createNavigator() = StackFragmentNavigator(
-        containerId = listOf(R.id.fragment_container, R.id.tabs_fragment_container),
+        containersId = listOf(R.id.fragment_container, R.id.tabs_fragment_container),
         animations = StackFragmentNavigator.Animations(
             enterAnim = R.anim.enter,
             exitAnim = R.anim.exit,

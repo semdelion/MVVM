@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard
+package com.semdelion.presentation.ui.tabs.dashboard.tmp
 
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator

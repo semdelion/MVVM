@@ -1,7 +1,5 @@
 package com.semdelion.presentation.ui.auth
 
-import android.text.Layout.Directions
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.exceptions.AuthException
@@ -13,13 +11,11 @@ import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
-import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.requireValue
 import com.semdelion.presentation.core.utils.share
 
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
-import com.semdelion.presentation.ui.tabs.dashboard.FirstFragmentDirections
 import kotlinx.coroutines.launch
 
 class SignInViewModel(

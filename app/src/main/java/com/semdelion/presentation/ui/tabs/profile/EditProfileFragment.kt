@@ -28,11 +28,9 @@ class EditProfileFragment : BaseFragment() {
         binding.viewModel = viewModel
 
         binding.saveButton.setOnClickListener { onSaveButtonPressed() }
-        binding.cancelButton.setOnClickListener { onCancelButtonPressed() }
+        binding.cancelButton.setOnClickListener { viewModel.goCancel() }
         if (savedInstanceState == null) listenInitialUsernameEvent()
-        observeGoBackEvent()
         observeSaveInProgress()
-        observeEmptyFieldErrorEvent()
 
         return binding.root
     }
@@ -55,17 +53,5 @@ class EditProfileFragment : BaseFragment() {
 
     private fun listenInitialUsernameEvent() = viewModel.initialUsernameEvent.observeEvent(viewLifecycleOwner) { username: String ->
         binding.usernameEditText.setText(username)
-    }
-
-    private fun observeEmptyFieldErrorEvent() = viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.field_is_empty, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun onCancelButtonPressed() {
-        findNavController().popBackStack()
-    }
-
-    private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
-        findNavController().popBackStack()
     }
 }

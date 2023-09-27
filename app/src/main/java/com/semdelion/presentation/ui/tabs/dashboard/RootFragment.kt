@@ -24,44 +24,20 @@ class RootFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_root,
-                container,
-                false
-            )
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_root, container,false)
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
         binding.openGreenBoxButton.setOnClickListener {
-            openBox(Color.rgb(55,250,55), "Green")
-
+            viewModel.openBox(Color.rgb(55,250,55), "Green")
         }
         binding.openYellowBoxButton.setOnClickListener {
-            openBox(Color.rgb(255,220,7), "Yellow")
-        }
-        val liveData = findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Int>(
-            BoxFragment.EXTRA_RANDOM_NUMBER
-        )
-        liveData?.observe(viewLifecycleOwner) {randomNumber ->
-            if(randomNumber!=null) {
-                Toast.makeText(
-                    requireContext(),
-                    "Generate number: $randomNumber",
-                    Toast.LENGTH_SHORT
-                ).show()
-                liveData.value = null
-            }
+            viewModel.openBox(Color.rgb(255,220,7), "Yellow")
         }
 
         return binding.root
     }
 
-    private fun openBox(color: Int, colorName: String) {
-        val direction = RootFragmentDirections.actionRootFragmentToBoxFragment(color, colorName)
-        findNavController().navigate(direction)
-    }
 }

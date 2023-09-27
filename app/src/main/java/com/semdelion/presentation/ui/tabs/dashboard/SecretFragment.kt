@@ -19,16 +19,17 @@ class SecretFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_secret, container, false)
         binding.lifecycleOwner = this
         binding.vm = viewModel
 
         binding.backButton.setOnClickListener {
-            findNavController().popBackStack()
+            viewModel.goBack()
         }
 
         binding.closeBoxButton.setOnClickListener {
+            //TODO navigation
             findNavController().popBackStack(R.id.rootFragment, false)
         }
 

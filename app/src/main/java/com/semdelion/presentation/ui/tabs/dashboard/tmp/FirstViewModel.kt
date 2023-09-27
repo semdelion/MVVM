@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard
+package com.semdelion.presentation.ui.tabs.dashboard.tmp
 
 import android.Manifest
 import androidx.lifecycle.SavedStateHandle
@@ -42,7 +42,11 @@ class FirstViewModel(
     }
 
     fun sendText() {
-        navigationService.launch(FirstFragmentDirections.actionFirstFragmentToSecondFragment(messageLive.value ?: ""))
+        navigationService.launch(
+            FirstFragmentDirections.actionFirstFragmentToSecondFragment(
+                messageLive.value ?: ""
+            )
+        )
     }
 
     fun requestPermission() = viewModelScope.launch {

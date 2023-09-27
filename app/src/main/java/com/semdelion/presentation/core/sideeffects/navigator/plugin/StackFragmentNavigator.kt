@@ -20,7 +20,7 @@ import com.semdelion.presentation.core.views.utils.HasScreenTitle
 
 
 class StackFragmentNavigator(
-    @IdRes private val containerId: List<Int>,
+    @IdRes private val containersId: List<Int>,
     private val animations: Animations
 ) : SideEffectImplementation(), Navigator {
 
@@ -72,7 +72,7 @@ class StackFragmentNavigator(
     }
 
     private fun launchDirections(direction: NavDirections) {
-        for (container in containerId) {
+        for (container in containersId) {
             //TODO костыль
             try {
                 val navController = requireActivity().findNavController(container)
@@ -95,7 +95,7 @@ class StackFragmentNavigator(
     }
 
     private fun launchDestination(destination: Int, args: Bundle?) {
-        for (container in containerId) {
+        for (container in containersId) {
             //TODO костыль
             try {
                 requireActivity().findNavController(container).navigate(
