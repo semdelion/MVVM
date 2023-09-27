@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.semdelion.data.services.intercepters.NoConnectivityException
 import com.semdelion.domain.models.NewsModel
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
@@ -22,6 +23,7 @@ import kotlinx.coroutines.launch
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentNewsBinding
 import com.semdelion.presentation.ui.base.ListViewState
+import com.semdelion.presentation.ui.navigation.NewsNavigationArg
 import com.semdelion.presentation.ui.tabs.news.adapters.NewsRecyclerAdapter
 
 

@@ -20,6 +20,6 @@
         tools:layout="@layout/fragment_favorite_news_details">
         <argument
             android:name="newsItem"
-            app:argType="com.semdelion.presentation.navigation.NewsNavigationArg" />
+            app:argType="com.semdelion.presentation.ui.navigation.NewsNavigationArg" />
     </fragment>
 </navigation>

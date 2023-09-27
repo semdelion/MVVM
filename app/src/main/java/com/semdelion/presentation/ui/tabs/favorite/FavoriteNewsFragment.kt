@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentFavoriteNewsBinding
 import com.semdelion.presentation.ui.base.ListViewState
+import com.semdelion.presentation.ui.navigation.NewsNavigationArg
 import com.semdelion.presentation.ui.tabs.favorite.adapters.FavoriteNewsRecyclerAdapter
 
 class FavoriteNewsFragment : BaseFragment() {

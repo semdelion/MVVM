@@ -8,6 +8,8 @@ import com.semdelion.domain.usecases.news.DeleteNewsUseCase
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import com.semdelion.presentation.ui.navigation.NewsNavigationArg
+import com.semdelion.presentation.ui.navigation.toNewsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -19,6 +21,13 @@ class FavoriteNewsDetailsViewModel(
     private val toasts: Toasts,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
+
+    private val newsNavigationArg: NewsNavigationArg
+
+    init {
+        newsNavigationArg = savedStateHandle.get<NewsNavigationArg>("newsItem")
+            ?: throw IllegalArgumentException("NewsDetailsViewModel args is null by key \"newsItem\"")
+    }
 
     val imageUrl: String = newsNavigationArg.imageURL
 
