@@ -7,8 +7,6 @@
 
     <style name="Theme.Semdelion" parent="Base.Theme.Semdelion" />
 
-    <style name="Theme.SplashScreen" parent="Theme.Material3.DayNight.NoActionBar" />
-
     <style name="GlobalButtonStyle" parent="Widget.Material3.Button">
         <item name="android:minWidth">200dp</item>
     </style>

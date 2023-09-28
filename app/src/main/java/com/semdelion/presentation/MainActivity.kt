@@ -9,6 +9,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navArgs
+import com.semdelion.data.repositories.InMemoryAccountsRepository
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogsPlugin
 import com.semdelion.presentation.core.sideeffects.intents.plugin.IntentsPlugin
@@ -18,14 +19,10 @@ import com.semdelion.presentation.core.sideeffects.permissions.plugin.Permission
 import com.semdelion.presentation.core.sideeffects.resources.plugin.ResourcesPlugin
 import com.semdelion.presentation.core.sideeffects.toasts.plugin.ToastsPlugin
 import com.semdelion.presentation.core.views.BaseActivity
+import com.semdelion.presentation.core.views.factories.viewModelCreator
 import com.semdelion.presentation.databinding.ActivityMainBinding
 import com.semdelion.presentation.ui.tabs.TabsFragment
 import java.util.regex.Pattern
-
-fun Fragment.findTopNavController(): NavController {
-    val topLevelHost = requireActivity().supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment?
-    return topLevelHost?.navController ?: findNavController()
-}
 
 class MainActivity : BaseActivity() {
 
@@ -33,6 +30,8 @@ class MainActivity : BaseActivity() {
 
     // nav controller of the current screen
     private var navController: NavController? = null
+
+    private val viewModel by viewModelCreator { MainActivityViewModel(InMemoryAccountsRepository()) }
 
     override fun registerPlugins(manager: SideEffectPluginsManager) = with (manager) {
         register(ToastsPlugin())
@@ -48,7 +47,6 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.toolbar)
-
         val navController = getRootNavController()
         prepareRootNavController(args.isSignedIn, navController)
         onNavControllerActivated(navController)

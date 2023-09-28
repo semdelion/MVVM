@@ -7,7 +7,11 @@
 
     <style name="Theme.Semdelion" parent="Base.Theme.Semdelion" />
 
-    <style name="Theme.SplashScreen" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.Semdelion.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splashscreen</item>
+        <item name="postSplashScreenTheme">@style/Theme.Semdelion</item>
+    </style>
 
     <style name="GlobalButtonStyle" parent="Widget.Material3.Button">
         <item name="android:minWidth">200dp</item>

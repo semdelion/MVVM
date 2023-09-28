@@ -1,7 +1,5 @@
-package com.semdelion.presentation.ui
+package com.semdelion.presentation
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.semdelion.domain.repositories.IAccountsRepository
 import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
@@ -9,7 +7,7 @@ import com.semdelion.presentation.core.utils.share
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.launch
 
-class SplashViewModel(
+class RoutingViewModel(
     private val accountsRepository: IAccountsRepository
 ) : BaseViewModel() {
 
