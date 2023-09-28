@@ -24,10 +24,6 @@ import com.semdelion.presentation.ui.tabs.news.NewsDetailsFragmentArgs
 
 class FavoriteNewsDetailsFragment : BaseFragment(), MenuProvider {
 
-    companion object {
-        fun newInstance() = FavoriteNewsDetailsFragment()
-    }
-
     //TODO https://stackoverflow.com/questions/67350331/how-to-use-hilt-to-inject-a-safe-args-argument-into-a-viewmodel
     override val viewModel by viewModel<FavoriteNewsDetailsViewModel>()
     private lateinit var binding: FragmentFavoriteNewsDetailsBinding
@@ -93,7 +89,6 @@ class FavoriteNewsDetailsFragment : BaseFragment(), MenuProvider {
                     lifecycleScope.launch {
                         viewModel.deleteFavoriteNews()
                         //setNavigationResult(true)
-                        findNavController().navigateUp()
                     }
                 }
                 builder.setNegativeButton("No") { _, _ -> }

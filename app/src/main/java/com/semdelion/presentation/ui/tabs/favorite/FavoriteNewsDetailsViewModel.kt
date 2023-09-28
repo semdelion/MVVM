@@ -3,7 +3,6 @@ package com.semdelion.presentation.ui.tabs.favorite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.viewModelScope
 import com.semdelion.domain.usecases.news.DeleteNewsUseCase
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
@@ -52,6 +51,7 @@ class FavoriteNewsDetailsViewModel(
             val result = deleteNewsUseCase.delete(newsNavigationArg.toNewsModel())
 
             _deleteNewsState.emit(if (result) "Successful delete!" else "Failure delete!")
+            navigationService.goBack()
         }
     }
 }

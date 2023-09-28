@@ -41,7 +41,7 @@ class NewsFragment : BaseFragment() {
 
         binding.newsRecyclerview.layoutManager =
             LinearLayoutManager(requireContext().applicationContext)
-        val adapter = NewsRecyclerAdapter(::onItemClick)
+        val adapter = NewsRecyclerAdapter { news: NewsModel -> viewModel.onItemClick(news) }
 
         binding.newsRecyclerview.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner) {
@@ -62,19 +62,6 @@ class NewsFragment : BaseFragment() {
         initScrollListener()
 
         return binding.root
-    }
-
-    private fun onItemClick(news: NewsModel) {
-        val navArg = NewsNavigationArg(
-            title = news.title,
-            link = news.link,
-            creator = news.creator,
-            content = news.content,
-            pubDate = news.pubDate,
-            imageURL = news.imageURL
-        )
-        this.findNavController()
-            .navigate(NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(navArg))
     }
 
     private fun initScrollListener() {

@@ -8,6 +8,7 @@ import com.semdelion.domain.usecases.GetNewsUseCase
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.ui.base.BaseListViewModel
+import com.semdelion.presentation.ui.navigation.NewsNavigationArg
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -29,6 +30,18 @@ class NewsViewModel(
 
     fun loadNextPage() : Job {
         return loadNews(_nextPageId)
+    }
+
+    fun onItemClick(news: NewsModel) {
+        val navArg = NewsNavigationArg(
+            title = news.title,
+            link = news.link,
+            creator = news.creator,
+            content = news.content,
+            pubDate = news.pubDate,
+            imageURL = news.imageURL
+        )
+        navigationService.launch(NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(navArg))
     }
 
     fun refreshNews() : Job {

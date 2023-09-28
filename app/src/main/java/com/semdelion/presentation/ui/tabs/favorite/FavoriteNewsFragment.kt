@@ -43,7 +43,7 @@ class FavoriteNewsFragment : BaseFragment() {
         binding.newsRecyclerview.layoutManager =
             LinearLayoutManager(requireContext().applicationContext)
 
-        val adapter = FavoriteNewsRecyclerAdapter (::onItemClick )
+        val adapter = FavoriteNewsRecyclerAdapter { news:NewsModel -> viewModel.onItemClick(news) }
         binding.newsRecyclerview.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner) {
             adapter.submitList(it)
@@ -57,22 +57,6 @@ class FavoriteNewsFragment : BaseFragment() {
             }
         }
         return binding.root
-    }
-
-    private fun onItemClick(news: NewsModel) {
-        val navArg = NewsNavigationArg(
-            title = news.title,
-            link = news.link,
-            creator = news.creator,
-            content = news.content,
-            pubDate = news.pubDate,
-            imageURL = news.imageURL
-        )
-        this.findNavController().navigate(
-            FavoriteNewsFragmentDirections.actionFavoriteNewsFragmentToFavoriteNewsDetailsFragment(
-                navArg
-            )
-        )
     }
 
     private fun stateChangeListener(state: ListViewState) {
