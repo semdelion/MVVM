@@ -37,6 +37,10 @@ class RootFragment : BaseFragment() {
             viewModel.openBox(Color.rgb(255,220,7), "Yellow")
         }
 
+        binding.firstButton.setOnClickListener {
+            viewModel.toFirstFragment()
+        }
+
         return binding.root
     }
 

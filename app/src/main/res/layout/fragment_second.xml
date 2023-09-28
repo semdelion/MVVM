@@ -57,18 +57,6 @@
                 android:hint="Result"
                 android:text="@={viewModel.resultLive}"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/go_next_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            android:text="Next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/result_textInputLayout" />
         <Button
             android:id="@+id/send_back_button"
             android:layout_width="match_parent"
@@ -79,7 +67,7 @@
             android:text="Go back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/go_next_button" />
+            app:layout_constraintTop_toBottomOf="@+id/result_textInputLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

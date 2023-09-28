@@ -25,10 +25,6 @@ class SecondViewModel(
         saveMessage()
     }
 
-    fun goNext() {
-        navigationService.launch(SecondFragmentDirections.actionSecondFragmentToThirdFragment())
-    }
-
     private fun saveMessage() {
         if (resultLive.value == null) {
             navigationService.goBack(resultLive.value)

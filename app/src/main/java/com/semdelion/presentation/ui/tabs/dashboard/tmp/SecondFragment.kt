@@ -40,10 +40,6 @@ class SecondFragment : BaseFragment(), HasScreenTitle {
             }
         }
 
-        binding.goNextButton.setOnClickListener {
-            viewModel.goNext()
-        }
-
         binding.sendBackButton.setOnClickListener {
             viewModel.onBack()
         }
