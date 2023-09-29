@@ -1,6 +1,5 @@
 package com.semdelion.presentation.core.views.factories
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
@@ -8,25 +7,22 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.savedstate.SavedStateRegistryOwner
 import com.semdelion.presentation.core.SingletonScopeDependencies
 import com.semdelion.presentation.core.views.ActivityDelegateHolder
 import com.semdelion.presentation.core.views.BaseFragment
 import java.lang.reflect.Constructor
 
+inline fun <reified VM : ViewModel> ComponentActivity.viewModel() =  viewModels<VM> {
 
-typealias ViewModelCreator<VM> = () -> VM
-inline fun <reified VM : ViewModel> ComponentActivity.viewModelCreator(noinline creator: ViewModelCreator<VM>): Lazy<VM> {
-    return viewModels { ActivityViewModelFactory(creator) }
-}
+    val application = this.application
 
-class ActivityViewModelFactory<VM : ViewModel>(
-    private val viewModelCreator: ViewModelCreator<VM>
-) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return viewModelCreator() as T
-    }
+    val baseActivityViewModel = (this as ActivityDelegateHolder).delegate.getBaseActivityViewModel()
+
+    val dependencies = baseActivityViewModel.sideEffectMediators +
+            SingletonScopeDependencies.getSingletonScopeDependencies(application)
+
+    ViewModelFactory(dependencies, this, null)
 }
 
 inline fun <reified VM : ViewModel> BaseFragment.viewModel() = viewModels<VM> {

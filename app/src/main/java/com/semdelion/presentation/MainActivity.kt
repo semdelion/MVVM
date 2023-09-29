@@ -19,7 +19,7 @@ import com.semdelion.presentation.core.sideeffects.permissions.plugin.Permission
 import com.semdelion.presentation.core.sideeffects.resources.plugin.ResourcesPlugin
 import com.semdelion.presentation.core.sideeffects.toasts.plugin.ToastsPlugin
 import com.semdelion.presentation.core.views.BaseActivity
-import com.semdelion.presentation.core.views.factories.viewModelCreator
+import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.ActivityMainBinding
 import com.semdelion.presentation.ui.tabs.TabsFragment
 import java.util.regex.Pattern
@@ -31,7 +31,7 @@ class MainActivity : BaseActivity() {
     // nav controller of the current screen
     private var navController: NavController? = null
 
-    private val viewModel by viewModelCreator { MainActivityViewModel(InMemoryAccountsRepository()) }
+    private val viewModel by viewModel<MainActivityViewModel>()
 
     override fun registerPlugins(manager: SideEffectPluginsManager) = with (manager) {
         register(ToastsPlugin())

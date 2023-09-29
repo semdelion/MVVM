@@ -3,18 +3,16 @@ package com.semdelion.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.semdelion.data.repositories.InMemoryAccountsRepository
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseActivity
-import com.semdelion.presentation.core.views.factories.viewModelCreator
+import com.semdelion.presentation.core.views.factories.viewModel
 
 class RoutingActivity  : BaseActivity() {
 
-    private val viewModel by viewModelCreator { RoutingViewModel(InMemoryAccountsRepository()) }
+    private val viewModel by viewModel<RoutingViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         Initializer.initDependencies()
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -28,7 +26,6 @@ class RoutingActivity  : BaseActivity() {
 
         val args = MainActivityArgs(isSignedIn)
         intent.putExtras(args.toBundle())
-
         startActivity(intent)
     }
 
