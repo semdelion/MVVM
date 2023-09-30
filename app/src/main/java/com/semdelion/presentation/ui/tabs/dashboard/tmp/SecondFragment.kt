@@ -48,6 +48,6 @@ class SecondFragment : BaseFragment(), HasScreenTitle {
     }
 
     override fun getScreenTitle(): String {
-        return "SecondFragment"
+        return "Custom title"
     }
 }

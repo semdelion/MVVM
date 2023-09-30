@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.navigation
+package com.semdelion.presentation.ui.tabs.news.navigation
 
 import android.os.Parcelable
 import com.semdelion.domain.models.NewsModel

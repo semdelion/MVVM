@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
     app:startDestination="@id/signInFragment">
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.semdelion.presentation.MainActivity"
+        tools:layout="@layout/activity_main" >
+        <argument android:name="isSignedIn"
+            app:argType="boolean" />
+    </activity>
 
     <fragment
         android:id="@+id/signInFragment"

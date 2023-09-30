@@ -1,8 +1,13 @@
-package com.semdelion.presentation.ui.base
+package com.semdelion.presentation.core.viewmodels
 
-import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+
+sealed class ListViewState {
+    object Loading : ListViewState()
+    object Success : ListViewState()
+    data class Error(val error: Exception) : ListViewState()
+}
 
 abstract class BaseListViewModel() : BaseViewModel() {
     protected val _viewState = MutableStateFlow<ListViewState>(ListViewState.Success)
