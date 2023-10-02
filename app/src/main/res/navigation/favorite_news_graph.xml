@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/favorite_news_graph"
+    app:startDestination="@+id/favoriteNewsFragment">
+    <fragment
+        android:id="@+id/favoriteNewsFragment"
+        android:name="com.semdelion.presentation.ui.tabs.favorite.FavoriteNewsFragment"
+        android:label="@string/toolbar_title_favorite_news"
+        tools:layout="@layout/fragment_favorite_news">
+        <action
+            android:id="@+id/action_favoriteNewsFragment_to_favoriteNewsDetailsFragment"
+            app:destination="@id/favoriteNewsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteNewsDetailsFragment"
+        android:name="com.semdelion.presentation.ui.tabs.favorite.FavoriteNewsDetailsFragment"
+        android:label="FavoriteNewsDetailsFragment"
+        tools:layout="@layout/fragment_favorite_news_details">
+        <argument
+            android:name="newsItem"
+            app:argType="com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg" />
+    </fragment>
+</navigation>

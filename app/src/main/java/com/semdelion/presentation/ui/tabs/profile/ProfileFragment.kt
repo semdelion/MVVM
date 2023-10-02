@@ -1,0 +1,68 @@
+package com.semdelion.presentation.ui.tabs.profile
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.navOptions
+import com.semdelion.domain.repositories.accounts.models.Account
+import com.semdelion.presentation.R
+import com.semdelion.presentation.core.utils.observeEvent
+import com.semdelion.presentation.core.views.BaseFragment
+import java.text.SimpleDateFormat
+import java.util.Date
+import com.semdelion.presentation.core.views.factories.viewModel
+import com.semdelion.presentation.databinding.FragmentProfileBinding
+import com.semdelion.presentation.ui.utils.findTopNavController
+
+class ProfileFragment : BaseFragment() {
+
+    private lateinit var binding: FragmentProfileBinding
+
+    override val viewModel by viewModel<ProfileViewModel>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+
+        binding.editProfileButton.setOnClickListener { viewModel.toEditProfile() }
+        binding.logoutButton.setOnClickListener { onLogoutButtonPressed() }
+
+        observeAccountDetails()
+        observeRestartAppFromLoginScreenEvent()
+
+        return binding.root
+    }
+
+    private fun observeAccountDetails() {
+        val formatter = SimpleDateFormat.getDateTimeInstance()
+        viewModel.account.observe(viewLifecycleOwner) {
+            if (it == null) return@observe
+            binding.emailTextView.text = it.email
+            binding.usernameTextView.text = it.username
+            binding.createdAtTextView.text = if (it.createdAt == Account.UNKNOWN_CREATED_AT)
+                getString(R.string.placeholder)
+            else
+                formatter.format(Date(it.createdAt))
+        }
+    }
+
+    private fun observeRestartAppFromLoginScreenEvent() {
+        viewModel.restartWithSignInEvent.observeEvent(viewLifecycleOwner) {
+            findTopNavController().navigate(R.id.signInFragment, null, navOptions {
+                popUpTo(R.id.tabsFragment) {
+                    inclusive = true
+                }
+            })
+        }
+    }
+
+    private fun onLogoutButtonPressed() {
+        viewModel.logout()
+    }
+}

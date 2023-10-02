@@ -1,11 +1,11 @@
 package com.semdelion.data.repositories
 
-import com.semdelion.data.storages.interfaces.IMessageStorage
-import com.semdelion.data.storages.models.MessageDataModel
-import com.semdelion.data.storages.models.toMessageModel
+import com.semdelion.data.storages.message.IMessageStorage
+import com.semdelion.data.storages.message.MessageDataModel
+import com.semdelion.data.storages.message.toMessageModel
 import com.semdelion.domain.core.coroutines.IoDispatcher
-import com.semdelion.domain.models.Message
-import com.semdelion.domain.repositories.IMessageRepository
+import com.semdelion.domain.repositories.message.models.Message
+import com.semdelion.domain.repositories.message.IMessageRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
