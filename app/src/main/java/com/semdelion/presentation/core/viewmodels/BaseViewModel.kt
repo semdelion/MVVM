@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asFlow
-import com.semdelion.domain.models.ErrorResult
-import com.semdelion.domain.models.Result
-import com.semdelion.domain.models.SuccessResult
+import com.semdelion.domain.core.tasks.models.ErrorResult
+import com.semdelion.domain.core.tasks.models.Result
+import com.semdelion.domain.core.tasks.models.SuccessResult
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

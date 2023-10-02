@@ -1,9 +1,9 @@
 package com.semdelion.data.repositories
 
-import com.semdelion.data.storages.interfaces.IFavoriteNewsStorage
-import com.semdelion.data.storages.room.FavoriteNewsEntity
-import com.semdelion.domain.models.NewsModel
-import com.semdelion.domain.repositories.IFavoriteNewsRepository
+import com.semdelion.data.storages.news.IFavoriteNewsStorage
+import com.semdelion.data.storages.news.entities.FavoriteNewsEntity
+import com.semdelion.domain.repositories.news.models.NewsModel
+import com.semdelion.domain.repositories.news.IFavoriteNewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

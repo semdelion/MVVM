@@ -1,6 +1,6 @@
 package com.semdelion.presentation
 
-import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.share

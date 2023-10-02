@@ -1,6 +1,6 @@
 package com.semdelion.presentation.core.sideeffects.dialogs.plugin
 
-import com.semdelion.domain.models.ErrorResult
+import com.semdelion.domain.core.tasks.models.ErrorResult
 import com.semdelion.presentation.core.sideeffects.SideEffectMediator
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.utils.callback.Emitter

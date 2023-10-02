@@ -1,7 +1,7 @@
 package com.semdelion.presentation.ui.tabs.news.navigation
 
 import android.os.Parcelable
-import com.semdelion.domain.models.NewsModel
+import com.semdelion.domain.repositories.news.models.NewsModel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

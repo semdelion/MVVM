@@ -2,8 +2,8 @@ package com.semdelion.presentation.ui.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.semdelion.domain.models.Account
-import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.domain.repositories.accounts.models.Account
+import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableLiveEvent

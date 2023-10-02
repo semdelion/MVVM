@@ -3,7 +3,7 @@ package com.semdelion.presentation.ui.tabs.favorite
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.semdelion.domain.models.NewsModel
+import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.usecases.news.GetFavoriteNewsUseCase
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts

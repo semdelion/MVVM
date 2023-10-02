@@ -1,6 +1,6 @@
 package com.semdelion.presentation.core.utils.callback
 
-import com.semdelion.domain.models.FinalResult
+import com.semdelion.domain.core.tasks.models.FinalResult
 
 typealias CancelListener = () -> Unit
 

@@ -2,7 +2,7 @@ package com.semdelion.presentation.core.sideeffects.permissions.plugin
 
 import android.content.pm.PackageManager
 import androidx.core.app.ActivityCompat
-import com.semdelion.domain.models.SuccessResult
+import com.semdelion.domain.core.tasks.models.SuccessResult
 import com.semdelion.presentation.core.sideeffects.SideEffectImplementation
 
 class PermissionsSideEffectImpl(

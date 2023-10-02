@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.semdelion.data.services.intercepters.NoConnectivityException
-import com.semdelion.domain.models.NewsModel
+import com.semdelion.data.core.intercepters.NoConnectivityException
+import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import kotlinx.coroutines.flow.collectLatest

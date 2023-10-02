@@ -2,8 +2,8 @@ package com.semdelion.presentation.ui.tabs.dashboard.tmp
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.semdelion.domain.models.Message
-import com.semdelion.domain.repositories.IMessageRepository
+import com.semdelion.domain.repositories.message.models.Message
+import com.semdelion.domain.repositories.message.IMessageRepository
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel

@@ -9,8 +9,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.semdelion.data.services.intercepters.NoConnectivityException
-import com.semdelion.domain.models.NewsModel
+import com.semdelion.data.core.intercepters.NoConnectivityException
+import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
@@ -41,7 +41,7 @@ class FavoriteNewsFragment : BaseFragment() {
         binding.newsRecyclerview.layoutManager =
             LinearLayoutManager(requireContext().applicationContext)
 
-        val adapter = FavoriteNewsRecyclerAdapter { news:NewsModel -> viewModel.onItemClick(news) }
+        val adapter = FavoriteNewsRecyclerAdapter { news: NewsModel -> viewModel.onItemClick(news) }
         binding.newsRecyclerview.adapter = adapter
         viewModel.items.observe(viewLifecycleOwner) {
             adapter.submitList(it)

@@ -1,15 +1,9 @@
 package com.semdelion.presentation
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.semdelion.domain.repositories.IAccountsRepository
-import com.semdelion.presentation.core.utils.MutableLiveEvent
-import com.semdelion.presentation.core.utils.publishEvent
+import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.core.utils.share
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(

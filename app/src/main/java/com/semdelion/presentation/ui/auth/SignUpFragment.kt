@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
-import com.semdelion.domain.models.SignUpData
+import com.semdelion.domain.repositories.accounts.models.SignUpData
 
 import com.semdelion.presentation.R
-import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentSignUpBinding

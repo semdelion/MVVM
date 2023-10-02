@@ -1,10 +1,10 @@
 package com.semdelion.data.repositories
 
-import com.semdelion.data.storages.interfaces.IUserStorage
-import com.semdelion.data.storages.models.UserDataModel
-import com.semdelion.data.storages.models.toUserModel
-import com.semdelion.domain.models.UserModel
-import com.semdelion.domain.repositories.IUserRepository
+import com.semdelion.data.storages.user.IUserStorage
+import com.semdelion.data.storages.user.UserDataModel
+import com.semdelion.data.storages.user.toUserModel
+import com.semdelion.domain.repositories.user.models.UserModel
+import com.semdelion.domain.repositories.user.IUserRepository
 
 class UserRepositoryImpl(private val userStorage: IUserStorage) : IUserRepository {
 

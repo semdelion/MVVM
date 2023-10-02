@@ -2,10 +2,10 @@ package com.semdelion.presentation.ui.auth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.semdelion.domain.exceptions.AuthException
-import com.semdelion.domain.exceptions.EmptyFieldException
-import com.semdelion.domain.exceptions.Field
-import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.domain.repositories.accounts.AuthException
+import com.semdelion.domain.repositories.accounts.EmptyFieldException
+import com.semdelion.domain.repositories.accounts.Field
+import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources

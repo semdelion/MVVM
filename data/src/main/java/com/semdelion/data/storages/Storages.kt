@@ -2,8 +2,8 @@ package com.semdelion.data.storages
 
 import android.content.Context
 import androidx.room.Room
-import com.semdelion.data.storages.interfaces.IFavoriteNewsStorage
-import com.semdelion.data.storages.room.AppDatabase
+import com.semdelion.data.storages.news.IFavoriteNewsStorage
+import com.semdelion.data.storages.news.RoomFavoriteNewsStorage
 
 object Storages {
     private lateinit var applicationContext: Context

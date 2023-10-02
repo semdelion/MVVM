@@ -1,11 +1,11 @@
 package com.semdelion.data.repositories
 
-import com.semdelion.data.services.BaseService
-import com.semdelion.data.services.interfaces.INewsServices
-import com.semdelion.data.services.models.toNewsModel
-import com.semdelion.domain.models.NewsModel
-import com.semdelion.domain.models.NewsPageModel
-import com.semdelion.domain.repositories.INewsRepository
+import com.semdelion.data.core.BaseService
+import com.semdelion.data.services.news.INewsServices
+import com.semdelion.data.services.news.toNewsModel
+import com.semdelion.domain.repositories.news.models.NewsModel
+import com.semdelion.domain.repositories.news.models.NewsPageModel
+import com.semdelion.domain.repositories.news.INewsRepository
 
 class NewsRepositoryImpl : BaseService(), INewsRepository {
 

@@ -3,8 +3,8 @@ package com.semdelion.presentation.ui.tabs.news
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.semdelion.domain.models.NewsModel
-import com.semdelion.domain.usecases.GetNewsUseCase
+import com.semdelion.domain.repositories.news.models.NewsModel
+import com.semdelion.domain.usecases.news.GetNewsUseCase
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel

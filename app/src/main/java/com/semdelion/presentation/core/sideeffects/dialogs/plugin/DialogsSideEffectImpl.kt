@@ -4,7 +4,7 @@ import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.LifecycleOwner
-import com.semdelion.domain.models.SuccessResult
+import com.semdelion.domain.core.tasks.models.SuccessResult
 import com.semdelion.presentation.core.sideeffects.SideEffectImplementation
 
 class DialogsSideEffectImpl(

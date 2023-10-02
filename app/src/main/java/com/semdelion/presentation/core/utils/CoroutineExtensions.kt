@@ -1,8 +1,8 @@
 package com.semdelion.presentation.core.utils
 
-import com.semdelion.domain.models.ErrorResult
-import com.semdelion.domain.models.FinalResult
-import com.semdelion.domain.models.SuccessResult
+import com.semdelion.domain.core.tasks.models.ErrorResult
+import com.semdelion.domain.core.tasks.models.FinalResult
+import com.semdelion.domain.core.tasks.models.SuccessResult
 import com.semdelion.presentation.core.utils.callback.CancelListener
 import com.semdelion.presentation.core.utils.callback.Emitter
 import kotlinx.coroutines.CancellableContinuation

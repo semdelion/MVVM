@@ -2,7 +2,7 @@ package com.semdelion.presentation.ui.tabs.dashboard.tmp
 
 import android.Manifest
 import androidx.lifecycle.SavedStateHandle
-import com.semdelion.domain.repositories.IMessageRepository
+import com.semdelion.domain.repositories.message.IMessageRepository
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogConfig

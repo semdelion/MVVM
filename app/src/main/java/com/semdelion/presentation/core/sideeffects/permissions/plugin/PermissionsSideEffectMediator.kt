@@ -3,7 +3,7 @@ package com.semdelion.presentation.core.sideeffects.permissions.plugin
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
-import com.semdelion.domain.models.ErrorResult
+import com.semdelion.domain.core.tasks.models.ErrorResult
 import com.semdelion.presentation.core.sideeffects.SideEffectMediator
 import com.semdelion.presentation.core.sideeffects.permissions.Permissions
 import com.semdelion.presentation.core.utils.callback.Emitter

@@ -1,17 +1,14 @@
 package com.semdelion.presentation.ui.tabs.profile
 
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import androidx.navigation.fragment.findNavController
-import com.semdelion.domain.exceptions.EmptyFieldException
-import com.semdelion.domain.repositories.IAccountsRepository
+import com.semdelion.domain.repositories.accounts.EmptyFieldException
+import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableLiveEvent
-import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.share
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
