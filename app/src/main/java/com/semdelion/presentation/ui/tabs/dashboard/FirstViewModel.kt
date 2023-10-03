@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard.tmp
+package com.semdelion.presentation.ui.tabs.dashboard
 
 import android.Manifest
 import androidx.lifecycle.SavedStateHandle
@@ -7,6 +7,7 @@ import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogConfig
 import com.semdelion.presentation.core.sideeffects.intents.Intents
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.permissions.Permissions
 import com.semdelion.presentation.core.sideeffects.permissions.plugin.PermissionStatus
@@ -43,9 +44,9 @@ class FirstViewModel(
 
     fun sendText() {
         navigationService.launch(
-            FirstFragmentDirections.actionFirstFragmentToSecondFragment(
-                messageLive.value ?: ""
-            )
+            NavCommandDirections(FirstFragmentDirections.actionFirstFragmentToSecondFragment(
+                messageLive.value
+            ))
         )
     }
 

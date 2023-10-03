@@ -16,6 +16,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.semdelion.presentation.core.sideeffects.SideEffectImplementation
+import com.semdelion.presentation.core.sideeffects.navigator.INavCommand
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.utils.Event
 import com.semdelion.presentation.core.views.BaseFragment
@@ -23,6 +24,9 @@ import com.semdelion.presentation.core.views.utils.HasScreenTitle
 import com.semdelion.presentation.ui.tabs.TabsFragment
 import java.util.regex.Pattern
 
+private fun NavController.navigate(navCommand: INavCommand) {
+    navCommand.launch(this)
+}
 
 class StackFragmentNavigator(
     @IdRes private val containersId: Set<Int>,
@@ -36,8 +40,8 @@ class StackFragmentNavigator(
 
     private var navController: NavController? = null
 
-    override fun launch(direction: NavDirections) {
-        launchDirections(direction)
+    override fun launch(navCommand: INavCommand) {
+        launchDirections(navCommand)
     }
 
     override fun goBack(result: Any?) {
@@ -112,12 +116,15 @@ class StackFragmentNavigator(
         this.navController = navController
     }
 
-    private fun launchDirections(direction: NavDirections) : Boolean {
+    private fun launchDirections(navCommand: INavCommand) : Boolean {
         //TODO костыль
         for (container in containersId) {
             try {
                 val navController = requireActivity().findNavController(container)
-                navController.navigate(
+
+                navController.navigate(navCommand)
+
+                /*navController.navigate(
                     directions = direction,
                     navOptions = navOptions {
                         anim {
@@ -127,7 +134,7 @@ class StackFragmentNavigator(
                             popExit = animations.popExitAnim
                         }
                     }
-                )
+                )*/
                 return true
             } catch (ex: Exception) { }
         }

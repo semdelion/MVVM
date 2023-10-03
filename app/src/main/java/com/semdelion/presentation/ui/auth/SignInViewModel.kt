@@ -7,6 +7,7 @@ import com.semdelion.domain.repositories.accounts.EmptyFieldException
 import com.semdelion.domain.repositories.accounts.Field
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.R
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
@@ -22,8 +23,7 @@ class SignInViewModel(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator,
     private val resources: Resources,
-    private val toasts: Toasts,
-    savedStateHandle: SavedStateHandle
+    private val toasts: Toasts
 ) : BaseViewModel() {
 
     private val _state = MutableLiveData(State())
@@ -36,7 +36,7 @@ class SignInViewModel(
         showProgress()
         try {
             accountsRepository.signIn(email, password)
-            navigationService.launch(SignInFragmentDirections.actionSignInFragmentToTabsFragment())
+            navigationService.launch(NavCommandDirections(SignInFragmentDirections.actionSignInFragmentToTabsFragment()))
         } catch (e: EmptyFieldException) {
             processEmptyFieldException(e)
         } catch (e: AuthException) {

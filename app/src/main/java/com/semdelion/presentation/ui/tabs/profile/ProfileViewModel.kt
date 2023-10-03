@@ -2,8 +2,12 @@ package com.semdelion.presentation.ui.tabs.profile
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
+import androidx.navigation.navOptions
 import com.semdelion.domain.repositories.accounts.models.Account
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
+import com.semdelion.presentation.R
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandResId
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableLiveEvent
@@ -12,20 +16,18 @@ import com.semdelion.presentation.core.utils.share
 
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import com.semdelion.presentation.ui.tabs.TabsFragmentDirections
+import com.semdelion.presentation.ui.utils.findTopNavController
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val accountsRepository: IAccountsRepository,
-    private val navigationService: Navigator,
-    private val toasts: Toasts,
-    savedStateHandle: SavedStateHandle
+    private val navigationService: Navigator
 ) : BaseViewModel() {
 
     private val _account = MutableLiveData<Account>()
     val account = _account.share()
 
-    private val _restartFromLoginEvent = MutableLiveEvent<Unit>()
-    val restartWithSignInEvent = _restartFromLoginEvent.share()
+
 
     init {
         viewModelScope.launch {
@@ -38,15 +40,13 @@ class ProfileViewModel(
     fun logout() {
         viewModelScope.launch {
             accountsRepository.logout()
-            restartAppFromLoginScreen()
+            navigationService.launch(NavCommandResId(R.id.signInFragment, null, navOptions {
+                popUpTo(R.id.tabsFragment) {inclusive = true}
+            }))
         }
     }
 
-    private fun restartAppFromLoginScreen() {
-        _restartFromLoginEvent.publishEvent()
-    }
-
     fun toEditProfile() {
-        navigationService.launch(TabsFragmentDirections.actionTabsFragmentToEditProfileFragment())
+        navigationService.launch(NavCommandDirections(TabsFragmentDirections.actionTabsFragmentToEditProfileFragment()))
     }
 }

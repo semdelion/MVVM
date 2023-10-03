@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard.tmp
+package com.semdelion.presentation.ui.tabs.dashboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.databinding.FragmentSecondBinding
 import com.semdelion.presentation.core.views.utils.HasScreenTitle
 import com.semdelion.presentation.core.views.factories.viewModel
+import com.semdelion.presentation.databinding.FragmentSecondBinding
 import kotlinx.coroutines.launch
 
 class SecondFragment : BaseFragment(), HasScreenTitle {

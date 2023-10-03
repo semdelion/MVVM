@@ -1,6 +1,5 @@
 package com.semdelion.presentation.core.sideeffects.navigator
 
-import androidx.navigation.NavDirections
 
 interface Navigator {
 
@@ -8,7 +7,7 @@ interface Navigator {
      * Launch a new view at the top of back stack.
      */
 
-    fun launch(direction: NavDirections)
+    fun launch(navCommand: INavCommand)
 
     /**
      * Go back to the previous screen and optionally send some results.

@@ -7,6 +7,7 @@ import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogConfig
 import com.semdelion.presentation.core.sideeffects.intents.Intents
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.permissions.Permissions
 import com.semdelion.presentation.core.sideeffects.permissions.plugin.PermissionStatus
@@ -17,22 +18,17 @@ import kotlinx.coroutines.launch
 
 class RootViewModel(
     private val navigationService: Navigator,
-    private val toasts: Toasts,
-    private val resources: Resources,
-    private val permissions: Permissions,
-    private val intents: Intents,
-    private val dialogs: Dialogs,
-    savedStateHandle: SavedStateHandle
+    private val toasts: Toasts
 ) : BaseViewModel() {
 
     fun openBox(color: Int, colorName: String) {
-        val direction = RootFragmentDirections.actionRootFragmentToBoxFragment(color, colorName)
-        navigationService.launch(direction)
+        val navCommand = NavCommandDirections(RootFragmentDirections.actionRootFragmentToBoxFragment(color, colorName))
+        navigationService.launch(navCommand)
     }
 
     fun toFirstFragment() {
-        val direction = RootFragmentDirections.actionRootFragmentToFirstFragment2()
-        navigationService.launch(direction)
+        val navCommand = NavCommandDirections(RootFragmentDirections.actionRootFragmentToFirstFragment2())
+        navigationService.launch(navCommand)
     }
 
     override fun onResult(result: Any) {

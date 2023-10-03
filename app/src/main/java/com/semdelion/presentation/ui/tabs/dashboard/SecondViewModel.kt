@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard.tmp
+package com.semdelion.presentation.ui.tabs.dashboard
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle

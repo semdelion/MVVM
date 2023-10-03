@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.usecases.news.GetFavoriteNewsUseCase
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel
@@ -17,8 +18,6 @@ import kotlinx.coroutines.flow.collectLatest
 class FavoriteNewsViewModel(
     private val getFavoriteNewsUseCase: GetFavoriteNewsUseCase,
     private val navigationService: Navigator,
-    private val toasts: Toasts,
-    savedStateHandle: SavedStateHandle
 ) : BaseListViewModel() {
     private val _items = MutableLiveData<MutableList<NewsModel>>()
     val items: LiveData<MutableList<NewsModel>> = _items
@@ -37,9 +36,10 @@ class FavoriteNewsViewModel(
             imageURL = news.imageURL
         )
         navigationService.launch(
+            NavCommandDirections(
             FavoriteNewsFragmentDirections.actionFavoriteNewsFragmentToFavoriteNewsDetailsFragment(
                 navArg
-            )
+            ))
         )
     }
 

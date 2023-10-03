@@ -10,6 +10,7 @@ import com.semdelion.domain.repositories.accounts.PasswordMismatchException
 import com.semdelion.domain.repositories.accounts.models.SignUpData
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.R
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
@@ -22,8 +23,7 @@ class SignUpViewModel(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator,
     private val toasts: Toasts,
-    private val resources: Resources,
-    savedStateHandle: SavedStateHandle
+    private val resources: Resources
 ) : BaseViewModel() {
 
 
@@ -37,7 +37,7 @@ class SignUpViewModel(
                 accountsRepository.signUp(signUpData)
                 toasts.toast(resources.getString(R.string.sign_up_success))
                 accountsRepository.signIn(signUpData.email, signUpData.password)
-                navigationService.launch(SignUpFragmentDirections.actionSignUpFragmentToTabsFragment())
+                navigationService.launch(NavCommandDirections(SignUpFragmentDirections.actionSignUpFragmentToTabsFragment()))
             } catch (e: EmptyFieldException) {
                 processEmptyFieldException(e)
             } catch (e: PasswordMismatchException) {

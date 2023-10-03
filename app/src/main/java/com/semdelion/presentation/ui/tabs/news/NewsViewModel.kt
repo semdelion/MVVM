@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.usecases.news.GetNewsUseCase
+import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel
@@ -15,9 +16,7 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel(
     private val getNewsUseCase: GetNewsUseCase,
-    private val navigationService: Navigator,
-    private val toasts: Toasts,
-    savedStateHandle: SavedStateHandle
+    private val navigationService: Navigator
     ) : BaseListViewModel() {
     private val _items = MutableLiveData<MutableList<NewsModel>>()
     val items: LiveData<MutableList<NewsModel>> = _items
@@ -41,7 +40,7 @@ class NewsViewModel(
             pubDate = news.pubDate,
             imageURL = news.imageURL
         )
-        navigationService.launch(NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(navArg))
+        navigationService.launch(NavCommandDirections(NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment(navArg)))
     }
 
     fun refreshNews() : Job {

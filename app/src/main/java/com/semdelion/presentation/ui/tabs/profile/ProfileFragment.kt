@@ -31,10 +31,9 @@ class ProfileFragment : BaseFragment() {
         binding.viewModel = viewModel
 
         binding.editProfileButton.setOnClickListener { viewModel.toEditProfile() }
-        binding.logoutButton.setOnClickListener { onLogoutButtonPressed() }
+        binding.logoutButton.setOnClickListener { viewModel.logout() }
 
         observeAccountDetails()
-        observeRestartAppFromLoginScreenEvent()
 
         return binding.root
     }
@@ -52,17 +51,6 @@ class ProfileFragment : BaseFragment() {
         }
     }
 
-    private fun observeRestartAppFromLoginScreenEvent() {
-        viewModel.restartWithSignInEvent.observeEvent(viewLifecycleOwner) {
-            findTopNavController().navigate(R.id.signInFragment, null, navOptions {
-                popUpTo(R.id.tabsFragment) {
-                    inclusive = true
-                }
-            })
-        }
-    }
 
-    private fun onLogoutButtonPressed() {
-        viewModel.logout()
-    }
+
 }
