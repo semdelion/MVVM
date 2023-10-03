@@ -36,7 +36,8 @@ class SignUpViewModel(
             try {
                 accountsRepository.signUp(signUpData)
                 toasts.toast(resources.getString(R.string.sign_up_success))
-                goBack()
+                accountsRepository.signIn(signUpData.email, signUpData.password)
+                navigationService.launch(SignUpFragmentDirections.actionSignUpFragmentToTabsFragment())
             } catch (e: EmptyFieldException) {
                 processEmptyFieldException(e)
             } catch (e: PasswordMismatchException) {

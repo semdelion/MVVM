@@ -52,7 +52,6 @@ class SignInFragment : BaseFragment() {
         binding.progressBar.visibility = if (result.showProgress) View.VISIBLE else View.INVISIBLE
     }
 
-
     private fun observeClearPasswordEvent() = viewModel.clearPasswordEvent.observeEvent(viewLifecycleOwner) {
         binding.passwordEditText.text?.clear()
     }

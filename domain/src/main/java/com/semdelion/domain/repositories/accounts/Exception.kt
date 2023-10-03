@@ -13,6 +13,8 @@ class AccountAlreadyExistsException : AppException()
 
 class AuthException : AppException()
 
+class StorageException: AppException()
+
 enum class Field {
     Email,
     Username,
