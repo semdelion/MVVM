@@ -1,25 +1,25 @@
 package com.semdelion.data.services.news
 
-import com.google.gson.annotations.SerializedName
 import com.semdelion.domain.repositories.news.models.NewsModel
+import com.squareup.moshi.Json
 
 data class NewsDataModel(
     val title: String,
     val link: String,
-    val keywords: List<String>,
+    val keywords: List<String>?,
     val creator: List<String>?,
 
-    @SerializedName("video_url")
+    @Json(name="video_url")
     val videoURL: String? = null,
 
     val description: String? = null,
     val content: String? = null,
     val pubDate: String,
 
-    @SerializedName("image_url")
+    @Json(name="image_url")
     val imageURL: String? = null,
 
-    @SerializedName("source_id")
+    @Json(name="source_id")
     val sourceID: String,
 
     val category: List<String>,
