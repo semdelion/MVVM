@@ -8,9 +8,7 @@ import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 
 class SecretViewModel(
-    private val navigationService: Navigator,
-    private val toasts: Toasts,
-    savedStateHandle: SavedStateHandle
+    private val navigationService: Navigator
 ) : BaseViewModel() {
 
     fun goBack() {

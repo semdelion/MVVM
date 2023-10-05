@@ -40,6 +40,7 @@ object Initializer {
         okHttpClient.addInterceptor(NewsAuthInterceptor())
         okHttpClient.addInterceptor(NetworkConnectionInterceptor(context))
 
+
         return ApiClient("https://newsdata.io/api/", okHttpClient)
     }
 

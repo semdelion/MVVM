@@ -1,13 +1,11 @@
 package com.semdelion.presentation.ui.tabs.favorite
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.usecases.news.GetFavoriteNewsUseCase
 import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
-import com.semdelion.presentation.core.sideeffects.toasts.Toasts
+import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel
 import com.semdelion.presentation.core.viewmodels.ListViewState
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
@@ -20,7 +18,7 @@ class FavoriteNewsViewModel(
     private val navigationService: Navigator,
 ) : BaseListViewModel() {
     private val _items = MutableLiveData<MutableList<NewsModel>>()
-    val items: LiveData<MutableList<NewsModel>> = _items
+    val items = _items.toLiveData()
 
     init {
         loadFavoriteNews()

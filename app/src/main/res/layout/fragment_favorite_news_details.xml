@@ -107,7 +107,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/creators_flow"
-                tools:text="тут очень много текста" />
+                tools:text="here is too many text" />
 
             <TextView
                 android:id="@+id/link_text"

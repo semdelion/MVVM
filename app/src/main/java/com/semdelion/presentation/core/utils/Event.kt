@@ -11,7 +11,8 @@ class Event<T>(
     private var _value: T? = value
     fun get(): T? = _value.also { _value = null }
 }
-fun <T> MutableLiveData<T>.share(): LiveData<T> = this
+
+fun <T> MutableLiveData<T>.toLiveData(): LiveData<T> = this
 
 // type aliases for live-data instances which contain events
 typealias MutableLiveEvent<T> = MutableLiveData<Event<T>>

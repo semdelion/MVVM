@@ -1,8 +1,8 @@
 package com.semdelion.presentation.ui.auth
 
 import androidx.annotation.StringRes
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.accounts.AccountAlreadyExistsException
 import com.semdelion.domain.repositories.accounts.EmptyFieldException
 import com.semdelion.domain.repositories.accounts.Field
@@ -15,7 +15,7 @@ import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.requireValue
-import com.semdelion.presentation.core.utils.share
+import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.launch
 
@@ -28,7 +28,7 @@ class SignUpViewModel(
 
 
     private val _state = MutableLiveData(State())
-    val state = _state.share()
+    val state = _state.toLiveData()
 
     fun signUp(signUpData: SignUpData) {
         viewModelScope.launch {

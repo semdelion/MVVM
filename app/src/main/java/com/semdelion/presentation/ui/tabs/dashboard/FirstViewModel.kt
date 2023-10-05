@@ -26,8 +26,7 @@ class FirstViewModel(
     private val permissions: Permissions,
     private val intents: Intents,
     private val dialogs: Dialogs,
-    private val messageRepository: IMessageRepository,
-    savedStateHandle: SavedStateHandle
+    private val messageRepository: IMessageRepository
 ) : BaseViewModel() {
 
     private val _resultLive = MutableStateFlow("...")

@@ -1,7 +1,6 @@
 package com.semdelion.presentation.ui.auth
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.accounts.AuthException
 import com.semdelion.domain.repositories.accounts.EmptyFieldException
 import com.semdelion.domain.repositories.accounts.Field
@@ -12,9 +11,10 @@ import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableUnitLiveEvent
+import com.semdelion.presentation.core.utils.UnitLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.requireValue
-import com.semdelion.presentation.core.utils.share
+import com.semdelion.presentation.core.utils.toLiveData
 
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.launch
@@ -27,10 +27,10 @@ class SignInViewModel(
 ) : BaseViewModel() {
 
     private val _state = MutableLiveData(State())
-    val state = _state.share()
+    val state = _state.toLiveData()
 
     private val _clearPasswordEvent = MutableUnitLiveEvent()
-    val clearPasswordEvent = _clearPasswordEvent.share()
+    val clearPasswordEvent = _clearPasswordEvent.toLiveData()
 
     fun signIn(email: String, password: String) = viewModelScope.launch {
         showProgress()

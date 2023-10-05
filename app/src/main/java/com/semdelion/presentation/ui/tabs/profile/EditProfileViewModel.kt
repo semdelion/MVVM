@@ -10,7 +10,7 @@ import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
-import com.semdelion.presentation.core.utils.share
+import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -20,15 +20,14 @@ class EditProfileViewModel(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator,
     private val toasts: Toasts,
-    private val resources: Resources,
-    savedStateHandle: SavedStateHandle
+    private val resources: Resources
 ) : BaseViewModel() {
 
     private val _initialUsernameEvent = MutableLiveEvent<String>()
-    val initialUsernameEvent = _initialUsernameEvent.share()
+    val initialUsernameEvent = _initialUsernameEvent.toLiveData()
 
     private val _saveInProgress = MutableLiveData(false)
-    val saveInProgress = _saveInProgress.share()
+    val saveInProgress = _saveInProgress.toLiveData()
 
     init {
         viewModelScope.launch {

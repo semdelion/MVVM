@@ -20,7 +20,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Message"
+            android:text="@string/message_title"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,7 @@
                 android:id="@+id/result_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Result"
+                android:hint="@string/hint_result"
                 android:text="@={viewModel.resultLive}"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
@@ -64,7 +64,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
-            android:text="Go back"
+            android:text="@string/button_go_back"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/result_textInputLayout" />

@@ -18,23 +18,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/logo_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginEnd="64dp"
+                android:maxWidth="200dp"
+                app:layout_constraintBottom_toTopOf="@id/emailTextInput"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:srcCompat="@drawable/ic_logo_large" />
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailTextInput"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/field_email"
                 app:layout_constraintBottom_toTopOf="@id/usernameTextInput"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed">
+                app:layout_constraintTop_toBottomOf="@id/logo_image">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:lines="1" />
@@ -59,6 +75,7 @@
                     android:id="@+id/usernameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:lines="1" />
@@ -73,6 +90,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/field_password"
+                app:passwordToggleEnabled="true"
                 app:layout_constraintBottom_toTopOf="@id/repeatPasswordTextInput"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,6 +100,7 @@
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:imeOptions="actionNext"
                     android:inputType="textPassword"
                     android:lines="1" />
@@ -96,6 +115,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
                 android:hint="@string/field_repeat_password"
+                app:passwordToggleEnabled="true"
                 app:layout_constraintBottom_toTopOf="@id/createAccountButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,6 +125,7 @@
                     android:id="@+id/repeatPasswordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:lines="1" />
