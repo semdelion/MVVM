@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.semdelion.presentation.databinding.FragmentFirstBinding
 import com.semdelion.presentation.core.views.BaseFragment
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class FirstFragment : BaseFragment(), HasScreenTitle {
@@ -34,7 +35,7 @@ class FirstFragment : BaseFragment(), HasScreenTitle {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.resultLive.collect {
+                viewModel.resultLive.collectLatest {
                     result: String -> binding.secondResultText.text = result
                 }
             }

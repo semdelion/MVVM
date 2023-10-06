@@ -3,6 +3,7 @@ package com.semdelion.presentation.ui.tabs.news
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.usecases.news.SaveNewsUseCase
+import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 
 class NewsDetailsViewModel(
     private val saveNewsUseCase: SaveNewsUseCase,
+    val toasts: Toasts,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
@@ -25,6 +27,9 @@ class NewsDetailsViewModel(
     }
 
     val imageUrl: String = newsNavigationArg.imageURL
+
+    private val _newsLive = MutableLiveData(newsNavigationArg)
+    val newsLive = _newsLive.toLiveData()
 
     private val _titleLive = MutableLiveData(newsNavigationArg.title)
     val titleLive = _titleLive.toLiveData()
@@ -39,14 +44,10 @@ class NewsDetailsViewModel(
 
     val link: String = newsNavigationArg.link
 
-    private val _saveNewsState = MutableSharedFlow<String>()
-    val saveNewsState = _saveNewsState.asSharedFlow()
-
     fun addToFavoriteNews() {
         viewModelScope.launch(Dispatchers.IO) {
             val result = saveNewsUseCase.save(newsNavigationArg.toNewsModel())
-
-            _saveNewsState.emit(if (result) "Successful save!" else "Failure save!")
+            toasts.toast(if (result) "Successful save!" else "Failure save!")
         }
     }
 }

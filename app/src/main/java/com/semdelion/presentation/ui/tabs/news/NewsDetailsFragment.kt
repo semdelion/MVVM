@@ -5,20 +5,15 @@ import android.view.*
 import android.view.View.GONE
 import android.view.View.generateViewId
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentNewsDetailsBinding
@@ -55,14 +50,6 @@ class NewsDetailsFragment : BaseFragment(), MenuProvider {
             creatorView.findViewById<TextView>(R.id.creator).text = creator
             binding.newsDetailsConstraint.addView(creatorView)
             binding.creatorsFlow.addView(creatorView)
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.saveNewsState.collectLatest {
-                    Toast.makeText(binding.root.context, it, Toast.LENGTH_SHORT).show()
-                }
-            }
         }
 
         return binding.root;
