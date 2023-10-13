@@ -35,7 +35,7 @@ class FirstFragment : BaseFragment(), HasScreenTitle {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.resultLive.collectLatest {
+                viewModel.resultFlow.collectLatest {
                     result: String -> binding.secondResultText.text = result
                 }
             }

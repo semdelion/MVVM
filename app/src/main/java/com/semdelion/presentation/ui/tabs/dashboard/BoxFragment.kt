@@ -44,5 +44,4 @@ class BoxFragment : BaseFragment() {
 
         return binding.root
     }
-
 }

@@ -55,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_result"
-                android:text="@={viewModel.resultLive}"/>
+                android:text="@={viewModel.resultFlow}"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/send_back_button"

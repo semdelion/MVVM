@@ -1,7 +1,6 @@
 package com.semdelion.presentation.ui.tabs.dashboard
 
 import android.Manifest
-import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.message.IMessageRepository
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
@@ -16,7 +15,7 @@ import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class FirstViewModel(
@@ -29,22 +28,22 @@ class FirstViewModel(
     private val messageRepository: IMessageRepository
 ) : BaseViewModel() {
 
-    private val _resultLive = MutableStateFlow("...")
-    val resultLive: StateFlow<String> = _resultLive
+    private val _resultFlow = MutableStateFlow("...")
+    val resultFlow = _resultFlow.asStateFlow()
 
-    val messageLive = MutableStateFlow("")
+    val messageFlow = MutableStateFlow("")
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             val result = messageRepository.getMessage()
-            _resultLive.value = result.text
+            _resultFlow.value = result.text
         }
     }
 
     fun sendText() {
         navigationService.launch(
             NavCommandDirections(FirstFragmentDirections.actionFirstFragmentToSecondFragment(
-                messageLive.value
+                messageFlow.value
             ))
         )
     }
@@ -86,7 +85,7 @@ class FirstViewModel(
 
     override fun onResult(result: Any) {
         super.onResult(result)
-        _resultLive.value = (result as String)
+        _resultFlow.value = (result as String)
         toasts.toast("Result from Second ${(result)}")
     }
 }
