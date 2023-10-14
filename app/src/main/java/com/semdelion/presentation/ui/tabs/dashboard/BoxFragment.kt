@@ -5,13 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentBoxBinding
-import kotlin.random.Random
 
 class BoxFragment : BaseFragment() {
 

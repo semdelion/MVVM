@@ -57,11 +57,5 @@ class MainActivity : BaseActivity() {
     private fun createNavigator() = StackFragmentNavigator(
         containersId = setOf(R.id.fragment_container, R.id.tabs_fragment_container),
         topLevelDestinationsId = setOf(R.id.tabsFragment, R.id.signInFragment),
-        animations = StackFragmentNavigator.Animations(
-            enterAnim = R.anim.enter,
-            exitAnim = R.anim.exit,
-            popEnterAnim = R.anim.pop_enter,
-            popExitAnim = R.anim.pop_exit
-        )
     )
 }

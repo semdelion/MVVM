@@ -5,8 +5,8 @@ import androidx.navigation.navOptions
 import com.semdelion.domain.repositories.accounts.models.Account
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.R
-import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
-import com.semdelion.presentation.core.sideeffects.navigator.NavCommandResId
+import com.semdelion.presentation.core.sideeffects.navigator.utils.NavCommandDirections
+import com.semdelion.presentation.core.sideeffects.navigator.utils.NavCommandResId
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.utils.toLiveData
 

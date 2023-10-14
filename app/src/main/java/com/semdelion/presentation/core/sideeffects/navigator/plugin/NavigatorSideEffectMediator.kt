@@ -1,8 +1,7 @@
 package com.semdelion.presentation.core.sideeffects.navigator.plugin
 
-import androidx.navigation.NavDirections
 import com.semdelion.presentation.core.sideeffects.SideEffectMediator
-import com.semdelion.presentation.core.sideeffects.navigator.INavCommand
+import com.semdelion.presentation.core.sideeffects.navigator.utils.INavCommand
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 
 class NavigatorSideEffectMediator : SideEffectMediator<Navigator>(), Navigator {

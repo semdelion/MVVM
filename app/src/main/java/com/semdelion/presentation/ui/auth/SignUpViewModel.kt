@@ -1,7 +1,6 @@
 package com.semdelion.presentation.ui.auth
 
 import androidx.annotation.StringRes
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.semdelion.domain.repositories.accounts.AccountAlreadyExistsException
 import com.semdelion.domain.repositories.accounts.EmptyFieldException
@@ -10,7 +9,7 @@ import com.semdelion.domain.repositories.accounts.PasswordMismatchException
 import com.semdelion.domain.repositories.accounts.models.SignUpData
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.presentation.R
-import com.semdelion.presentation.core.sideeffects.navigator.NavCommandDirections
+import com.semdelion.presentation.core.sideeffects.navigator.utils.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts

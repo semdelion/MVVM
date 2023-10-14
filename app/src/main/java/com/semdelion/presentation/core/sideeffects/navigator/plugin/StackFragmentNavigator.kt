@@ -2,21 +2,17 @@ package com.semdelion.presentation.core.sideeffects.navigator.plugin
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.AnimRes
 import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
-import androidx.navigation.NavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import com.semdelion.presentation.core.sideeffects.SideEffectImplementation
-import com.semdelion.presentation.core.sideeffects.navigator.INavCommand
+import com.semdelion.presentation.core.sideeffects.navigator.utils.INavCommand
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.utils.Event
 import com.semdelion.presentation.core.views.BaseFragment
@@ -30,8 +26,7 @@ private fun NavController.navigate(navCommand: INavCommand) {
 
 class StackFragmentNavigator(
     @IdRes private val containersId: Set<Int>,
-    @IdRes private val topLevelDestinationsId: Set<Int>,
-    private val animations: Animations
+    @IdRes private val topLevelDestinationsId: Set<Int>
 ) : SideEffectImplementation(), Navigator {
 
     private var result: Event<Any>? = null
@@ -82,9 +77,11 @@ class StackFragmentNavigator(
         if (f is HasScreenTitle && f.getScreenTitle() != null) {
             requireActivity().supportActionBar?.title = f.getScreenTitle()
         } else {
+
+            navController?.currentDestination?.arguments
             requireActivity().supportActionBar?.title = prepareTitle(
                 navController?.currentDestination?.label,
-                navController?.currentDestination?.arguments
+                f?.arguments
             )
         }
 
@@ -95,7 +92,7 @@ class StackFragmentNavigator(
         )
     }
 
-    /*private val destinationListener =
+    private val destinationListener =
         NavController.OnDestinationChangedListener { _, destination, arguments ->
             requireActivity().supportActionBar?.title = prepareTitle(destination.label, arguments)
             requireActivity().supportActionBar?.setDisplayHomeAsUpEnabled(
@@ -104,39 +101,17 @@ class StackFragmentNavigator(
                 )
             )
         }
-    private fun onNavControllerActivated(navController: NavController) {
-        if (this.navController == navController) return
-        //this.navController?.removeOnDestinationChangedListener(destinationListener)
-        //navController.addOnDestinationChangedListener(destinationListener)
-        this.navController = navController
-    }*/
-
-    private fun onNavControllerActivated(navController: NavController) {
-        if (this.navController == navController) return
-        this.navController = navController
-    }
 
     private fun launchDirections(navCommand: INavCommand) : Boolean {
-        //TODO костыль
+        //TODO need monitor right navController
         for (container in containersId) {
             try {
                 val navController = requireActivity().findNavController(container)
-
                 navController.navigate(navCommand)
-
-                /*navController.navigate(
-                    directions = direction,
-                    navOptions = navOptions {
-                        anim {
-                            enter = animations.enterAnim
-                            exit = animations.exitAnim
-                            popEnter = animations.popEnterAnim
-                            popExit = animations.popExitAnim
-                        }
-                    }
-                )*/
                 return true
-            } catch (ex: Exception) { }
+            } catch (_: IllegalArgumentException) {
+                //ignore error with wrong nav container
+            }
         }
         return false
     }
@@ -158,6 +133,13 @@ class StackFragmentNavigator(
         }
     }
 
+    private fun onNavControllerActivated(navController: NavController) {
+        if (this.navController == navController) return
+        //this.navController?.removeOnDestinationChangedListener(destinationListener)
+        //navController.addOnDestinationChangedListener(destinationListener)
+        this.navController = navController
+    }
+
     private fun isStartDestination(destination: NavDestination?): Boolean {
         if (destination == null) return false
         val graph = destination.parent ?: return false
@@ -165,9 +147,10 @@ class StackFragmentNavigator(
         return startDestinations.contains(destination.id)
     }
 
-    private fun prepareTitle(label: CharSequence?, arguments: Map<String, NavArgument>?): String {
+    private fun prepareTitle(label: CharSequence?, arguments: Bundle?): String {
 
-        // code for this method has been copied from Google sources
+        // code for this method has been copied from Google sources :)
+
         if (label == null) return ""
         val title = StringBuffer()
         val fillInPattern = Pattern.compile("\\{(.+?)\\}")
@@ -201,11 +184,4 @@ class StackFragmentNavigator(
         )
         navController = null
     }
-
-    class Animations(
-        @AnimRes val enterAnim: Int,
-        @AnimRes val exitAnim: Int,
-        @AnimRes val popEnterAnim: Int,
-        @AnimRes val popExitAnim: Int,
-    )
 }

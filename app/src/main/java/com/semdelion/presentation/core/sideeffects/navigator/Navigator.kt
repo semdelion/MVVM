@@ -1,5 +1,6 @@
 package com.semdelion.presentation.core.sideeffects.navigator
 
+import com.semdelion.presentation.core.sideeffects.navigator.utils.INavCommand
 
 interface Navigator {
 

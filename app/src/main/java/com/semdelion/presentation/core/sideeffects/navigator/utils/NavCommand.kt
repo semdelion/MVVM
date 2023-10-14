@@ -1,4 +1,4 @@
-package com.semdelion.presentation.core.sideeffects.navigator
+package com.semdelion.presentation.core.sideeffects.navigator.utils
 
 import android.os.Bundle
 import androidx.annotation.IdRes
