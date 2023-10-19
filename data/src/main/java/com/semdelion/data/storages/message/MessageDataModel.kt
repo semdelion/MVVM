@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MessageDataModel(val text: String) {
+    companion object { private const val serialVersionUID = 3L }
 }
 
 fun MessageDataModel.toMessageModel(): Message {

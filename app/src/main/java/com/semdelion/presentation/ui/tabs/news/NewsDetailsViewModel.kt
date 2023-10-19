@@ -1,16 +1,14 @@
 package com.semdelion.presentation.ui.tabs.news
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.usecases.news.SaveNewsUseCase
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
-import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
 import com.semdelion.presentation.ui.tabs.news.navigation.toNewsModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class NewsDetailsViewModel(
@@ -28,17 +26,14 @@ class NewsDetailsViewModel(
 
     val imageUrl: String = newsNavigationArg.imageURL
 
-    private val _newsLive = MutableLiveData(newsNavigationArg)
-    val newsLive = _newsLive.toLiveData()
+    private val _titleFlow = MutableStateFlow(newsNavigationArg.title)
+    val titleFlow = _titleFlow.asStateFlow()
 
-    private val _titleLive = MutableLiveData(newsNavigationArg.title)
-    val titleLive = _titleLive.toLiveData()
+    private val _contentFlow = MutableStateFlow(newsNavigationArg.content)
+    val contentFlow = _contentFlow.asStateFlow()
 
-    private val _contentLive = MutableLiveData(newsNavigationArg.content)
-    val contentLive = _contentLive.toLiveData()
-
-    private val _dateLive = MutableLiveData(newsNavigationArg.pubDate)
-    val dateLive = _dateLive.toLiveData()
+    private val _dateFlow = MutableStateFlow(newsNavigationArg.pubDate)
+    val dateFlow = _dateFlow.asStateFlow()
 
     val creators: List<String> = newsNavigationArg.creator
 

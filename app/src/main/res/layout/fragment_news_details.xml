@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{vm.titleLive}"
+                android:text="@{vm.titleFlow}"
                 android:textColor="@color/black"
                 android:textSize="21sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +75,7 @@
                     android:layout_gravity="center_vertical"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:text="@{vm.dateLive}"
+                    android:text="@{vm.dateFlow}"
                     tools:text="C 1.05.2021 1111" />
             </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@{vm.contentLive}"
+                android:text="@{vm.contentFlow}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/creators_flow"

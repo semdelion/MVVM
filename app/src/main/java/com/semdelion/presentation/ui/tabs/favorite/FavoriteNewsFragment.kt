@@ -43,8 +43,12 @@ class FavoriteNewsFragment : BaseFragment() {
 
         val adapter = FavoriteNewsRecyclerAdapter { news: NewsModel -> viewModel.onItemClick(news) }
         binding.newsRecyclerview.adapter = adapter
-        viewModel.items.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                viewModel.items.collectLatest {
+                    adapter.submitList(it)
+                }
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -58,7 +62,7 @@ class FavoriteNewsFragment : BaseFragment() {
     }
 
     private fun stateChangeListener(state: ListViewState) {
-        val hasItems = ((viewModel.items.value?.size ?: 0) > 0)
+        val hasItems = (viewModel.items.value.size > 0)
         when (state) {
             is ListViewState.Loading -> {
                 binding.newsLoaderProgressBar.visibility =

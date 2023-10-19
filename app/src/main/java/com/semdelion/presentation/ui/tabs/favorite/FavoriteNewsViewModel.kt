@@ -9,16 +9,19 @@ import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel
 import com.semdelion.presentation.core.viewmodels.ListViewState
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emitAll
 
 class FavoriteNewsViewModel(
     private val getFavoriteNewsUseCase: GetFavoriteNewsUseCase,
     private val navigationService: Navigator,
 ) : BaseListViewModel() {
-    private val _items = MutableLiveData<MutableList<NewsModel>>()
-    val items = _items.toLiveData()
+    private val _items = MutableStateFlow<MutableList<NewsModel>>(mutableListOf())
+    val items = _items.asStateFlow()
 
     init {
         loadFavoriteNews()
@@ -46,7 +49,7 @@ class FavoriteNewsViewModel(
             _viewState.emit(ListViewState.Loading)
             getFavoriteNewsUseCase.getFavoriteNews().collectLatest {
                 try {
-                    _items.postValue(it.toMutableList())
+                    _items.emit(it.toMutableList())
                     _viewState.emit(ListViewState.Success)
                 } catch (ex: Exception) {
                     _viewState.emit(ListViewState.Error(ex))
