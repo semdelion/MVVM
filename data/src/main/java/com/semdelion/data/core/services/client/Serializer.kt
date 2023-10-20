@@ -1,4 +1,4 @@
-package com.semdelion.data.core.client
+package com.semdelion.data.core.services.client
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory

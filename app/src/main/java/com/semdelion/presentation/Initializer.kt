@@ -2,10 +2,10 @@ package com.semdelion.presentation
 
 import android.content.Context
 import com.semdelion.data.BuildConfig
-import com.semdelion.data.core.client.ApiClient
-import com.semdelion.data.core.client.intercepters.LoggingInterceptor
-import com.semdelion.data.core.client.intercepters.NetworkConnectionInterceptor
-import com.semdelion.data.core.client.intercepters.NewsAuthInterceptor
+import com.semdelion.data.core.services.client.ApiClient
+import com.semdelion.data.core.services.client.intercepters.LoggingInterceptor
+import com.semdelion.data.core.services.client.intercepters.NetworkConnectionInterceptor
+import com.semdelion.data.core.services.client.intercepters.NewsAuthInterceptor
 import com.semdelion.data.repositories.AccountsRepositoryImpl
 import com.semdelion.data.repositories.FavoriteNewsRepositoryImpl
 import com.semdelion.data.repositories.MessageRepositoryImpl

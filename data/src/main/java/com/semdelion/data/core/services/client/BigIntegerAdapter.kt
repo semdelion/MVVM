@@ -1,4 +1,4 @@
-package com.semdelion.data.core.client
+package com.semdelion.data.core.services.client
 
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.ToJson

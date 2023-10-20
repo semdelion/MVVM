@@ -1,7 +1,7 @@
 package com.semdelion.data.repositories
 
-import com.semdelion.data.core.BaseService
-import com.semdelion.data.core.client.ApiClient
+import com.semdelion.data.core.services.BaseService
+import com.semdelion.data.core.services.client.ApiClient
 import com.semdelion.data.services.news.INewsServices
 import com.semdelion.data.services.news.toNewsModel
 import com.semdelion.domain.repositories.news.models.NewsModel

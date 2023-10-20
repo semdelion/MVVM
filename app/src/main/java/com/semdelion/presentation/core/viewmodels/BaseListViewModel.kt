@@ -14,7 +14,7 @@ abstract class BaseListViewModel() : BaseViewModel() {
     val viewState = _viewState.asStateFlow()
     var isLoading: Boolean = false
 
-    protected suspend fun getItemsWithState(getItems: () -> Unit) {
+    protected suspend fun getItemsWithState(getItems: suspend () -> Unit) {
         try {
             isLoading = true
             _viewState.emit(ListViewState.Loading)

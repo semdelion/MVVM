@@ -1,4 +1,4 @@
-package com.semdelion.data.core.client.intercepters
+package com.semdelion.data.core.services.client.intercepters
 
 import java.io.IOException
 

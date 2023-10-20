@@ -1,12 +1,12 @@
-package com.semdelion.data.core.client.intercepters
+package com.semdelion.data.core.services.client.intercepters
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.semdelion.data.core.services.exceptions.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import java.io.IOException
 
 class NetworkConnectionInterceptor(private val _context: Context) : Interceptor {
 
@@ -34,9 +34,4 @@ class NetworkConnectionInterceptor(private val _context: Context) : Interceptor 
 
         return result
     }
-}
-
-class NoConnectivityException : IOException() {
-    override val message: String
-        get() = "No Internet Connection"
 }
