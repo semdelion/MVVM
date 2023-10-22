@@ -1,6 +1,6 @@
 package com.semdelion.data.repositories
 
-import com.semdelion.data.core.wrapSQLiteException
+import com.semdelion.data.core.storages.BaseRoomStorages
 import com.semdelion.data.storages.account.AppSettings
 import com.semdelion.data.storages.account.IAccountsStorage
 import com.semdelion.domain.core.coroutines.IoDispatcher
@@ -10,20 +10,18 @@ import com.semdelion.domain.repositories.accounts.Field
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.domain.repositories.accounts.models.Account
 import com.semdelion.domain.repositories.accounts.models.SignUpData
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
-import java.lang.Exception
 
 class AccountsRepositoryImpl(
     private val accountsStorage: IAccountsStorage,
     private val appSettings: AppSettings,
     private val ioDispatcher: IoDispatcher
-): IAccountsRepository
+): BaseRoomStorages(), IAccountsRepository
 {
     private val currentAccountIdFlow: MutableStateFlow<AccountId> by lazy { MutableStateFlow(AccountId(appSettings.getCurrentAccountId())) }
 
