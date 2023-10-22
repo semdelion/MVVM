@@ -1,7 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MVVM" parent="Theme.Material3.DayNight">
+    <style name="Base.Theme.Semdelion" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    </style>
+
+    <style name="Theme.Semdelion" parent="Base.Theme.Semdelion" />
+
+    <style name="GlobalButtonStyle" parent="Widget.Material3.Button">
+        <item name="android:minWidth">200dp</item>
     </style>
 </resources>

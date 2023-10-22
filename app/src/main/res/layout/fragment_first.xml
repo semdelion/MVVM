@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.semdelion.presentaion.viewmodels.FirstViewModel" />
+            type="com.semdelion.presentation.ui.tabs.dashboard.FirstViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Result"
+            android:text="@string/title_result"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,8 +54,8 @@
                 android:id="@+id/first_name_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Message"
-                android:text="@={viewModel.messageLive}"/>
+                android:hint="@string/hint_message"
+                android:text="@={viewModel.messageFlow}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -65,7 +65,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Send message"
+            android:text="@string/button_send_message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/message_textInputLayout" />
@@ -77,7 +77,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:text="Request Permission"
+            android:text="@string/button_request_permission"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sendTextButton" />
