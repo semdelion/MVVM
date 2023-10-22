@@ -25,7 +25,6 @@ import com.semdelion.presentation.databinding.FragmentNewsBinding
 import com.semdelion.presentation.core.viewmodels.ListViewState
 import com.semdelion.presentation.ui.tabs.news.adapters.NewsRecyclerAdapter
 
-
 class NewsFragment : BaseFragment() {
 
     override val viewModel by viewModel<NewsViewModel>()

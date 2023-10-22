@@ -5,16 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.navOptions
 import com.semdelion.domain.repositories.accounts.models.Account
 import com.semdelion.presentation.R
-import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseFragment
 import java.text.SimpleDateFormat
 import java.util.Date
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentProfileBinding
-import com.semdelion.presentation.ui.utils.findTopNavController
 
 class ProfileFragment : BaseFragment() {
 
