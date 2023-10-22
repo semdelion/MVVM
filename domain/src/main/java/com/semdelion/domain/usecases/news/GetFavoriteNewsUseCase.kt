@@ -5,7 +5,7 @@ import com.semdelion.domain.repositories.news.IFavoriteNewsRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetFavoriteNewsUseCase(private val favoriteNews: IFavoriteNewsRepository) {
-    fun getFavoriteNews(): Flow<List<NewsModel>> {
+    suspend fun getFavoriteNews(): Flow<List<NewsModel>> {
         return favoriteNews.getFavoriteNews()
     }
 }

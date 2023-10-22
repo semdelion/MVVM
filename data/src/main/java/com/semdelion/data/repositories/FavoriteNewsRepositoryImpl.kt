@@ -1,15 +1,19 @@
 package com.semdelion.data.repositories
 
+import com.semdelion.data.core.storages.BaseRoomStorages
 import com.semdelion.data.storages.news.IFavoriteNewsStorage
 import com.semdelion.data.storages.news.entities.FavoriteNewsEntity
+import com.semdelion.domain.core.coroutines.IoDispatcher
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.repositories.news.IFavoriteNewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class FavoriteNewsRepositoryImpl(private val favoriteNewsStorage: IFavoriteNewsStorage) :
-    IFavoriteNewsRepository {
-    override suspend fun addFavoriteNews(newsModel: NewsModel): Boolean {
+class FavoriteNewsRepositoryImpl(
+    private val favoriteNewsStorage: IFavoriteNewsStorage,
+    private val ioDispatcher: IoDispatcher
+    ) : BaseRoomStorages(), IFavoriteNewsRepository {
+    override suspend fun addFavoriteNews(newsModel: NewsModel): Boolean = wrapSQLiteException(ioDispatcher.value) {
 
         val newsEntity = FavoriteNewsEntity(
             id = newsModel.hashCode(),
@@ -21,13 +25,13 @@ class FavoriteNewsRepositoryImpl(private val favoriteNewsStorage: IFavoriteNewsS
             imageURL = newsModel.imageURL,
         )
 
-        return favoriteNewsStorage.addNews(newsEntity)
+        return@wrapSQLiteException favoriteNewsStorage.addNews(newsEntity)
     }
 
-    override fun getFavoriteNews(): Flow<List<NewsModel>> {
+    override suspend fun getFavoriteNews(): Flow<List<NewsModel>> = wrapSQLiteException(ioDispatcher.value) {
         val result = favoriteNewsStorage.getNews()
 
-        return result.map {
+        return@wrapSQLiteException result.map {
             val list = mutableListOf<NewsModel>()
             if (it.isNotEmpty()) {
                 it.forEach {item ->  list.add(item.toFavoriteNewsModel())}
@@ -36,7 +40,7 @@ class FavoriteNewsRepositoryImpl(private val favoriteNewsStorage: IFavoriteNewsS
         }
     }
 
-    override suspend fun deleteFavoriteNews(key: NewsModel): Boolean {
-        return favoriteNewsStorage.deleteNews(key.hashCode())
+    override suspend fun deleteFavoriteNews(key: NewsModel): Boolean = wrapSQLiteException(ioDispatcher.value) {
+        return@wrapSQLiteException favoriteNewsStorage.deleteNews(key.hashCode())
     }
 }

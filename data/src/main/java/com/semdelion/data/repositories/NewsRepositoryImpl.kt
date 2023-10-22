@@ -12,12 +12,15 @@ import com.semdelion.domain.repositories.news.models.NewsPageModel
 import com.semdelion.domain.repositories.news.INewsRepository
 import retrofit2.awaitResponse
 
-class NewsRepositoryImpl(apiClient: ApiClient, dispatcher: IoDispatcher) : BaseService(apiClient, dispatcher), INewsRepository {
+class NewsRepositoryImpl(
+    apiClient: ApiClient,
+    private val dispatcher: IoDispatcher
+) : BaseService(apiClient), INewsRepository {
 
     private val _newsService = apiClient.createService(INewsServices::class.java)
 
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
-    override suspend fun getNews(page: String?): NewsPageModel = wrapRetrofitExceptions {
+    override suspend fun getNews(page: String?): NewsPageModel = wrapRetrofitExceptions(dispatcher.value) {
         val response = _newsService.getNewsAsync(page).awaitResponse()
 
         val newsModel = response.body()?.results ?: mutableListOf()

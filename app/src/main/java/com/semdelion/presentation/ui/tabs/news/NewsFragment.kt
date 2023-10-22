@@ -1,6 +1,7 @@
 package com.semdelion.presentation.ui.tabs.news
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -68,10 +69,11 @@ class NewsFragment : BaseFragment() {
                 super.onScrolled(recyclerView, dx, dy)
                 val linearLayoutManager = recyclerView.layoutManager as LinearLayoutManager?
                 val size = viewModel.items.value?.size ?: 0
-                if (!viewModel.isLoading && size > 0) {
+                if (!viewModel.isLoading && size > 0 && dy > 0) {
                     linearLayoutManager?.let {
-                        if (it.findLastCompletelyVisibleItemPosition() > (size - 3))
+                        if (it.findLastCompletelyVisibleItemPosition() > (size - 3)) {
                             viewModel.loadNextPage()
+                        }
                     }
                 }
             }
