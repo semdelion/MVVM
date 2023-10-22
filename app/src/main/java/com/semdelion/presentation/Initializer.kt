@@ -53,7 +53,7 @@ object Initializer {
         val ioWorkerDispatcher = WorkerDispatcher(Dispatchers.Default)
         val appSettings = SharedPreferencesAppSettings(applicationContext)
         val accountsRepository = AccountsRepositoryImpl(accountsStorage = Storages.accountsStorage, appSettings = appSettings, ioDispatcher = ioDispatcher)
-        val getNewsUseCase = GetNewsUseCase(newsRepository = NewsRepositoryImpl(apiClient))
+        val getNewsUseCase = GetNewsUseCase(newsRepository = NewsRepositoryImpl(apiClient, ioDispatcher))
         val getFavoriteNewsUseCase = GetFavoriteNewsUseCase(favoriteNews = FavoriteNewsRepositoryImpl(Storages.favoriteNewsStorage))
         val saveNewsUseCase = SaveNewsUseCase(favoriteNews = FavoriteNewsRepositoryImpl(Storages.favoriteNewsStorage))
         val deleteNewsUseCase = DeleteNewsUseCase(favoriteNews = FavoriteNewsRepositoryImpl(Storages.favoriteNewsStorage))
