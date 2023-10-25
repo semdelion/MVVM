@@ -16,9 +16,12 @@ import com.semdelion.presentation.core.utils.requireValue
 import com.semdelion.presentation.core.utils.toLiveData
 
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SignInViewModel(
+@HiltViewModel
+class SignInViewModel @Inject constructor(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator,
     private val resources: Resources,

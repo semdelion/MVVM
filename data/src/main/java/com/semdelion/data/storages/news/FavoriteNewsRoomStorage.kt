@@ -4,8 +4,10 @@ import com.semdelion.data.storages.news.entities.FavoriteNewsEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RoomFavoriteNewsStorage(private val favoriteNewsDao: FavoriteNewsDao): IFavoriteNewsStorage {
+
+class FavoriteNewsRoomStorage @Inject constructor(private val favoriteNewsDao: FavoriteNewsDao): IFavoriteNewsStorage {
     override fun getNews(): Flow<List<FavoriteNewsEntity>> {
         return favoriteNewsDao.getFavoriteNews()
     }

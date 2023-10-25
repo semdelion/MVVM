@@ -7,13 +7,16 @@ import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel
 import com.semdelion.presentation.core.viewmodels.ListViewState
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
-class FavoriteNewsViewModel(
+@HiltViewModel
+class FavoriteNewsViewModel @Inject constructor(
     private val getFavoriteNewsUseCase: GetFavoriteNewsUseCase,
     private val navigationService: Navigator,
 ) : BaseListViewModel() {

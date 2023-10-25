@@ -5,15 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentBoxBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class BoxFragment : BaseFragment() {
 
-    override val viewModel by viewModel<BoxViewModel>()
+    override val viewModel by viewModels<BoxViewModel>()
     private lateinit var binding: FragmentBoxBinding
 
     private val args: BoxFragmentArgs by navArgs()

@@ -8,14 +8,18 @@ import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseListViewModel
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsViewModel(
+@HiltViewModel
+class NewsViewModel @Inject constructor(
     private val getNewsUseCase: GetNewsUseCase,
     private val navigationService: Navigator
     ) : BaseListViewModel() {
+
     private val _items = MutableLiveData<MutableList<NewsModel>>()
     val items = _items.toLiveData()
 

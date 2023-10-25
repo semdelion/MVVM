@@ -9,8 +9,10 @@ import com.semdelion.domain.repositories.accounts.models.SignUpData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.lang.Exception
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AccountRoomStorage(
+class AccountRoomStorage @Inject constructor(
     private val accountsDao: AccountsDao):
     IAccountsStorage {
 

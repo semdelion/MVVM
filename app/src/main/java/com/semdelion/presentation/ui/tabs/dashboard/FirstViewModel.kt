@@ -13,12 +13,15 @@ import com.semdelion.presentation.core.sideeffects.permissions.plugin.Permission
 import com.semdelion.presentation.core.sideeffects.resources.Resources
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FirstViewModel(
+@HiltViewModel
+class FirstViewModel @Inject constructor(
     private val navigationService: Navigator,
     private val toasts: Toasts,
     private val resources: Resources,

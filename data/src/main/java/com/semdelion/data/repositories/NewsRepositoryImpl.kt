@@ -11,8 +11,11 @@ import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.repositories.news.models.NewsPageModel
 import com.semdelion.domain.repositories.news.INewsRepository
 import retrofit2.awaitResponse
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class NewsRepositoryImpl(
+@Singleton
+class NewsRepositoryImpl @Inject constructor(
     apiClient: ApiClient,
     private val dispatcher: IoDispatcher
 ) : BaseService(apiClient), INewsRepository {

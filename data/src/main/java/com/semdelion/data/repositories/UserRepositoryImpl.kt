@@ -5,8 +5,13 @@ import com.semdelion.data.storages.user.UserDataModel
 import com.semdelion.data.storages.user.toUserModel
 import com.semdelion.domain.repositories.user.models.UserModel
 import com.semdelion.domain.repositories.user.IUserRepository
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class UserRepositoryImpl(private val userStorage: IUserStorage) : IUserRepository {
+@Singleton
+class UserRepositoryImpl @Inject constructor (
+    private val userStorage: IUserStorage
+    ) : IUserRepository {
 
     override fun saveUser(userModel: UserModel): Boolean {
         val userDataModel = UserDataModel(

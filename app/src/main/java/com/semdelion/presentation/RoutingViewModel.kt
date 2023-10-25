@@ -5,9 +5,12 @@ import com.semdelion.presentation.core.utils.LiveEvent
 import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RoutingViewModel(
+@HiltViewModel
+class RoutingViewModel @Inject constructor(
     private val accountsRepository: IAccountsRepository
 ) : BaseViewModel() {
 

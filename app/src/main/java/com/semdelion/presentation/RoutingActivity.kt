@@ -2,18 +2,20 @@ package com.semdelion.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseActivity
 import com.semdelion.presentation.core.views.factories.viewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RoutingActivity  : BaseActivity() {
 
-    private val viewModel by viewModel<RoutingViewModel>()
+    private val viewModel by viewModels<RoutingViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Initializer.initDependencies()
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         splashScreen.setKeepOnScreenCondition { true }

@@ -16,8 +16,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class AccountsRepositoryImpl(
+@Singleton
+class AccountsRepositoryImpl @Inject constructor(
     private val accountsStorage: IAccountsStorage,
     private val appSettings: AppSettings,
     private val ioDispatcher: IoDispatcher

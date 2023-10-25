@@ -6,11 +6,14 @@ import com.semdelion.domain.repositories.message.IMessageRepository
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SecondViewModel(
+@HiltViewModel
+class SecondViewModel @Inject constructor(
     private val navigationService: Navigator,
     private val toasts: Toasts,
     private val messageRepository: IMessageRepository,

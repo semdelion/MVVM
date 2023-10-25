@@ -8,8 +8,11 @@ import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.repositories.news.IFavoriteNewsRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FavoriteNewsRepositoryImpl(
+@Singleton
+class FavoriteNewsRepositoryImpl @Inject constructor(
     private val favoriteNewsStorage: IFavoriteNewsStorage,
     private val ioDispatcher: IoDispatcher
     ) : BaseRoomStorages(), IFavoriteNewsRepository {

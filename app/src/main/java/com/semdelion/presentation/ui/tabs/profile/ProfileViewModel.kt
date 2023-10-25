@@ -12,9 +12,12 @@ import com.semdelion.presentation.core.utils.toLiveData
 
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import com.semdelion.presentation.ui.tabs.TabsFragmentDirections
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProfileViewModel(
+@HiltViewModel
+class ProfileViewModel  @Inject constructor(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator
 ) : BaseViewModel() {

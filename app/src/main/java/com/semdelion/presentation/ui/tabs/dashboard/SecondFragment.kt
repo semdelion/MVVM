@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -14,11 +15,13 @@ import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.utils.HasScreenTitle
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentSecondBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SecondFragment : BaseFragment(), HasScreenTitle {
 
-    override val viewModel by viewModel<SecondViewModel>()
+    override val viewModel by viewModels<SecondViewModel>()
 
     private lateinit var binding: FragmentSecondBinding
 

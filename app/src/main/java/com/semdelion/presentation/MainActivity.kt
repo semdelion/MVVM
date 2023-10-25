@@ -1,8 +1,11 @@
 package com.semdelion.presentation
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navArgs
+import com.semdelion.data.storages.account.AppSettings
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogsPlugin
 import com.semdelion.presentation.core.sideeffects.intents.plugin.IntentsPlugin
@@ -14,12 +17,15 @@ import com.semdelion.presentation.core.sideeffects.toasts.plugin.ToastsPlugin
 import com.semdelion.presentation.core.views.BaseActivity
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
 
     private val args: MainActivityArgs by navArgs()
 
-    private val viewModel by viewModel<MainActivityViewModel>()
+    private val viewModel by viewModels<MainActivityViewModel>()
 
     override fun registerPlugins(manager: SideEffectPluginsManager) = with(manager) {
         register(ToastsPlugin())
@@ -31,7 +37,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Initializer.initDependencies()
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.toolbar)

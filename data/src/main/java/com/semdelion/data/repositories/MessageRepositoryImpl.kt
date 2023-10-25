@@ -8,8 +8,11 @@ import com.semdelion.domain.repositories.message.models.Message
 import com.semdelion.domain.repositories.message.IMessageRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MessageRepositoryImpl(
+@Singleton
+class MessageRepositoryImpl @Inject constructor(
     private val messageStorage: IMessageStorage,
     private val ioDispatcher: IoDispatcher
 ) : IMessageRepository {

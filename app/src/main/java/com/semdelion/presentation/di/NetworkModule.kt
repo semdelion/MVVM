@@ -1,19 +1,27 @@
-package com.semdelion.data.services
+package com.semdelion.presentation.di
 
 import android.content.Context
 import com.semdelion.data.core.services.client.ApiClient
 import com.semdelion.data.core.services.client.intercepters.LoggingInterceptor
 import com.semdelion.data.core.services.client.intercepters.NetworkConnectionInterceptor
 import com.semdelion.data.core.services.client.intercepters.NewsAuthInterceptor
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
-object Services {
-    private lateinit var applicationContext: Context
+@Module
+@InstallIn(SingletonComponent::class)
+class NetworkModule {
 
-    private lateinit var baseUrl: String
+    @Provides
+    @Singleton
+    fun provideAppClient(@ApplicationContext context: Context) : ApiClient {
 
-    val httpClient: ApiClient by lazy {
         val okHttpClient = OkHttpClient()
             .newBuilder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -22,14 +30,8 @@ object Services {
 
         okHttpClient.addInterceptor(LoggingInterceptor.defaultInterceptor())
         okHttpClient.addInterceptor(NewsAuthInterceptor())
-        okHttpClient.addInterceptor(NetworkConnectionInterceptor(applicationContext))
+        okHttpClient.addInterceptor(NetworkConnectionInterceptor(context))
 
-
-        ApiClient(baseUrl, okHttpClient)
-    }
-
-    fun init(context: Context, baseUrl: String = "https://newsdata.io/api/") {
-        this.baseUrl = baseUrl
-        applicationContext = context
+        return ApiClient("https://newsdata.io/api/", okHttpClient)
     }
 }

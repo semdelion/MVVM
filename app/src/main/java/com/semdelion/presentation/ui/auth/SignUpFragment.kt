@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import com.semdelion.domain.repositories.accounts.models.SignUpData
@@ -14,12 +15,14 @@ import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentSignUpBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSignUpBinding
 
-    override val viewModel by viewModel<SignUpViewModel>()
+    override val viewModel by viewModels<SignUpViewModel>()
 
     private val args by navArgs<SignUpFragmentArgs>()
 

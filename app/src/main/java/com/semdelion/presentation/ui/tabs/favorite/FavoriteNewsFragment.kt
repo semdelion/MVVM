@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -19,10 +20,12 @@ import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentFavoriteNewsBinding
 import com.semdelion.presentation.core.viewmodels.ListViewState
 import com.semdelion.presentation.ui.tabs.favorite.adapters.FavoriteNewsRecyclerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteNewsFragment : BaseFragment() {
 
-    override val viewModel by viewModel<FavoriteNewsViewModel>()
+    override val viewModel by viewModels<FavoriteNewsViewModel>()
     private lateinit var binding: FragmentFavoriteNewsBinding
 
     override fun onCreateView(

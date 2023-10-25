@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -17,10 +18,12 @@ import com.semdelion.presentation.core.views.BaseFragment
 import kotlinx.coroutines.launch
 import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentNewsDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsDetailsFragment : BaseFragment(), MenuProvider {
 
-    override val viewModel by viewModel<NewsDetailsViewModel>()
+    override val viewModel by viewModels<NewsDetailsViewModel>()
     private lateinit var binding: FragmentNewsDetailsBinding
     private val args: NewsDetailsFragmentArgs by navArgs()
 

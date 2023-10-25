@@ -4,8 +4,11 @@ import com.semdelion.presentation.core.sideeffects.navigator.utils.NavCommandDir
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RootViewModel(
+@HiltViewModel
+class RootViewModel @Inject constructor(
     private val navigationService: Navigator,
     private val toasts: Toasts
 ) : BaseViewModel() {

@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,11 +22,13 @@ import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentFavoriteNewsDetailsBinding
 import androidx.navigation.fragment.navArgs
 import com.semdelion.presentation.ui.tabs.news.NewsDetailsFragmentArgs
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteNewsDetailsFragment : BaseFragment(), MenuProvider {
 
     //TODO https://stackoverflow.com/questions/67350331/how-to-use-hilt-to-inject-a-safe-args-argument-into-a-viewmodel
-    override val viewModel by viewModel<FavoriteNewsDetailsViewModel>()
+    override val viewModel by viewModels<FavoriteNewsDetailsViewModel>()
     private lateinit var binding: FragmentFavoriteNewsDetailsBinding
     private val args: FavoriteNewsDetailsFragmentArgs by navArgs()
 

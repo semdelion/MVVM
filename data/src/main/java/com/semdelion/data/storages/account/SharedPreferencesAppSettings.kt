@@ -2,9 +2,11 @@ package com.semdelion.data.storages.account
 
 import android.content.Context
 import com.semdelion.data.storages.account.AppSettings.Companion.NO_ACCOUNT_ID
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class SharedPreferencesAppSettings(
-    appContext: Context
+class SharedPreferencesAppSettings @Inject constructor(
+    @ApplicationContext appContext: Context
 ) : AppSettings {
 
     private val sharedPreferences = appContext.getSharedPreferences("settings", Context.MODE_PRIVATE)

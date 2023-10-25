@@ -12,11 +12,14 @@ import com.semdelion.presentation.core.utils.MutableLiveEvent
 import com.semdelion.presentation.core.utils.publishEvent
 import com.semdelion.presentation.core.utils.toLiveData
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class EditProfileViewModel(
+@HiltViewModel
+class EditProfileViewModel @Inject constructor(
     private val accountsRepository: IAccountsRepository,
     private val navigationService: Navigator,
     private val toasts: Toasts,

@@ -6,12 +6,15 @@ import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import com.semdelion.presentation.ui.tabs.news.navigation.NewsNavigationArg
 import com.semdelion.presentation.ui.tabs.news.navigation.toNewsModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsDetailsViewModel(
+@HiltViewModel
+class NewsDetailsViewModel @Inject constructor(
     private val saveNewsUseCase: SaveNewsUseCase,
     val toasts: Toasts,
     savedStateHandle: SavedStateHandle

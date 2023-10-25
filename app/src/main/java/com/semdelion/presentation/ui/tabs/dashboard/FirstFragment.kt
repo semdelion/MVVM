@@ -8,17 +8,20 @@ import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.utils.HasScreenTitle
 import com.semdelion.presentation.core.views.factories.viewModel
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.semdelion.presentation.databinding.FragmentFirstBinding
 import com.semdelion.presentation.core.views.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class FirstFragment : BaseFragment(), HasScreenTitle {
 
-    override val viewModel by viewModel<FirstViewModel>()
+    override val viewModel by viewModels<FirstViewModel>()
     private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(
