@@ -5,11 +5,12 @@ import android.widget.Toast
 import com.semdelion.presentation.core.sideeffects.SideEffectMediator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.utils.dispatchers.MainThreadDispatcher
+import javax.inject.Inject
 
 /**
  * Android implementation of [Toasts]. Displaying simple toast message and getting string from resources.
  */
-class ToastsSideEffectMediator(
+class ToastsSideEffectMediator @Inject constructor (
     private val appContext: Context
 ) : SideEffectMediator<Nothing>(), Toasts {
 

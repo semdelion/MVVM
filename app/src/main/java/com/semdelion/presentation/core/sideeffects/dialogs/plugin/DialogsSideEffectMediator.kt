@@ -6,8 +6,9 @@ import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.utils.callback.Emitter
 import com.semdelion.presentation.core.utils.toEmitter
 import kotlinx.coroutines.suspendCancellableCoroutine
+import javax.inject.Inject
 
-class DialogsSideEffectMediator : SideEffectMediator<DialogsSideEffectImpl>(), Dialogs {
+class DialogsSideEffectMediator  @Inject constructor() : SideEffectMediator<DialogsSideEffectImpl>(), Dialogs {
 
     var retainedState = RetainedState()
 

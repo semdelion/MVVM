@@ -10,6 +10,7 @@ import com.semdelion.presentation.core.sideeffects.SideEffectPlugin
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.utils.viewModelCreator
 import com.semdelion.presentation.core.viewmodels.BaseActivityViewModel
+import java.lang.Exception
 
 /**
  * Delegate that manages side-effect plugins and contains common logic.
@@ -134,6 +135,9 @@ class ActivityDelegate(
     }
 
     private fun setupSideEffectImplementer(plugin: SideEffectPlugin<*, *>) {
-        implementersHolder.putWithPlugin(plugin, activityViewModel.sideEffectMediatorsHolder, activity)
+        try {
+            implementersHolder.putWithPlugin(plugin, activityViewModel.sideEffectMediatorsHolder, activity)
+        } catch (ex: Exception) {}
+
     }
 }

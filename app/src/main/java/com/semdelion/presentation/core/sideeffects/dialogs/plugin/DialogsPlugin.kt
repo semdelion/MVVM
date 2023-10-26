@@ -9,8 +9,12 @@ class DialogsPlugin : SideEffectPlugin<DialogsSideEffectMediator, DialogsSideEff
     override val mediatorClass: Class<DialogsSideEffectMediator>
         get() = DialogsSideEffectMediator::class.java
 
+    private var current: SideEffectMediator<DialogsSideEffectImpl>? = null
+
     override fun createMediator(applicationContext: Context): SideEffectMediator<DialogsSideEffectImpl> {
-        return DialogsSideEffectMediator()
+        if(current == null)
+            current = DialogsSideEffectMediator()
+        return current!!
     }
 
     override fun createImplementation(mediator: DialogsSideEffectMediator): DialogsSideEffectImpl {

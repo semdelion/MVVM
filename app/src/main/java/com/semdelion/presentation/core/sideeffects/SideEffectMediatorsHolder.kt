@@ -5,8 +5,9 @@ import android.content.Context
 /**
  * Container for [SideEffectMediator] instances. This holder lives in [ActivityScopeViewModel].
  */
+
 @Suppress("UNCHECKED_CAST")
-class SideEffectMediatorsHolder {
+class SideEffectMediatorsHolder{
 
     private val _mediators = mutableMapOf<Class<*>, SideEffectMediator<*>>()
     val mediators: List<SideEffectMediator<*>>
@@ -22,6 +23,7 @@ class SideEffectMediatorsHolder {
     /**
      * Create and store [SideEffectMediator] by using the specified [SideEffectPlugin].
      */
+
     fun <Mediator, Implementation> putWithPlugin(
         applicationContext: Context,
         plugin: SideEffectPlugin<Mediator, Implementation>

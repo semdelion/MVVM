@@ -35,6 +35,7 @@ class SideEffectMediatorModule {
     @Singleton
     fun provideToastsPluginMediator(@ApplicationContext context: Context, toastsPlugin: ToastsPlugin): Toasts {
         return  toastsPlugin.createMediator(context) as ToastsSideEffectMediator
+
     }
 
     @Provides

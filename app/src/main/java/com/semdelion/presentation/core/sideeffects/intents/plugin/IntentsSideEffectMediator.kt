@@ -7,8 +7,9 @@ import android.net.Uri
 import android.provider.Settings
 import com.semdelion.presentation.core.sideeffects.SideEffectMediator
 import com.semdelion.presentation.core.sideeffects.intents.Intents
+import javax.inject.Inject
 
-class IntentsSideEffectMediator(
+class IntentsSideEffectMediator @Inject constructor (
     private val appContext: Context
 ) : SideEffectMediator<Nothing>(), Intents {
 

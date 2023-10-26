@@ -3,6 +3,7 @@ package com.semdelion.presentation.core.sideeffects.permissions.plugin
 import android.content.Context
 import com.semdelion.presentation.core.sideeffects.SideEffectMediator
 import com.semdelion.presentation.core.sideeffects.SideEffectPlugin
+import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogsSideEffectMediator
 
 /**
  * Plugin for managing permissions from view-models.
@@ -14,8 +15,12 @@ class PermissionsPlugin :
     override val mediatorClass: Class<PermissionsSideEffectMediator>
         get() = PermissionsSideEffectMediator::class.java
 
+    private var current: SideEffectMediator<PermissionsSideEffectImpl>? = null
+
     override fun createMediator(applicationContext: Context): SideEffectMediator<PermissionsSideEffectImpl> {
-        return PermissionsSideEffectMediator(applicationContext)
+        if(current == null)
+            current = PermissionsSideEffectMediator(applicationContext)
+        return current!!
     }
 
     override fun createImplementation(mediator: PermissionsSideEffectMediator): PermissionsSideEffectImpl {
