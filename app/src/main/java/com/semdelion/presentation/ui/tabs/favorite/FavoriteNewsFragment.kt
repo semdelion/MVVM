@@ -16,7 +16,6 @@ import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentFavoriteNewsBinding
 import com.semdelion.presentation.core.viewmodels.ListViewState
 import com.semdelion.presentation.ui.tabs.favorite.adapters.FavoriteNewsRecyclerAdapter

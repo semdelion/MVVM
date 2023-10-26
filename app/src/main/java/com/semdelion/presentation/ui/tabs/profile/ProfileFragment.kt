@@ -11,7 +11,6 @@ import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import java.text.SimpleDateFormat
 import java.util.Date
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -50,7 +49,4 @@ class ProfileFragment : BaseFragment() {
                 formatter.format(Date(it.createdAt))
         }
     }
-
-
-
 }

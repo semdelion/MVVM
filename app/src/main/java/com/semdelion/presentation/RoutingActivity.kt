@@ -7,7 +7,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseActivity
-import com.semdelion.presentation.core.views.factories.viewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

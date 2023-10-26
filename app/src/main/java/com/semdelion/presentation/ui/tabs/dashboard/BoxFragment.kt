@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentBoxBinding
 import dagger.hilt.android.AndroidEntryPoint
 

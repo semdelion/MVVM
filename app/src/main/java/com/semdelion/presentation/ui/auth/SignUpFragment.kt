@@ -13,7 +13,6 @@ import com.semdelion.domain.repositories.accounts.models.SignUpData
 
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentSignUpBinding
 import dagger.hilt.android.AndroidEntryPoint
 

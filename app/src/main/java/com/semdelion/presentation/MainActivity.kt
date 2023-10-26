@@ -15,7 +15,6 @@ import com.semdelion.presentation.core.sideeffects.permissions.plugin.Permission
 import com.semdelion.presentation.core.sideeffects.resources.plugin.ResourcesPlugin
 import com.semdelion.presentation.core.sideeffects.toasts.plugin.ToastsPlugin
 import com.semdelion.presentation.core.views.BaseActivity
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,13 +26,27 @@ class MainActivity : BaseActivity() {
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
+    @Inject
+    lateinit var toastsPlugin: ToastsPlugin
+    @Inject
+    lateinit var resourcesPlugin: ResourcesPlugin
+    @Inject
+    lateinit var navigatorPlugin: NavigatorPlugin
+    @Inject
+    lateinit var permissionsPlugin: PermissionsPlugin
+    @Inject
+    lateinit var dialogsPlugin: DialogsPlugin
+    @Inject
+    lateinit var intentsPlugin: IntentsPlugin
+
+
     override fun registerPlugins(manager: SideEffectPluginsManager) = with(manager) {
-        register(ToastsPlugin())
-        register(ResourcesPlugin())
-        register(NavigatorPlugin(createNavigator()))
-        register(PermissionsPlugin())
-        register(DialogsPlugin())
-        register(IntentsPlugin())
+        register(toastsPlugin)
+        register(resourcesPlugin)
+        register(navigatorPlugin)
+        register(permissionsPlugin)
+        register(dialogsPlugin)
+        register(intentsPlugin)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,9 +71,4 @@ class MainActivity : BaseActivity() {
         )
         navController.graph = graph
     }
-
-    private fun createNavigator() = StackFragmentNavigator(
-        containersId = setOf(R.id.fragment_container, R.id.tabs_fragment_container),
-        topLevelDestinationsId = setOf(R.id.tabsFragment, R.id.signInFragment),
-    )
 }

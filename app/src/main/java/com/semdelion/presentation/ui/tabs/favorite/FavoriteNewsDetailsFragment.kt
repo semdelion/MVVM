@@ -18,10 +18,7 @@ import com.bumptech.glide.Glide
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import kotlinx.coroutines.launch
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentFavoriteNewsDetailsBinding
-import androidx.navigation.fragment.navArgs
-import com.semdelion.presentation.ui.tabs.news.NewsDetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

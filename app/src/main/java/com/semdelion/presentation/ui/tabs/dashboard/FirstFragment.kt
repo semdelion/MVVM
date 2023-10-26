@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.utils.HasScreenTitle
-import com.semdelion.presentation.core.views.factories.viewModel
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle

@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.utils.observeEvent
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
