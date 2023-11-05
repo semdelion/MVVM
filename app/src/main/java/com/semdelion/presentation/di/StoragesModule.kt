@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.semdelion.data.storages.AppDatabase
 import com.semdelion.data.storages.account.AccountRoomStorage
+import com.semdelion.data.storages.account.AppSettings
 import com.semdelion.data.storages.account.IAccountsStorage
+import com.semdelion.data.storages.account.SharedPrefAppSettings
 import com.semdelion.data.storages.message.IMessageStorage
 import com.semdelion.data.storages.message.SharedPrefMessageStorage
-import com.semdelion.data.storages.news.FavoriteNewsDao
 import com.semdelion.data.storages.news.FavoriteNewsRoomStorage
 import com.semdelion.data.storages.news.IFavoriteNewsStorage
 import dagger.Binds
@@ -46,6 +47,11 @@ class StoragesModule {
         return SharedPrefMessageStorage(applicationContext)
     }
 
+    @Provides
+    @Singleton
+    fun providesAppSettings(@ApplicationContext applicationContext: Context): AppSettings {
+        return SharedPrefAppSettings(applicationContext)
+    }
 
     @Module
     @InstallIn(SingletonComponent::class)

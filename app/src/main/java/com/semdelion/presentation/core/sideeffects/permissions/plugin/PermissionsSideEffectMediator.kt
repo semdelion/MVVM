@@ -9,9 +9,8 @@ import com.semdelion.presentation.core.sideeffects.permissions.Permissions
 import com.semdelion.presentation.core.utils.callback.Emitter
 import com.semdelion.presentation.core.utils.toEmitter
 import kotlinx.coroutines.suspendCancellableCoroutine
-import javax.inject.Inject
 
-class PermissionsSideEffectMediator  @Inject constructor (
+class PermissionsSideEffectMediator(
     private val appContext: Context
 ) : SideEffectMediator<PermissionsSideEffectImpl>(), Permissions {
 

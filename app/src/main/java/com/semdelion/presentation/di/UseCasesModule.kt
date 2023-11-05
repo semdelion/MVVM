@@ -6,39 +6,32 @@ import com.semdelion.domain.usecases.news.DeleteNewsUseCase
 import com.semdelion.domain.usecases.news.GetFavoriteNewsUseCase
 import com.semdelion.domain.usecases.news.GetNewsUseCase
 import com.semdelion.domain.usecases.news.SaveNewsUseCase
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class UseCasesModule {
 
     @Provides
-    @Singleton
-    fun bindsNewsUseCase(newsRepository: INewsRepository): GetNewsUseCase {
+    fun providesNewsUseCase(newsRepository: INewsRepository): GetNewsUseCase {
         return GetNewsUseCase(newsRepository)
     }
 
     @Provides
-    @Singleton
-    fun bindsFavoriteNewsUseCase(favoriteNews: IFavoriteNewsRepository): GetFavoriteNewsUseCase {
+    fun providesFavoriteNewsUseCase(favoriteNews: IFavoriteNewsRepository): GetFavoriteNewsUseCase {
         return GetFavoriteNewsUseCase(favoriteNews)
     }
 
     @Provides
-    @Singleton
-    fun bindsSaveNewsUseCase(favoriteNews: IFavoriteNewsRepository): SaveNewsUseCase {
+    fun providesSaveNewsUseCase(favoriteNews: IFavoriteNewsRepository): SaveNewsUseCase {
         return SaveNewsUseCase(favoriteNews)
     }
 
     @Provides
-    @Singleton
-    fun bindsDeleteNewsUseCase(favoriteNews: IFavoriteNewsRepository): DeleteNewsUseCase {
+    fun providesDeleteNewsUseCase(favoriteNews: IFavoriteNewsRepository): DeleteNewsUseCase {
         return DeleteNewsUseCase(favoriteNews)
     }
 }

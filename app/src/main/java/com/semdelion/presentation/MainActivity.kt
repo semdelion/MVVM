@@ -1,11 +1,9 @@
 package com.semdelion.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navArgs
-import com.semdelion.data.storages.account.AppSettings
 import com.semdelion.presentation.core.sideeffects.SideEffectPluginsManager
 import com.semdelion.presentation.core.sideeffects.dialogs.plugin.DialogsPlugin
 import com.semdelion.presentation.core.sideeffects.intents.plugin.IntentsPlugin
@@ -17,7 +15,6 @@ import com.semdelion.presentation.core.sideeffects.toasts.plugin.ToastsPlugin
 import com.semdelion.presentation.core.views.BaseActivity
 import com.semdelion.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -26,32 +23,23 @@ class MainActivity : BaseActivity() {
 
     private val viewModel by viewModels<MainActivityViewModel>()
 
-    @Inject
-    lateinit var toastsPlugin: ToastsPlugin
-    @Inject
-    lateinit var resourcesPlugin: ResourcesPlugin
-    @Inject
-    lateinit var navigatorPlugin: NavigatorPlugin
-    @Inject
-    lateinit var permissionsPlugin: PermissionsPlugin
-    @Inject
-    lateinit var dialogsPlugin: DialogsPlugin
-    @Inject
-    lateinit var intentsPlugin: IntentsPlugin
-
+    private fun createNavigator(): StackFragmentNavigator = StackFragmentNavigator(
+        containersId = setOf(R.id.fragment_container, R.id.tabs_fragment_container),
+        topLevelDestinationsId = setOf(R.id.tabsFragment, R.id.signInFragment))
 
     override fun registerPlugins(manager: SideEffectPluginsManager) = with(manager) {
-        register(toastsPlugin)
-        register(resourcesPlugin)
-        register(navigatorPlugin)
-        register(permissionsPlugin)
-        register(dialogsPlugin)
-        register(intentsPlugin)
+        register(ToastsPlugin())
+        register(ResourcesPlugin())
+        register(NavigatorPlugin(createNavigator()))
+        register(PermissionsPlugin())
+        register(DialogsPlugin())
+        register(IntentsPlugin())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
+
         setSupportActionBar(binding.toolbar)
         setStartDestinationForNavController()
     }

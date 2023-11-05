@@ -12,10 +12,6 @@ class SideEffectImplementationsHolder {
         return _implementations[plugin.mediatorClass] as Implementation?
     }
 
-
-
-
-
     fun <Mediator, Implementation> putWithPlugin(
         plugin: SideEffectPlugin<Mediator, Implementation>,
         sideEffectMediatorsHolder: SideEffectMediatorsHolder,

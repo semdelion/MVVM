@@ -5,7 +5,7 @@ import com.semdelion.data.storages.account.AppSettings.Companion.NO_ACCOUNT_ID
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class SharedPreferencesAppSettings @Inject constructor(
+class SharedPrefAppSettings @Inject constructor(
     @ApplicationContext appContext: Context
 ) : AppSettings {
 

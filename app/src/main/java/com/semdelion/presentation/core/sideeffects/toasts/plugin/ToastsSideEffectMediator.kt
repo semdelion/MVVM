@@ -10,7 +10,7 @@ import javax.inject.Inject
 /**
  * Android implementation of [Toasts]. Displaying simple toast message and getting string from resources.
  */
-class ToastsSideEffectMediator @Inject constructor (
+class ToastsSideEffectMediator(
     private val appContext: Context
 ) : SideEffectMediator<Nothing>(), Toasts {
 
@@ -21,5 +21,4 @@ class ToastsSideEffectMediator @Inject constructor (
             Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show()
         }
     }
-
 }
