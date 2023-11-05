@@ -19,110 +19,122 @@
             android:layout_height="wrap_content"
             android:paddingTop="12dp">
 
-            <TextView
-                android:id="@+id/screenTitleTextView"
-                style="@style/TitleTextView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/user_avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 app:layout_constraintBottom_toTopOf="@id/dataContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                android:text="@string/profile_title_hint"/>
+                app:cardBackgroundColor="#cccccc"
+                app:layout_constraintTop_toTopOf="parent"
+                app:cardCornerRadius="50dp"
+                tools:background="#cccccc">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_default_profile"/>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/dataContainer"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintTop_toBottomOf="@id/screenTitleTextView"
-                app:layout_constraintBottom_toTopOf="@id/editProfileButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <TextView
-                    android:id="@+id/emailHintTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/field_email"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <TextView
-                    android:id="@+id/usernameHintTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/field_username"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintTop_toBottomOf="@id/emailHintTextView"/>
-
-                <TextView
-                    android:id="@+id/createdAtHintTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/field_created_at"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintTop_toBottomOf="@id/usernameHintTextView"/>
-
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/startBarrier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="end"
-                    app:constraint_referenced_ids="emailHintTextView,usernameHintTextView,createdAtHintTextView"/>
-
-                <TextView
-                    android:id="@+id/emailTextView"
-                    style="@style/ProfileValueTextView"
-                    tools:text="test@test.test"
-                    app:layout_constraintStart_toStartOf="@id/startBarrier"
-                    app:layout_constraintTop_toTopOf="@id/emailHintTextView"/>
-
-                <TextView
-                    android:id="@+id/usernameTextView"
-                    style="@style/ProfileValueTextView"
-                    tools:text="admin"
-                    app:layout_constraintStart_toStartOf="@id/startBarrier"
-                    app:layout_constraintTop_toTopOf="@id/usernameHintTextView"/>
-
-                <TextView
-                    android:id="@+id/createdAtTextView"
-                    style="@style/ProfileValueTextView"
-                    tools:text="10/10/2010"
-                    app:layout_constraintStart_toStartOf="@id/startBarrier"
-                    app:layout_constraintTop_toTopOf="@id/createdAtHintTextView"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <Button
-                android:id="@+id/editProfileButton"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dataContainer"
+                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toTopOf="@id/logoutButton"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:text="@string/action_edit_profile"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/user_avatar">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ProfileTextInputLayout"
+                    android:id="@+id/usernameInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/field_username"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_text_edit"
+                    app:endIconTint="@color/primaryColor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/usernameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"
+                        tools:text="admin"
+                        android:lines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ProfileTextInputLayout"
+                    android:id="@+id/emailInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/field_email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/usernameInputLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/emailTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"
+                        tools:text="test@test.test"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/ProfileTextInputLayout"
+                    android:id="@+id/createdAtInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/field_created_at"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/emailInputLayout">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/createdAtTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
+                        android:inputType="textEmailAddress"
+                        android:enabled="false"
+                        tools:text="10/10/2010"
+                        android:lines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/logoutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="32dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editProfileButton"
+                app:layout_constraintTop_toBottomOf="@id/dataContainer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:text="@string/action_logout"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

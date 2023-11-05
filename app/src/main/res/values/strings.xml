@@ -27,7 +27,7 @@
 
     <string name="please_wait">Please wait…</string>
     <string name="edit_profile_description">Right now you can edit only username</string>
-    <string name="profile_title_hint">Let\'s imagine this is a user profile screen</string>
+    <string name="profile_title">Let\'s imagine this is a user profile screen</string>
     <string name="field_username">Username</string>
     <string name="action_save">Save</string>
     <string name="action_cancel">Cancel</string>

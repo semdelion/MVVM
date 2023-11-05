@@ -29,7 +29,6 @@ class ProfileFragment : BaseFragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        binding.editProfileButton.setOnClickListener { viewModel.toEditProfile() }
         binding.logoutButton.setOnClickListener { viewModel.logout() }
 
         observeAccountDetails()
@@ -41,12 +40,15 @@ class ProfileFragment : BaseFragment() {
         val formatter = SimpleDateFormat.getDateTimeInstance()
         viewModel.account.observe(viewLifecycleOwner) {
             if (it == null) return@observe
-            binding.emailTextView.text = it.email
-            binding.usernameTextView.text = it.username
-            binding.createdAtTextView.text = if (it.createdAt == Account.UNKNOWN_CREATED_AT)
+            binding.emailTextView.setText(it.email)
+            binding.usernameTextView.setText(it.username)
+            binding.createdAtTextView.setText(if (it.createdAt == Account.UNKNOWN_CREATED_AT)
                 getString(R.string.placeholder)
             else
-                formatter.format(Date(it.createdAt))
+                formatter.format(Date(it.createdAt)))
+            binding.usernameInputLayout.setEndIconOnClickListener { _ ->
+                viewModel.toEditProfile()
+            }
         }
     }
 }
