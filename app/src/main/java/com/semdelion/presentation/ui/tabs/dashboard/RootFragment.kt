@@ -38,6 +38,10 @@ class RootFragment : BaseFragment() {
             viewModel.toFirstFragment()
         }
 
+        binding.servicesButton.setOnClickListener {
+            viewModel.toServicesFragment()
+        }
+
         return binding.root
     }
 
