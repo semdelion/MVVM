@@ -23,6 +23,11 @@ class RootViewModel @Inject constructor(
         navigationService.launch(navCommand)
     }
 
+    fun toServicesFragment() {
+        val navCommand = NavCommandDirections(RootFragmentDirections.actionRootFragmentToServicesFragment())
+        navigationService.launch(navCommand)
+    }
+
     override fun onResult(result: Any) {
         super.onResult(result)
         if(result is Int) {

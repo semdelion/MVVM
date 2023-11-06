@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_rootFragment_to_firstFragment2"
             app:destination="@id/firstFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_servicesFragment"
+            app:destination="@id/servicesFragment" />
     </fragment>
     <fragment
         android:id="@+id/boxFragment"
@@ -55,4 +58,9 @@
             android:name="message"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="com.semdelion.presentation.ui.tabs.dashboard.services.ServicesFragment"
+        android:label="Services"
+        tools:layout="@layout/fragment_services" />
 </navigation>
