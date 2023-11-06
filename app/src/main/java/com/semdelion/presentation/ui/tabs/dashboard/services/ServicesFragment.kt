@@ -8,14 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentServicesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ServicesFragment : BaseFragment() {
     private lateinit var binding: FragmentServicesBinding
-    override val viewModel by viewModel<ServicesViewModel>()
+    override val viewModel by viewModels<ServicesViewModel>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
