@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Semdelion.SplashScreen"
         tools:targetApi="31" >
+        <service
+            android:exported="false"
+            android:name=".ui.tabs.dashboard.services.BackgroundServices"/>
+        <service
+            android:exported="false"
+            android:name=".ui.tabs.dashboard.services.ForegroundService"/>
         <activity
             android:name=".RoutingActivity"
             android:exported="true"
