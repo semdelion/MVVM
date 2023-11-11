@@ -4,6 +4,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import java.lang.Exception
 import java.util.concurrent.Executors
 
 
@@ -12,11 +15,32 @@ interface ProgressCallBack {
 }
 
 class FileUpLoader() {
-    fun upload(notify: ProgressCallBack) {
-        for (i in 1..100) {
-            notify.onProgress(i)
-            Thread.sleep(1000)
+
+    @Volatile
+    var isInterrupted = false
+
+    fun  upload(notify: ProgressCallBack)  {
+        Log.i("Semdelion", "File upload started")
+
+        try {
+            for (i in 1..100 ) {
+                if(isInterrupted)
+                    break
+                notify.onProgress(i)
+                Thread.sleep(100)
+            }
         }
+        catch (ex: InterruptedException) {
+            Log.e("InterruptedException", ex.message ?: "InterruptedException")
+        }
+        catch (ex: Exception) {
+            Log.e("Exception", ex.message ?: "Exception")
+        }
+    }
+
+    fun cancel() {
+        Log.i("Semdelion", "File upload canceled")
+        isInterrupted = true
     }
 }
 
@@ -43,7 +67,6 @@ class BackgroundServices: Service() {
             )
             stopSelf()
         }
-
 
         return START_NOT_STICKY
     }
