@@ -17,9 +17,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
@@ -28,8 +32,10 @@ import com.semdelion.presentation.databinding.FragmentServicesBinding
 import com.semdelion.presentation.ui.tabs.dashboard.services.BackgroundServices
 import com.semdelion.presentation.ui.tabs.dashboard.services.BoundService
 import com.semdelion.presentation.ui.tabs.dashboard.services.ForegroundService
+import com.semdelion.presentation.ui.tabs.dashboard.works.NotifyWorker
 import com.semdelion.presentation.ui.tabs.dashboard.works.UploadWorker
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class ServicesFragment : BaseFragment() {
     private lateinit var binding: FragmentServicesBinding
@@ -78,17 +84,33 @@ class ServicesFragment : BaseFragment() {
             }
         }
 
-
         binding.workButton.setOnClickListener {
-            var workRequest = OneTimeWorkRequest.from(UploadWorker::class.java)
+            val workRequest = OneTimeWorkRequest.from(UploadWorker::class.java)
+            val notifyRequest = OneTimeWorkRequestBuilder<NotifyWorker>()
+                .setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+            ).build()
 
-            WorkManager.getInstance(this.requireContext()).enqueueUniqueWork("doWork",
+           /* WorkManager.getInstance(this.requireContext()).enqueueUniqueWork("doWork",
+                ExistingWorkPolicy.REPLACE,
+                workRequest)*/
+
+            WorkManager.getInstance(this.requireContext()).beginUniqueWork("UploadWork",
                 ExistingWorkPolicy.REPLACE,
                 workRequest)
-
+                .then(notifyRequest)
+                .enqueue()
         }
 
-        ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.POST_NOTIFICATIONS), 0)
+        binding.periodicWorkButton.setOnClickListener {
+            val periodicWorkRequest = PeriodicWorkRequestBuilder<NotifyWorker>(15,TimeUnit.MINUTES).build()
+
+            WorkManager.getInstance(this.requireContext()).enqueueUniquePeriodicWork("NotifyPeriodicWork",
+                ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest)
+        }
+
         Intent(this.context, BoundService::class.java).also {
             requireActivity().bindService(it, connectivity, BIND_AUTO_CREATE)
         }

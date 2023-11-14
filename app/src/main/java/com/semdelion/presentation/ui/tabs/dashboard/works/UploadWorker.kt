@@ -12,7 +12,7 @@ class UploadWorker(context: Context, workerParams: WorkerParameters) : Worker(co
     private val fileUpLoader = FileUpLoader()
 
     override fun doWork(): Result {
-        Log.i("Semdelion", "doWork")
+        Log.i("Semdelion", "Upload doWork")
         fileUpLoader.upload(
             object : ProgressCallBack {
                 override fun onProgress(progress: Int) {
