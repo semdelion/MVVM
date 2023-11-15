@@ -4,45 +4,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import java.lang.Exception
+import com.semdelion.data.utils.FileUpLoader
 import java.util.concurrent.Executors
-
-
-interface ProgressCallBack {
-     fun onProgress(progress: Int)
-}
-
-class FileUpLoader() {
-
-    @Volatile
-    var isInterrupted = false
-
-    fun  upload(notify: ProgressCallBack)  {
-        Log.i("Semdelion", "File upload started")
-
-        try {
-            for (i in 1..100 ) {
-                if(isInterrupted)
-                    break
-                notify.onProgress(i)
-                Thread.sleep(100)
-            }
-        }
-        catch (ex: InterruptedException) {
-            Log.e("InterruptedException", ex.message ?: "InterruptedException")
-        }
-        catch (ex: Exception) {
-            Log.e("Exception", ex.message ?: "Exception")
-        }
-    }
-
-    fun cancel() {
-        Log.i("Semdelion", "File upload canceled")
-        isInterrupted = true
-    }
-}
 
 class BackgroundServices: Service() {
 
@@ -59,7 +22,7 @@ class BackgroundServices: Service() {
         Log.i("Semdelion", "BackgroundServices onStartCommand")
         Executors.newSingleThreadExecutor().execute {
             fileUpLoader.upload(
-                object : ProgressCallBack {
+                object : FileUpLoader.ProgressCallBack {
                     override fun onProgress(progress: Int) {
                         Log.i("Semdelion", "${Thread.currentThread().name} Progress $progress%")
                     }

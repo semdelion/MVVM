@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import android.util.Log
-import java.util.concurrent.ExecutorService
+import com.semdelion.data.utils.FileUpLoader
 import java.util.concurrent.Executors
 
 class BoundService: Service() {
@@ -33,7 +33,7 @@ class BoundService: Service() {
         val executorService = Executors.newSingleThreadExecutor()
         executorService?.execute {
             fileUpLoader.upload(
-                object : ProgressCallBack {
+                object : FileUpLoader.ProgressCallBack {
                     override fun onProgress(progress: Int) {
                         Log.i("Semdelion", "${Thread.currentThread().name} Progress $progress%")
                         onProgress?.invoke(progress)

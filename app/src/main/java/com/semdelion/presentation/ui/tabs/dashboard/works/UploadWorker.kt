@@ -4,8 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.semdelion.presentation.ui.tabs.dashboard.services.FileUpLoader
-import com.semdelion.presentation.ui.tabs.dashboard.services.ProgressCallBack
+import com.semdelion.data.utils.FileUpLoader
 
 class UploadWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
@@ -14,7 +13,7 @@ class UploadWorker(context: Context, workerParams: WorkerParameters) : Worker(co
     override fun doWork(): Result {
         Log.i("Semdelion", "Upload doWork")
         fileUpLoader.upload(
-            object : ProgressCallBack {
+            object : FileUpLoader.ProgressCallBack {
                 override fun onProgress(progress: Int) {
                     if(isStopped) {
                         Log.i("Semdelion", "Stopped")

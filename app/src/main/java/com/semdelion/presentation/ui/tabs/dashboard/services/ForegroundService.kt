@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.semdelion.data.utils.FileUpLoader
 import com.semdelion.presentation.R
 import com.semdelion.presentation.RoutingActivity
 import java.util.concurrent.Executors
@@ -51,7 +52,7 @@ class ForegroundService: Service() {
 
         Executors.newSingleThreadExecutor().execute {
             fileUpLoader.upload(
-                object : ProgressCallBack {
+                object : FileUpLoader.ProgressCallBack {
                     override fun onProgress(progress: Int) {
                         val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
                         notificationManager.notify(
