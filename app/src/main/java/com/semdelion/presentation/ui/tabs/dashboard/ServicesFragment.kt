@@ -1,6 +1,5 @@
 package com.semdelion.presentation.ui.tabs.dashboard
 
-import android.Manifest
 import android.content.ComponentName
 import android.content.Context.BIND_AUTO_CREATE
 import android.content.Intent
@@ -12,8 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -27,19 +26,21 @@ import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentServicesBinding
 import com.semdelion.presentation.ui.tabs.dashboard.services.BackgroundServices
 import com.semdelion.presentation.ui.tabs.dashboard.services.BoundService
 import com.semdelion.presentation.ui.tabs.dashboard.services.ForegroundService
 import com.semdelion.presentation.ui.tabs.dashboard.works.NotifyWorker
 import com.semdelion.presentation.ui.tabs.dashboard.works.UploadWorker
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class ServicesFragment : BaseFragment() {
+
     private lateinit var binding: FragmentServicesBinding
-    override val viewModel by viewModel<ServicesViewModel>()
+    override val viewModel by viewModels<ServicesViewModel>()
 
     private val connectivity = object: ServiceConnection {
 

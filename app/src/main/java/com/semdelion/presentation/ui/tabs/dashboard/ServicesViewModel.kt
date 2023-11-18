@@ -9,10 +9,14 @@ import com.semdelion.presentation.core.sideeffects.permissions.Permissions
 import com.semdelion.presentation.core.sideeffects.permissions.plugin.PermissionStatus
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ServicesViewModel (
+
+@HiltViewModel
+class ServicesViewModel @Inject constructor (
     private val navigationService: Navigator,
     private val toasts: Toasts,
     private val permissions: Permissions,
