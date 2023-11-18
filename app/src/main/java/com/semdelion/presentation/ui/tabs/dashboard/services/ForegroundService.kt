@@ -27,12 +27,11 @@ class ForegroundService: Service() {
 
     override fun onCreate() {
         super.onCreate()
+        createNotificationChannel()
         Log.i("Semdelion", "ForegroundService onCreate")
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
-        createNotificationChannel()
 
         val pendingIntent: PendingIntent =
             Intent(this, RoutingActivity::class.java).let { notificationIntent ->
@@ -45,7 +44,6 @@ class ForegroundService: Service() {
             createNotification(this,
                 "Foreground service",
                 "Starting...",
-                R.drawable.ic_add_favorite,
                 pendingIntent
             )
         )
@@ -60,7 +58,6 @@ class ForegroundService: Service() {
                             createNotification(this@ForegroundService,
                                 "Foreground service - started",
                                 "Progress $progress%",
-                                R.drawable.ic_add_favorite,
                                 pendingIntent)
                         )
                     }
@@ -71,11 +68,11 @@ class ForegroundService: Service() {
         return START_NOT_STICKY
     }
 
-    private fun createNotification(context: Context, title: String, contentText: String, icon: Int, pendingIntent: PendingIntent): Notification {
+    private fun createNotification(context: Context, title: String, contentText: String, pendingIntent: PendingIntent): Notification {
         return NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(contentText)
-            .setSmallIcon(icon)
+            .setSmallIcon(R.drawable.ic_add_favorite)
             .setContentIntent(pendingIntent)
             .setSilent(true)
             .build()
@@ -94,6 +91,7 @@ class ForegroundService: Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        fileUpLoader.cancel()
         Log.i("Semdelion", "ForegroundService onDestroy")
     }
 }
