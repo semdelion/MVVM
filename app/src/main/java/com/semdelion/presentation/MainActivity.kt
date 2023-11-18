@@ -1,5 +1,6 @@
 package com.semdelion.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -58,5 +59,9 @@ class MainActivity : BaseActivity() {
             }
         )
         navController.graph = graph
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
     }
 }

@@ -26,6 +26,9 @@
         <service
             android:exported="false"
             android:name=".ui.tabs.dashboard.services.ForegroundService"/>
+        <service
+            android:exported="false"
+            android:name=".ui.tabs.dashboard.services.BoundService"/>
         <activity
             android:name=".RoutingActivity"
             android:exported="true"
@@ -38,6 +41,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:exported="false"
             android:theme="@style/Theme.Semdelion">
         </activity>
