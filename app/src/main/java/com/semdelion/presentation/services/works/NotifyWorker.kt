@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard.works
+package com.semdelion.presentation.services.works
 
 import android.content.Context
 import android.util.Log

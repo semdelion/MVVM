@@ -1,4 +1,4 @@
-package com.semdelion.presentation.ui.tabs.dashboard.services
+package com.semdelion.presentation.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -18,7 +18,6 @@ import java.util.concurrent.Executors
 
 private const val NOTIFICATION_ID = 1
 private const val CHANNEL_ID = "ForegroundService_channel"
-
 class ForegroundService: Service() {
 
     private val fileUpLoader = FileUpLoader()
@@ -35,8 +34,10 @@ class ForegroundService: Service() {
 
         val pendingIntent: PendingIntent =
             Intent(this, RoutingActivity::class.java).let { notificationIntent ->
-                PendingIntent.getActivity(this, 0, notificationIntent,
-                    PendingIntent.FLAG_IMMUTABLE)
+                PendingIntent.getActivity(
+                    this, 0, notificationIntent,
+                    PendingIntent.FLAG_IMMUTABLE
+                )
             }
 
         startForeground(
@@ -80,8 +81,10 @@ class ForegroundService: Service() {
 
     private fun createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val serviceChannel = NotificationChannel(CHANNEL_ID, "Foreground Service Channel",
-                NotificationManager.IMPORTANCE_MIN)
+            val serviceChannel = NotificationChannel(
+                CHANNEL_ID, "Foreground Service Channel",
+                NotificationManager.IMPORTANCE_MIN
+            )
             serviceChannel.enableVibration(false)
 
             val manager = getSystemService(NotificationManager::class.java)
