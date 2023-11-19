@@ -1,7 +1,7 @@
 package com.semdelion.data.utils.room
 
 import androidx.room.TypeConverter
-import com.semdelion.data.core.services.client.Serializer.moshi
+import com.semdelion.data.core.apis.client.Serializer.moshi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 

@@ -2,11 +2,9 @@ package com.semdelion.presentation.ui.tabs.dashboard
 
 import android.Manifest
 import android.os.Build
-import androidx.core.app.ActivityCompat
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.permissions.Permissions
-import com.semdelion.presentation.core.sideeffects.permissions.plugin.PermissionStatus
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

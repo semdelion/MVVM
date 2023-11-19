@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.semdelion.data.core.services.exceptions.NoConnectivityException
+import com.semdelion.data.core.apis.exceptions.NoConnectivityException
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment

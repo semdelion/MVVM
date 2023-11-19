@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895377783576",
+    "project_id": "semdelionmvvm",
+    "storage_bucket": "semdelionmvvm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895377783576:android:fe72b052fff287f207bc6d",
+        "android_client_info": {
+          "package_name": "com.semdelion.presentation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYahvAjiYsapew3C2gyYFwtRw1aNQcq-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

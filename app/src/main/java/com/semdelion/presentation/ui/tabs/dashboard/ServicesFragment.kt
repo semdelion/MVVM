@@ -27,12 +27,12 @@ import androidx.work.WorkManager
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.databinding.FragmentServicesBinding
-import com.semdelion.presentation.ui.tabs.dashboard.services.BackgroundServices
-import com.semdelion.presentation.ui.tabs.dashboard.services.BoundService
-import com.semdelion.presentation.ui.tabs.dashboard.services.ForegroundService
-import com.semdelion.presentation.ui.tabs.dashboard.works.NotifyWorker
-import com.semdelion.presentation.ui.tabs.dashboard.works.UploadWorker
 import dagger.hilt.android.AndroidEntryPoint
+import com.semdelion.presentation.services.BackgroundServices
+import com.semdelion.presentation.services.BoundService
+import com.semdelion.presentation.services.ForegroundService
+import com.semdelion.presentation.services.works.NotifyWorker
+import com.semdelion.presentation.services.works.UploadWorker
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 

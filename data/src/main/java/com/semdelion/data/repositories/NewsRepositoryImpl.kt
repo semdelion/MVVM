@@ -2,10 +2,10 @@ package com.semdelion.data.repositories
 
 import android.os.Build
 import androidx.annotation.RequiresExtension
-import com.semdelion.data.core.services.BaseService
-import com.semdelion.data.core.services.client.ApiClient
-import com.semdelion.data.services.news.INewsServices
-import com.semdelion.data.services.news.toNewsModel
+import com.semdelion.data.apis.news.INewsApi
+import com.semdelion.data.apis.news.toNewsModel
+import com.semdelion.data.core.apis.BaseApi
+import com.semdelion.data.core.apis.client.ApiClient
 import com.semdelion.domain.core.coroutines.IoDispatcher
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.domain.repositories.news.models.NewsPageModel
@@ -18,9 +18,9 @@ import javax.inject.Singleton
 class NewsRepositoryImpl @Inject constructor(
     apiClient: ApiClient,
     private val dispatcher: IoDispatcher
-) : BaseService(apiClient), INewsRepository {
+) : BaseApi(apiClient), INewsRepository {
 
-    private val _newsService = apiClient.createService(INewsServices::class.java)
+    private val _newsService = apiClient.createService(INewsApi::class.java)
 
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override suspend fun getNews(page: String?): NewsPageModel = wrapRetrofitExceptions(dispatcher.value) {
