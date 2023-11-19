@@ -1,7 +1,6 @@
 package com.semdelion.presentation.ui.tabs.news
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -14,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.semdelion.data.core.services.exceptions.NoConnectivityException
+import com.semdelion.data.core.apis.exceptions.NoConnectivityException
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment

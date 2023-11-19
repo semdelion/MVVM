@@ -1,4 +1,4 @@
-package com.semdelion.data.core.services.client
+package com.semdelion.data.core.apis.client
 
 import com.squareup.moshi.JsonDataException
 import com.squareup.moshi.Moshi

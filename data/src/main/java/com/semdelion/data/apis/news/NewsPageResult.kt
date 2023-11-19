@@ -1,4 +1,4 @@
-package com.semdelion.data.services.news
+package com.semdelion.data.apis.news
 
 data class NewsPageResult(
     val status: String,

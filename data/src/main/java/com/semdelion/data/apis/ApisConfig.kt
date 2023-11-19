@@ -1,14 +1,14 @@
-package com.semdelion.data.services
+package com.semdelion.data.apis
 
 import android.content.Context
-import com.semdelion.data.core.services.client.ApiClient
-import com.semdelion.data.core.services.client.intercepters.LoggingInterceptor
-import com.semdelion.data.core.services.client.intercepters.NetworkConnectionInterceptor
-import com.semdelion.data.core.services.client.intercepters.NewsAuthInterceptor
+import com.semdelion.data.core.apis.client.ApiClient
+import com.semdelion.data.core.apis.client.intercepters.LoggingInterceptor
+import com.semdelion.data.core.apis.client.intercepters.NetworkConnectionInterceptor
+import com.semdelion.data.core.apis.client.intercepters.NewsAuthInterceptor
 import okhttp3.OkHttpClient
 import java.util.concurrent.TimeUnit
 
-object Services {
+object ApisConfig {
     private lateinit var applicationContext: Context
 
     private lateinit var baseUrl: String

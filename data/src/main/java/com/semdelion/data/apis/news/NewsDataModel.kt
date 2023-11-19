@@ -1,4 +1,4 @@
-package com.semdelion.data.services.news
+package com.semdelion.data.apis.news
 
 import com.semdelion.domain.repositories.news.models.NewsModel
 import com.squareup.moshi.Json

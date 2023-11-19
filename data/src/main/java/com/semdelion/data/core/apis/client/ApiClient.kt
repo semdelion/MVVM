@@ -1,7 +1,6 @@
-package com.semdelion.data.core.services.client
+package com.semdelion.data.core.apis.client
 
-import com.semdelion.data.BuildConfig
-import com.semdelion.data.core.services.client.intercepters.HttpBearerAuth
+import com.semdelion.data.core.apis.client.intercepters.HttpBearerAuth
 import okhttp3.Call
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

@@ -1,4 +1,4 @@
-package com.semdelion.data.core.services.exceptions
+package com.semdelion.data.core.apis.exceptions
 
 import java.io.IOException
 
