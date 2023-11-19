@@ -6,8 +6,10 @@ import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import com.semdelion.data.utils.FileUpLoader
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
+@AndroidEntryPoint
 class BoundService: Service() {
 
     private var onProgress: ((Int) -> Unit)? = null

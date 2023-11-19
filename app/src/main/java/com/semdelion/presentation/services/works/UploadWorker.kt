@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.semdelion.data.utils.FileUpLoader
-
+//Di https://medium.com/@jeremy.leyvraz/the-art-of-integrating-hilt-dependency-injection-with-workers-for-harmonious-android-development-28bdc21be047
 class UploadWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
 
     private val fileUpLoader = FileUpLoader()

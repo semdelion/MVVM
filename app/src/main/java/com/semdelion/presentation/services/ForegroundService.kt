@@ -14,10 +14,13 @@ import androidx.core.app.NotificationCompat
 import com.semdelion.data.utils.FileUpLoader
 import com.semdelion.presentation.R
 import com.semdelion.presentation.RoutingActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
 private const val NOTIFICATION_ID = 1
 private const val CHANNEL_ID = "ForegroundService_channel"
+
+@AndroidEntryPoint
 class ForegroundService: Service() {
 
     private val fileUpLoader = FileUpLoader()

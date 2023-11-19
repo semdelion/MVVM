@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import com.semdelion.data.utils.FileUpLoader
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.Executors
 
+@AndroidEntryPoint
 class BackgroundServices: Service() {
 
     private val fileUpLoader = FileUpLoader()
