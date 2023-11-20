@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
@@ -54,7 +55,6 @@ class ServicesFragment : BaseFragment() {
         override fun onServiceDisconnected(p0: ComponentName?) { }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -72,7 +72,12 @@ class ServicesFragment : BaseFragment() {
 
         binding.foregroundButton.setOnClickListener {
             Intent(this.context, ForegroundService::class.java).also {
-                activity?.startForegroundService(it)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    activity?.startForegroundService(it)
+                }
+                else {
+                    Toast.makeText(this.context,"startForegroundService is not available in this version android", Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -101,6 +106,8 @@ class ServicesFragment : BaseFragment() {
                 .then(notifyRequest)
                 .enqueue()
         }
+
+        //DownloadManager https://www.youtube.com/watch?v=4t8EevQSYK4
 
         binding.periodicWorkButton.setOnClickListener {
             val periodicWorkRequest = PeriodicWorkRequestBuilder<NotifyWorker>(15,TimeUnit.MINUTES).build()
