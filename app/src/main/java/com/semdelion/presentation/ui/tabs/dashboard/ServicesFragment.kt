@@ -116,6 +116,10 @@ class ServicesFragment : BaseFragment() {
                 ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest)
         }
 
+        binding.goToPushButton.setOnClickListener {
+            viewModel.goToPushFragment()
+        }
+
         Intent(this.context, BoundService::class.java).also {
             requireActivity().bindService(it, connectivity, BIND_AUTO_CREATE)
         }
