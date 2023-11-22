@@ -57,9 +57,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
+    //FCM
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.3.1'
     implementation platform('com.google.firebase:firebase-bom:32.6.0')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.3.1'
 
     def nav_version = "2.7.3" //Navigation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

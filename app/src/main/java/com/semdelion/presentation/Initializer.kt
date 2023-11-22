@@ -5,6 +5,7 @@ import com.semdelion.data.repositories.FavoriteNewsRepositoryImpl
 import com.semdelion.data.repositories.MessageRepositoryImpl
 import com.semdelion.data.repositories.NewsRepositoryImpl
 import com.semdelion.data.apis.ApisConfig
+import com.semdelion.data.repositories.NotificationRepositoryImpl
 import com.semdelion.data.storages.message.SharedPrefMessageStorage
 import com.semdelion.data.storages.Storages
 import com.semdelion.data.storages.account.SharedPreferencesAppSettings
@@ -28,6 +29,7 @@ object Initializer {
         val ioWorkerDispatcher = WorkerDispatcher(Dispatchers.Default)
         val appSettings = SharedPreferencesAppSettings(applicationContext)
         val accountsRepository = AccountsRepositoryImpl(accountsStorage = Storages.accountsStorage, appSettings = appSettings, ioDispatcher = ioDispatcher)
+        val notificationRepository = NotificationRepositoryImpl(ApisConfig.httpClient, ioDispatcher)
         val getNewsUseCase = GetNewsUseCase(newsRepository = NewsRepositoryImpl(ApisConfig.httpClient, ioDispatcher))
         val getFavoriteNewsUseCase = GetFavoriteNewsUseCase(favoriteNews = FavoriteNewsRepositoryImpl(Storages.favoriteNewsStorage, ioDispatcher))
         val saveNewsUseCase = SaveNewsUseCase(favoriteNews = FavoriteNewsRepositoryImpl(Storages.favoriteNewsStorage, ioDispatcher))
@@ -40,7 +42,8 @@ object Initializer {
             getNewsUseCase,
             saveNewsUseCase,
             getFavoriteNewsUseCase,
-            deleteNewsUseCase
+            deleteNewsUseCase,
+            notificationRepository
         )
     }
 }

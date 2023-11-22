@@ -12,53 +12,92 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/editTextTextMultiLine"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/user_token_title_textView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:hint="push token"
+            android:text="Current push token"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Current push token"/>
 
-        <EditText
-            android:id="@+id/editTextTextMultiLine2"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/user_token_textView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:ems="10"
             android:gravity="start|top"
+            android:textIsSelectable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_token_title_textView"
+            tools:text="token" />
+
+        <EditText
+            android:id="@+id/token_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Push token"
             android:inputType="textMultiLine"
+            android:text="@={vm.tokenFlow}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_token_textView" />
+
+        <EditText
+            android:id="@+id/title_push_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:gravity="start|top"
             android:hint="Title"
+            android:inputType="textMultiLine"
+            android:text="@={vm.titleFlow}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+            app:layout_constraintTop_toBottomOf="@+id/token_editText" />
 
         <EditText
-            android:id="@+id/editTextTextMultiLine3"
-            android:layout_width="wrap_content"
+            android:id="@+id/title_context_editText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
             android:ems="10"
             android:gravity="start|top"
-            android:inputType="textMultiLine"
             android:hint="Content"
+            android:inputType="textMultiLine"
+            android:text="@={vm.contextFlow}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+            app:layout_constraintTop_toBottomOf="@+id/title_push_editText" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/send_push_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Send push"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine3" />
+            app:layout_constraintTop_toBottomOf="@+id/title_context_editText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

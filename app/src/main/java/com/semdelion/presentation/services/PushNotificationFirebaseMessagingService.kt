@@ -11,6 +11,7 @@ import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.semdelion.presentation.R
@@ -19,6 +20,8 @@ import okhttp3.internal.notify
 import kotlin.random.Random
 
 private const val CHANNEL_ID = "semdelion_notification_channel"
+
+const val TOPIC="/topics/semdelionTopics"
 
 class PushNotificationFirebaseMessagingService: FirebaseMessagingService() {
 
@@ -34,7 +37,11 @@ class PushNotificationFirebaseMessagingService: FirebaseMessagingService() {
         }
     }
 
-
+    override fun onCreate() {
+        super.onCreate()
+        sharedPref = getSharedPreferences("SharedPrefToken", MODE_PRIVATE)
+        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+    }
 
     override fun onNewToken(newToken: String) {
         super.onNewToken(newToken)
@@ -45,10 +52,11 @@ class PushNotificationFirebaseMessagingService: FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
-
         val intent = Intent(this, RoutingActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()
+
+        createNotificationChannel(notificationManager)
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
