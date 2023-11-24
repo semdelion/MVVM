@@ -3,6 +3,7 @@ package com.semdelion.presentation.ui.tabs.dashboard
 import androidx.lifecycle.SavedStateHandle
 import com.semdelion.domain.repositories.notification.INotificationRepository
 import com.semdelion.domain.repositories.notification.models.NotificationData
+import com.semdelion.domain.repositories.notification.models.NotificationMessage
 import com.semdelion.domain.repositories.notification.models.PushNotification
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
@@ -30,21 +31,13 @@ class PushViewModel(
         }
         val notificationData = NotificationData(titleFlow.value, contextFlow.value)
          viewModelScope.launch {
-             if(tokenFlow.value.isEmpty()) {
-                 notificationRepository.sendNotification(
-                     PushNotification(
-                         notificationData,
-                         "/topics/semdelionTopics"
+             notificationRepository.sendNotification(
+                 PushNotification(
+                     NotificationMessage(tokenFlow.value.ifEmpty { "/topics/semdelionTopics" },
+                         notificationData
                      )
                  )
-             } else {
-                 notificationRepository.sendNotification(
-                     PushNotification(
-                         notificationData,
-                         tokenFlow.value
-                     )
-                 )
-             }
+             )
          }
     }
 }

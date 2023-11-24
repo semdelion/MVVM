@@ -52,6 +52,16 @@ class PushNotificationFirebaseMessagingService: FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
+        Log.d("PushNotificationFirebaseMessagingService", "From: ${remoteMessage.from}")
+
+        // Check if message contains a data payload.
+        if (remoteMessage.data.isNotEmpty()) {
+            Log.d(
+                "PushNotificationFirebaseMessagingService",
+                "Message data payload: ${remoteMessage.data}"
+            )
+        }
+
         val intent = Intent(this, RoutingActivity::class.java)
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationID = Random.nextInt()

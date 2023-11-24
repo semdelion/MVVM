@@ -4,7 +4,17 @@ data class NotificationData(
     val title: String,
     val message: String
 )
-data class PushNotification(
+
+data class NotificationMessage(
+    val token: String,
     val data: NotificationData,
-    val to: String
+)
+
+data class PushNotification(
+    val message: NotificationMessage
+)
+
+data class PushNotificationLegacy(
+    val to: String,
+    val data: NotificationData
 )
