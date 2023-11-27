@@ -8,6 +8,7 @@ import com.semdelion.domain.repositories.notification.models.PushNotification
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
+import com.semdelion.presentation.core.viewmodels.ListViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
@@ -31,13 +32,17 @@ class PushViewModel(
         }
         val notificationData = NotificationData(titleFlow.value, contextFlow.value)
          viewModelScope.launch {
-             notificationRepository.sendNotification(
-                 PushNotification(
-                     NotificationMessage(tokenFlow.value.ifEmpty { "/topics/semdelionTopics" },
-                         notificationData
+             try {
+                 notificationRepository.sendNotification(
+                     PushNotification(
+                         NotificationMessage(tokenFlow.value.ifEmpty { "/topics/semdelionTopics" },
+                             notificationData
+                         )
                      )
                  )
-             )
+             } catch (ex: Exception) {
+                 toasts.toast(ex.message ?: "")
+             }
          }
     }
 }
