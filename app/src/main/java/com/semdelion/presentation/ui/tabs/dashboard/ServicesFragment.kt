@@ -10,6 +10,7 @@ import android.os.IBinder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -24,6 +25,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.databinding.FragmentServicesBinding
@@ -57,7 +59,6 @@ class ServicesFragment : BaseFragment() {
         override fun onServiceDisconnected(p0: ComponentName?) { }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,7 +76,12 @@ class ServicesFragment : BaseFragment() {
 
         binding.foregroundButton.setOnClickListener {
             Intent(this.context, ForegroundService::class.java).also {
-                activity?.startForegroundService(it)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    activity?.startForegroundService(it)
+                }
+                else {
+                    Toast.makeText(this.context,"startForegroundService is not available in this version android", Toast.LENGTH_LONG).show()
+                }
             }
         }
 
@@ -86,7 +92,16 @@ class ServicesFragment : BaseFragment() {
         }
 
         binding.workButton.setOnClickListener {
-            val workRequest = OneTimeWorkRequest.from(UploadWorker::class.java)
+            val workRequest = OneTimeWorkRequestBuilder<UploadWorker>().setInputData(
+                workDataOf(
+                    UploadWorker.KEY_CONTENT_URI to "https://noticiassalamanca.com/wp-content/uploads/2022/07/vida-eusebio.jpg"
+                )
+            ).setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+            ).build()
+
             val notifyRequest = OneTimeWorkRequestBuilder<NotifyWorker>()
                 .setConstraints(
                 Constraints.Builder()
@@ -94,9 +109,6 @@ class ServicesFragment : BaseFragment() {
                     .build()
             ).build()
 
-           /* WorkManager.getInstance(this.requireContext()).enqueueUniqueWork("doWork",
-                ExistingWorkPolicy.REPLACE,
-                workRequest)*/
 
             WorkManager.getInstance(this.requireContext()).beginUniqueWork("UploadWork",
                 ExistingWorkPolicy.REPLACE,
@@ -105,11 +117,17 @@ class ServicesFragment : BaseFragment() {
                 .enqueue()
         }
 
+        //DownloadManager https://www.youtube.com/watch?v=4t8EevQSYK4
+
         binding.periodicWorkButton.setOnClickListener {
             val periodicWorkRequest = PeriodicWorkRequestBuilder<NotifyWorker>(15,TimeUnit.MINUTES).build()
 
             WorkManager.getInstance(this.requireContext()).enqueueUniquePeriodicWork("NotifyPeriodicWork",
                 ExistingPeriodicWorkPolicy.KEEP, periodicWorkRequest)
+        }
+
+        binding.goToPushButton.setOnClickListener {
+            viewModel.goToPushFragment()
         }
 
         Intent(this.context, BoundService::class.java).also {

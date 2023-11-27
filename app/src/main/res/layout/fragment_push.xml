@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.tabs.dashboard.ServicesFragment">
+    <data>
+        <variable
+            name="vm"
+            type="com.semdelion.presentation.ui.tabs.dashboard.PushViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/user_token_title_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:text="Current push token"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Current push token"/>
+
+        <TextView
+            android:id="@+id/user_token_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:textIsSelectable="true"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/copy_imageButton"
+            app:layout_constraintEnd_toStartOf="@+id/copy_imageButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/copy_imageButton"
+            tools:text="token" />
+
+        <EditText
+            android:id="@+id/token_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Push token"
+            android:inputType="textMultiLine"
+            android:text="@={vm.tokenFlow}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_token_textView" />
+
+        <EditText
+            android:id="@+id/title_push_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Title"
+            android:inputType="textMultiLine"
+            android:text="@={vm.titleFlow}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/token_editText" />
+
+        <EditText
+            android:id="@+id/title_context_editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Content"
+            android:inputType="textMultiLine"
+            android:text="@={vm.contextFlow}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_push_editText" />
+
+        <Button
+            android:id="@+id/send_push_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Send push"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_context_editText" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/copy_imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:clickable="true"
+            android:src="@drawable/ic_copy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_token_title_textView"
+            app:fabSize="mini"
+            android:contentDescription="copy push token"
+            android:focusable="true" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

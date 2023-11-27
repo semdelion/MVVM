@@ -29,7 +29,7 @@ class ForegroundService: Service() {
 
     override fun onCreate() {
         super.onCreate()
-        createNotificationChannel()
+        createNotificationChannel(getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager)
         Log.i("Semdelion", "ForegroundService onCreate")
     }
 
@@ -82,16 +82,16 @@ class ForegroundService: Service() {
             .build()
     }
 
-    private fun createNotificationChannel() {
+    private fun createNotificationChannel(notificationManager: NotificationManager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serviceChannel = NotificationChannel(
                 CHANNEL_ID, "Foreground Service Channel",
                 NotificationManager.IMPORTANCE_MIN
-            )
-            serviceChannel.enableVibration(false)
+            ).apply {
+                enableVibration(false)
+            }
 
-            val manager = getSystemService(NotificationManager::class.java)
-            manager!!.createNotificationChannel(serviceChannel)
+            notificationManager.createNotificationChannel(serviceChannel)
         }
     }
 

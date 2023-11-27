@@ -62,5 +62,14 @@
         android:id="@+id/servicesFragment"
         android:name="com.semdelion.presentation.ui.tabs.dashboard.ServicesFragment"
         android:label="Services"
-        tools:layout="@layout/fragment_services" />
+        tools:layout="@layout/fragment_services" >
+        <action
+            android:id="@+id/action_servicesFragment_to_pushFragment"
+            app:destination="@id/pushFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pushFragment"
+        android:name="com.semdelion.presentation.ui.tabs.dashboard.PushFragment"
+        android:label="PushFragment"
+        tools:layout="@layout/fragment_push"/>
 </navigation>

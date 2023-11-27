@@ -20,11 +20,11 @@ class NewsRepositoryImpl @Inject constructor(
     private val dispatcher: IoDispatcher
 ) : BaseApi(apiClient), INewsRepository {
 
-    private val _newsService = apiClient.createService(INewsApi::class.java)
+    private val _newsAPI = apiClient.createService(INewsApi::class.java)
 
     @RequiresExtension(extension = Build.VERSION_CODES.S, version = 7)
     override suspend fun getNews(page: String?): NewsPageModel = wrapRetrofitExceptions(dispatcher.value) {
-        val response = _newsService.getNewsAsync(page).awaitResponse()
+        val response = _newsAPI.getNewsAsync(page).awaitResponse()
 
         val newsModel = response.body()?.results ?: mutableListOf()
 

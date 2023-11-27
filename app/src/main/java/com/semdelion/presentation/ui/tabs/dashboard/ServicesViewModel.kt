@@ -4,6 +4,7 @@ import android.Manifest
 import android.os.Build
 import com.semdelion.presentation.core.sideeffects.dialogs.Dialogs
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
+import com.semdelion.presentation.core.sideeffects.navigator.utils.NavCommandDirections
 import com.semdelion.presentation.core.sideeffects.permissions.Permissions
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
@@ -35,5 +36,10 @@ class ServicesViewModel @Inject constructor (
 
     fun goBack() {
         navigationService.goBack()
+    }
+
+    fun goToPushFragment() {
+        val navCommand = NavCommandDirections(ServicesFragmentDirections.actionServicesFragmentToPushFragment())
+        navigationService.launch(navCommand)
     }
 }
