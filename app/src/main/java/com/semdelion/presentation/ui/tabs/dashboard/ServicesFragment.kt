@@ -24,6 +24,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import androidx.work.workDataOf
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
 import com.semdelion.presentation.core.views.factories.viewModel
@@ -88,7 +89,16 @@ class ServicesFragment : BaseFragment() {
         }
 
         binding.workButton.setOnClickListener {
-            val workRequest = OneTimeWorkRequest.from(UploadWorker::class.java)
+            val workRequest = OneTimeWorkRequestBuilder<UploadWorker>().setInputData(
+                workDataOf(
+                    UploadWorker.KEY_CONTENT_URI to "https://noticiassalamanca.com/wp-content/uploads/2022/07/vida-eusebio.jpg"
+                )
+            ).setConstraints(
+                Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+            ).build()
+
             val notifyRequest = OneTimeWorkRequestBuilder<NotifyWorker>()
                 .setConstraints(
                 Constraints.Builder()
@@ -96,9 +106,6 @@ class ServicesFragment : BaseFragment() {
                     .build()
             ).build()
 
-           /* WorkManager.getInstance(this.requireContext()).enqueueUniqueWork("doWork",
-                ExistingWorkPolicy.REPLACE,
-                workRequest)*/
 
             WorkManager.getInstance(this.requireContext()).beginUniqueWork("UploadWork",
                 ExistingWorkPolicy.REPLACE,
