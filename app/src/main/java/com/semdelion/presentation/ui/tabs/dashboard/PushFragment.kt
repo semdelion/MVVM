@@ -9,21 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.firebase.messaging.FirebaseMessaging
 import com.semdelion.presentation.R
 import com.semdelion.presentation.core.views.BaseFragment
-import com.semdelion.presentation.core.views.factories.viewModel
 import com.semdelion.presentation.databinding.FragmentPushBinding
 import com.semdelion.presentation.services.PushNotificationFirebaseMessagingService
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class PushFragment : BaseFragment() {
 
     private lateinit var binding: FragmentPushBinding
-
-    override val viewModel by viewModel<PushViewModel>()
+    override val viewModel by viewModels<PushViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -4,10 +4,12 @@ import com.semdelion.data.repositories.AccountsRepositoryImpl
 import com.semdelion.data.repositories.FavoriteNewsRepositoryImpl
 import com.semdelion.data.repositories.MessageRepositoryImpl
 import com.semdelion.data.repositories.NewsRepositoryImpl
+import com.semdelion.data.repositories.NotificationRepositoryImpl
 import com.semdelion.domain.repositories.accounts.IAccountsRepository
 import com.semdelion.domain.repositories.message.IMessageRepository
 import com.semdelion.domain.repositories.news.IFavoriteNewsRepository
 import com.semdelion.domain.repositories.news.INewsRepository
+import com.semdelion.domain.repositories.notification.INotificationRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,17 +17,20 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class RepositoriesModule {
+interface RepositoriesModule {
 
     @Binds
-    abstract fun bindsAccountsRepository(accountsRepositoryImpl: AccountsRepositoryImpl): IAccountsRepository
+    fun bindsAccountsRepository(accountsRepositoryImpl: AccountsRepositoryImpl): IAccountsRepository
 
     @Binds
-    abstract fun bindsMessageRepository(messageRepositoryImpl: MessageRepositoryImpl): IMessageRepository
+    fun bindsMessageRepository(messageRepositoryImpl: MessageRepositoryImpl): IMessageRepository
 
     @Binds
-    abstract fun bindsNewsRepository(newsRepository: NewsRepositoryImpl ): INewsRepository
+    fun bindsNewsRepository(newsRepository: NewsRepositoryImpl ): INewsRepository
 
     @Binds
-    abstract fun bindsFavoriteNewsRepository(favoriteNewsRepository: FavoriteNewsRepositoryImpl): IFavoriteNewsRepository
+    fun bindsFavoriteNewsRepository(favoriteNewsRepository: FavoriteNewsRepositoryImpl): IFavoriteNewsRepository
+
+    @Binds
+    fun bindsNotificationRepository(notificationRepository: NotificationRepositoryImpl): INotificationRepository
 }

@@ -55,14 +55,14 @@ class StoragesModule {
 
     @Module
     @InstallIn(SingletonComponent::class)
-    abstract class BindsStoragesModule {
+    interface BindsStoragesModule {
         @Binds
         @Singleton
-        abstract fun bindFavoriteNewsStorage(favoriteNewsRoomStorage: FavoriteNewsRoomStorage): IFavoriteNewsStorage
+        fun bindFavoriteNewsStorage(favoriteNewsRoomStorage: FavoriteNewsRoomStorage): IFavoriteNewsStorage
 
         @Binds
         @Singleton
-        abstract fun bindAccountsStorage(accountRoomStorage: AccountRoomStorage): IAccountsStorage
+        fun bindAccountsStorage(accountRoomStorage: AccountRoomStorage): IAccountsStorage
     }
 }
 

@@ -10,12 +10,13 @@ import com.semdelion.data.core.apis.client.ApiClient
 import com.semdelion.domain.core.coroutines.IoDispatcher
 import com.semdelion.domain.repositories.notification.INotificationRepository
 import com.semdelion.domain.repositories.notification.models.PushNotificationLegacy
+import javax.inject.Inject
 
-class NotificationRepositoryImpl(
+
+class NotificationRepositoryImpl @Inject constructor(
     apiClient: ApiClient,
     private val dispatcher: IoDispatcher
 ): BaseApi(apiClient), INotificationRepository {
-
 
     private val notificationAPI = apiClient.createService(NotificationApi::class.java)
 

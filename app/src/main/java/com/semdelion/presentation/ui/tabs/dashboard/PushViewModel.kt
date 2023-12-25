@@ -8,13 +8,15 @@ import com.semdelion.domain.repositories.notification.models.PushNotification
 import com.semdelion.presentation.core.sideeffects.navigator.Navigator
 import com.semdelion.presentation.core.sideeffects.toasts.Toasts
 import com.semdelion.presentation.core.viewmodels.BaseViewModel
-import com.semdelion.presentation.core.viewmodels.ListViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val TOPIC = "/topics/semdelionTopics"
 
-class PushViewModel(
+@HiltViewModel
+class PushViewModel @Inject constructor(
     private val navigation: Navigator,
     private val toasts: Toasts,
     private val notificationRepository: INotificationRepository,
