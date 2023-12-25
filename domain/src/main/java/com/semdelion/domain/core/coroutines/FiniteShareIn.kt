@@ -1,4 +1,4 @@
-package com.semdelion.presentation.core.utils
+package com.semdelion.domain.core.coroutines
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +22,7 @@ private class ErrorElement<T>(
 ) : Element<T>()
 
 fun <T> Flow<T>.finiteShareIn(coroutineScope: CoroutineScope): Flow<T> {
-    return this.map<T,Element<T>> { item ->  ItemElement(item)}
+    return this.map<T, Element<T>> { item ->  ItemElement(item) }
         .onCompletion {
             emit(CompletedElement())
         }
@@ -34,6 +34,6 @@ fun <T> Flow<T>.finiteShareIn(coroutineScope: CoroutineScope): Flow<T> {
             if (it is ErrorElement) throw it.error
             return@map it
         }
-        .takeWhile { it is ItemElement  }
+        .takeWhile { it is ItemElement }
         .map { (it as ItemElement).item}
 }
