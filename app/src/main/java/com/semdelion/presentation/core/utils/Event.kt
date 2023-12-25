@@ -3,7 +3,7 @@ package com.semdelion.presentation.core.utils
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
+//TODO need migrate to the channel https://youtu.be/njchj9d_Lf8?si=LU4oo4PFey8CUTrw&t=1324
 class Event<T>(
     value: T
 ) {
